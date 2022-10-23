@@ -1,0 +1,186 @@
+<div>
+  <h2 id="page-heading" data-cy="PromotionHeading">
+    <span yaliTranslate="bisterApp.promotion.home.title">Promotions</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span yaliTranslate="bisterApp.promotion.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-promotion"
+        [routerLink]="['/promotion/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" yaliTranslate="bisterApp.promotion.home.createLabel"> Create a new Promotion </span>
+      </button>
+    </div>
+  </h2>
+
+  <yali-alert-error></yali-alert-error>
+
+  <yali-alert></yali-alert>
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" yaliTranslate="bisterApp.promotion.home.search">Search for Promotion</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'bisterApp.promotion.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        <button class="btn btn-danger" (click)="search('')" *ngIf="currentSearch">
+          <fa-icon icon="trash-alt"></fa-icon>
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="promotions?.length === 0">
+    <span yaliTranslate="bisterApp.promotion.home.notFound">No Promotions found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="promotions && promotions.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr yaliSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" yaliSortBy="id">
+            <div class="d-flex">
+              <span yaliTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="productId">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.promotion.productId">Product Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="projectId">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.promotion.projectId">Project Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="contentType">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.promotion.contentType">Content Type</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="recipients">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.promotion.recipients">Recipients</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="recipientGroup">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.promotion.recipientGroup">Recipient Group</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="createdBy">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.promotion.createdBy">Created By</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="createdAt">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.promotion.createdAt">Created At</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="sendAt">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.promotion.sendAt">Send At</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="attachmentId">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.promotion.attachmentId">Attachment Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let promotion of promotions; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/promotion', promotion.id, 'view']">{{ promotion.id }}</a>
+          </td>
+          <td>{{ promotion.productId }}</td>
+          <td>{{ promotion.projectId }}</td>
+          <td yaliTranslate="{{ 'bisterApp.PromotionContentType.' + promotion.contentType }}">{{ promotion.contentType }}</td>
+          <td>{{ promotion.recipients }}</td>
+          <td>{{ promotion.recipientGroup }}</td>
+          <td>{{ promotion.createdBy }}</td>
+          <td>{{ promotion.createdAt | formatMediumDatetime }}</td>
+          <td>{{ promotion.sendAt | formatMediumDatetime }}</td>
+          <td>{{ promotion.attachmentId }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/promotion', promotion.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" yaliTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/promotion', promotion.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" yaliTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(promotion)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" yaliTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="promotions && promotions.length > 0">
+    <div class="d-flex justify-content-center">
+      <yali-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></yali-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

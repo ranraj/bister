@@ -1,0 +1,28 @@
+{
+  "bisterApp": {
+    "productSpecificationGroup": {
+      "home": {
+        "title": "Product Specification Groups",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Product Specification Group",
+        "createOrEditLabel": "Create or edit a Product Specification Group",
+        "search": "Search for Product Specification Group",
+        "notFound": "No Product Specification Groups found"
+      },
+      "created": "A new Product Specification Group is created with identifier {{ param }}",
+      "updated": "A Product Specification Group is updated with identifier {{ param }}",
+      "deleted": "A Product Specification Group is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Product Specification Group {{ id }}?"
+      },
+      "detail": {
+        "title": "Product Specification Group"
+      },
+      "id": "ID",
+      "title": "Title",
+      "slug": "Slug",
+      "description": "Description",
+      "product": "Product"
+    }
+  }
+}

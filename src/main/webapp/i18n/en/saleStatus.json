@@ -1,0 +1,12 @@
+{
+  "bisterApp": {
+    "SaleStatus": {
+      "null": "",
+      "RESALE": "RESALE",
+      "SOLD": "SOLD",
+      "OPEN": "OPEN",
+      "DELIVERY": "DELIVERY",
+      "CLOSED": "CLOSED"
+    }
+  }
+}

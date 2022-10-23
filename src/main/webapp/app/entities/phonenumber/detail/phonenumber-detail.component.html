@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="phonenumber">
+      <h2 data-cy="phonenumberDetailsHeading"><span yaliTranslate="bisterApp.phonenumber.detail.title">Phonenumber</span></h2>
+
+      <hr />
+
+      <yali-alert-error></yali-alert-error>
+
+      <yali-alert></yali-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span yaliTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ phonenumber.id }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.phonenumber.country">Country</span></dt>
+        <dd>
+          <span>{{ phonenumber.country }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.phonenumber.code">Code</span></dt>
+        <dd>
+          <span>{{ phonenumber.code }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.phonenumber.contactNumber">Contact Number</span></dt>
+        <dd>
+          <span>{{ phonenumber.contactNumber }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.phonenumber.phonenumberType">Phonenumber Type</span></dt>
+        <dd>
+          <span yaliTranslate="{{ 'bisterApp.PhonenumberType.' + phonenumber.phonenumberType }}">{{ phonenumber.phonenumberType }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.phonenumber.user">User</span></dt>
+        <dd>
+          <span>{{ phonenumber.user?.login }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.phonenumber.organisation">Organisation</span></dt>
+        <dd>
+          <div *ngIf="phonenumber.organisation">
+            <a [routerLink]="['/organisation', phonenumber.organisation.id, 'view']">{{ phonenumber.organisation.name }}</a>
+          </div>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.phonenumber.facility">Facility</span></dt>
+        <dd>
+          <div *ngIf="phonenumber.facility">
+            <a [routerLink]="['/facility', phonenumber.facility.id, 'view']">{{ phonenumber.facility.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span yaliTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/phonenumber', phonenumber.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span yaliTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

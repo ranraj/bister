@@ -1,0 +1,76 @@
+{
+  "applications": ["bister"],
+  "changelogDate": "20221023041552",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "purchase_order",
+  "fields": [
+    {
+      "fieldName": "placedDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "OrderStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "NEW,PAYMENT_PENDING,HOLD,ORDER_CONFIMED,IN_DELIVERY,DELIVERED,CANCELLED"
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "250",
+      "fieldValidateRulesMinlength": "20"
+    },
+    {
+      "fieldName": "deliveryOption",
+      "fieldType": "DeliveryOption",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "HAND_OVER,LEASE,RENT,CONSTRUCTION_HANDOVER"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "PurchaseOrder",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "paymentSchedule",
+      "otherEntityRelationshipName": "purchaseOrdep",
+      "relationshipName": "paymentSchedule",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "code",
+      "otherEntityName": "transaction",
+      "otherEntityRelationshipName": "purchaseOrder",
+      "relationshipName": "transaction",
+      "relationshipType": "one-to-many",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "relationshipName": "user",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "productVariation",
+      "relationshipName": "productVariation",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "invoice",
+      "otherEntityRelationshipName": "purchaseOrder",
+      "ownerSide": false,
+      "relationshipName": "invoice",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

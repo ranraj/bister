@@ -1,0 +1,166 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="yali-promotion-heading" data-cy="PromotionCreateUpdateHeading" yaliTranslate="bisterApp.promotion.home.createOrEditLabel">
+        Create or edit a Promotion
+      </h2>
+
+      <div>
+        <yali-alert-error></yali-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" yaliTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.promotion.productId" for="field_productId">Product Id</label>
+          <input type="number" class="form-control" name="productId" id="field_productId" data-cy="productId" formControlName="productId" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.promotion.projectId" for="field_projectId">Project Id</label>
+          <input type="number" class="form-control" name="projectId" id="field_projectId" data-cy="projectId" formControlName="projectId" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.promotion.contentType" for="field_contentType">Content Type</label>
+          <select class="form-control" name="contentType" formControlName="contentType" id="field_contentType" data-cy="contentType">
+            <option [ngValue]="null">{{ 'bisterApp.PromotionContentType.null' | translate }}</option>
+            <option *ngFor="let promotionContentType of promotionContentTypeValues" [value]="promotionContentType">
+              {{ 'bisterApp.PromotionContentType.' + promotionContentType | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('contentType')!.invalid && (editForm.get('contentType')!.dirty || editForm.get('contentType')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('contentType')?.errors?.required"
+              yaliTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.promotion.recipients" for="field_recipients">Recipients</label>
+          <input
+            type="text"
+            class="form-control"
+            name="recipients"
+            id="field_recipients"
+            data-cy="recipients"
+            formControlName="recipients"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.promotion.recipientGroup" for="field_recipientGroup">Recipient Group</label>
+          <input
+            type="text"
+            class="form-control"
+            name="recipientGroup"
+            id="field_recipientGroup"
+            data-cy="recipientGroup"
+            formControlName="recipientGroup"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.promotion.createdBy" for="field_createdBy">Created By</label>
+          <input type="number" class="form-control" name="createdBy" id="field_createdBy" data-cy="createdBy" formControlName="createdBy" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.promotion.createdAt" for="field_createdAt">Created At</label>
+          <div class="d-flex">
+            <input
+              id="field_createdAt"
+              data-cy="createdAt"
+              type="datetime-local"
+              class="form-control"
+              name="createdAt"
+              formControlName="createdAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('createdAt')!.invalid && (editForm.get('createdAt')!.dirty || editForm.get('createdAt')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('createdAt')?.errors?.required"
+              yaliTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('createdAt')?.errors?.datetimelocal"
+              yaliTranslate="entity.validation.datetimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.promotion.sendAt" for="field_sendAt">Send At</label>
+          <div class="d-flex">
+            <input
+              id="field_sendAt"
+              data-cy="sendAt"
+              type="datetime-local"
+              class="form-control"
+              name="sendAt"
+              formControlName="sendAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('sendAt')!.invalid && (editForm.get('sendAt')!.dirty || editForm.get('sendAt')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('sendAt')?.errors?.required"
+              yaliTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('sendAt')?.errors?.datetimelocal"
+              yaliTranslate="entity.validation.datetimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.promotion.attachmentId" for="field_attachmentId">Attachment Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="attachmentId"
+            id="field_attachmentId"
+            data-cy="attachmentId"
+            formControlName="attachmentId"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span yaliTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span yaliTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

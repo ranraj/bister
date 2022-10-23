@@ -1,0 +1,15 @@
+export enum NotificationMode {
+  EMAIL = 'EMAIL',
+
+  SMS = 'SMS',
+
+  WHATSAPP_MESSAGE = 'WHATSAPP_MESSAGE',
+
+  WHATSAPP_CALL = 'WHATSAPP_CALL',
+
+  PHONECALL = 'PHONECALL',
+
+  COURIER = 'COURIER',
+
+  PARCEL = 'PARCEL',
+}

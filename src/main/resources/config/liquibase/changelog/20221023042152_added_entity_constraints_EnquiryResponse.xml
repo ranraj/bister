@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity EnquiryResponse.
+    -->
+    <changeSet id="20221023042152-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="agent_id"
+                                 baseTableName="enquiry_response"
+                                 constraintName="fk_enquiry_response__agent_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="agent"/>
+
+        <addForeignKeyConstraint baseColumnNames="enquiry_id"
+                                 baseTableName="enquiry_response"
+                                 constraintName="fk_enquiry_response__enquiry_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="enquiry"/>
+    </changeSet>
+</databaseChangeLog>

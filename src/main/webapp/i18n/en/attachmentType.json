@@ -1,0 +1,15 @@
+{
+  "bisterApp": {
+    "AttachmentType": {
+      "null": "",
+      "IMAGE": "IMAGE",
+      "AUDIO": "AUDIO",
+      "VIDEO": "VIDEO",
+      "LINK": "LINK",
+      "WEBSITE": "WEBSITE",
+      "DOC": "DOC",
+      "TEXT": "TEXT",
+      "PDF": "PDF"
+    }
+  }
+}

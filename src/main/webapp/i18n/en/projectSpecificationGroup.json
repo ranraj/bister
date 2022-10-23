@@ -1,0 +1,28 @@
+{
+  "bisterApp": {
+    "projectSpecificationGroup": {
+      "home": {
+        "title": "Project Specification Groups",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Project Specification Group",
+        "createOrEditLabel": "Create or edit a Project Specification Group",
+        "search": "Search for Project Specification Group",
+        "notFound": "No Project Specification Groups found"
+      },
+      "created": "A new Project Specification Group is created with identifier {{ param }}",
+      "updated": "A Project Specification Group is updated with identifier {{ param }}",
+      "deleted": "A Project Specification Group is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Project Specification Group {{ id }}?"
+      },
+      "detail": {
+        "title": "Project Specification Group"
+      },
+      "id": "ID",
+      "title": "Title",
+      "slug": "Slug",
+      "description": "Description",
+      "project": "Project"
+    }
+  }
+}

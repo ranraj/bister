@@ -1,0 +1,30 @@
+{
+  "bisterApp": {
+    "projectSpecification": {
+      "home": {
+        "title": "Project Specifications",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Project Specification",
+        "createOrEditLabel": "Create or edit a Project Specification",
+        "search": "Search for Project Specification",
+        "notFound": "No Project Specifications found"
+      },
+      "created": "A new Project Specification is created with identifier {{ param }}",
+      "updated": "A Project Specification is updated with identifier {{ param }}",
+      "deleted": "A Project Specification is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Project Specification {{ id }}?"
+      },
+      "detail": {
+        "title": "Project Specification"
+      },
+      "id": "ID",
+      "title": "Title",
+      "value": "Value",
+      "description": "Description",
+      "attachment": "Attachment",
+      "projectSpecificationGroup": "Project Specification Group",
+      "project": "Project"
+    }
+  }
+}

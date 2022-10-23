@@ -1,0 +1,76 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="productVariation">
+      <h2 data-cy="productVariationDetailsHeading">
+        <span yaliTranslate="bisterApp.productVariation.detail.title">Product Variation</span>
+      </h2>
+
+      <hr />
+
+      <yali-alert-error></yali-alert-error>
+
+      <yali-alert></yali-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span yaliTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ productVariation.id }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productVariation.assetId">Asset Id</span></dt>
+        <dd>
+          <span>{{ productVariation.assetId }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productVariation.name">Name</span></dt>
+        <dd>
+          <span>{{ productVariation.name }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productVariation.description">Description</span></dt>
+        <dd>
+          <span>{{ productVariation.description }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productVariation.regularPrice">Regular Price</span></dt>
+        <dd>
+          <span>{{ productVariation.regularPrice }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productVariation.salePrice">Sale Price</span></dt>
+        <dd>
+          <span>{{ productVariation.salePrice }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productVariation.dateOnSaleFrom">Date On Sale From</span></dt>
+        <dd>
+          <span>{{ productVariation.dateOnSaleFrom | formatMediumDate }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productVariation.dateOnSaleTo">Date On Sale To</span></dt>
+        <dd>
+          <span>{{ productVariation.dateOnSaleTo | formatMediumDate }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productVariation.isDraft">Is Draft</span></dt>
+        <dd>
+          <span>{{ productVariation.isDraft }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productVariation.useParentDetails">Use Parent Details</span></dt>
+        <dd>
+          <span>{{ productVariation.useParentDetails }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productVariation.saleStatus">Sale Status</span></dt>
+        <dd>
+          <span yaliTranslate="{{ 'bisterApp.SaleStatus.' + productVariation.saleStatus }}">{{ productVariation.saleStatus }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productVariation.product">Product</span></dt>
+        <dd>
+          <div *ngIf="productVariation.product">
+            <a [routerLink]="['/product', productVariation.product.id, 'view']">{{ productVariation.product.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span yaliTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/product-variation', productVariation.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span yaliTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,213 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="yali-enquiry-heading" data-cy="EnquiryCreateUpdateHeading" yaliTranslate="bisterApp.enquiry.home.createOrEditLabel">
+        Create or edit a Enquiry
+      </h2>
+
+      <div>
+        <yali-alert-error></yali-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" yaliTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.enquiry.raisedDate" for="field_raisedDate">Raised Date</label>
+          <div class="d-flex">
+            <input
+              id="field_raisedDate"
+              data-cy="raisedDate"
+              type="datetime-local"
+              class="form-control"
+              name="raisedDate"
+              formControlName="raisedDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('raisedDate')!.invalid && (editForm.get('raisedDate')!.dirty || editForm.get('raisedDate')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('raisedDate')?.errors?.required"
+              yaliTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('raisedDate')?.errors?.datetimelocal"
+              yaliTranslate="entity.validation.datetimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.enquiry.subject" for="field_subject">Subject</label>
+          <input type="text" class="form-control" name="subject" id="field_subject" data-cy="subject" formControlName="subject" />
+          <div *ngIf="editForm.get('subject')!.invalid && (editForm.get('subject')!.dirty || editForm.get('subject')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('subject')?.errors?.required"
+              yaliTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.enquiry.details" for="field_details">Details</label>
+          <input type="text" class="form-control" name="details" id="field_details" data-cy="details" formControlName="details" />
+          <div *ngIf="editForm.get('details')!.invalid && (editForm.get('details')!.dirty || editForm.get('details')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('details')?.errors?.minlength"
+              yaliTranslate="entity.validation.minlength"
+              [translateValues]="{ min: 3 }"
+            >
+              This field is required to be at least 3 characters.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('details')?.errors?.maxlength"
+              yaliTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 1000 }"
+            >
+              This field cannot be longer than 1000 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.enquiry.lastResponseDate" for="field_lastResponseDate"
+            >Last Response Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_lastResponseDate"
+              data-cy="lastResponseDate"
+              type="datetime-local"
+              class="form-control"
+              name="lastResponseDate"
+              formControlName="lastResponseDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.enquiry.lastResponseId" for="field_lastResponseId">Last Response Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="lastResponseId"
+            id="field_lastResponseId"
+            data-cy="lastResponseId"
+            formControlName="lastResponseId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.enquiry.enquiryType" for="field_enquiryType">Enquiry Type</label>
+          <select class="form-control" name="enquiryType" formControlName="enquiryType" id="field_enquiryType" data-cy="enquiryType">
+            <option [ngValue]="null">{{ 'bisterApp.EnquiryType.null' | translate }}</option>
+            <option *ngFor="let enquiryType of enquiryTypeValues" [value]="enquiryType">
+              {{ 'bisterApp.EnquiryType.' + enquiryType | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('enquiryType')!.invalid && (editForm.get('enquiryType')!.dirty || editForm.get('enquiryType')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('enquiryType')?.errors?.required"
+              yaliTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.enquiry.status" for="field_status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'bisterApp.EnquiryResolutionStatus.null' | translate }}</option>
+            <option *ngFor="let enquiryResolutionStatus of enquiryResolutionStatusValues" [value]="enquiryResolutionStatus">
+              {{ 'bisterApp.EnquiryResolutionStatus.' + enquiryResolutionStatus | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.enquiry.agent" for="field_agent">Agent</label>
+          <select class="form-control" id="field_agent" data-cy="agent" name="agent" formControlName="agent" [compareWith]="compareAgent">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="agentOption" *ngFor="let agentOption of agentsSharedCollection">{{ agentOption.name }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.enquiry.project" for="field_project">Project</label>
+          <select
+            class="form-control"
+            id="field_project"
+            data-cy="project"
+            name="project"
+            formControlName="project"
+            [compareWith]="compareProject"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="projectOption" *ngFor="let projectOption of projectsSharedCollection">{{ projectOption.name }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.enquiry.product" for="field_product">Product</label>
+          <select
+            class="form-control"
+            id="field_product"
+            data-cy="product"
+            name="product"
+            formControlName="product"
+            [compareWith]="compareProduct"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="productOption" *ngFor="let productOption of productsSharedCollection">{{ productOption.name }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.enquiry.customer" for="field_customer">Customer</label>
+          <select
+            class="form-control"
+            id="field_customer"
+            data-cy="customer"
+            name="customer"
+            formControlName="customer"
+            [compareWith]="compareCustomer"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="customerOption" *ngFor="let customerOption of customersSharedCollection">{{ customerOption.name }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span yaliTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span yaliTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

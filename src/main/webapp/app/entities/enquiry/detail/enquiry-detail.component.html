@@ -1,0 +1,80 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="enquiry">
+      <h2 data-cy="enquiryDetailsHeading"><span yaliTranslate="bisterApp.enquiry.detail.title">Enquiry</span></h2>
+
+      <hr />
+
+      <yali-alert-error></yali-alert-error>
+
+      <yali-alert></yali-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span yaliTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ enquiry.id }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.enquiry.raisedDate">Raised Date</span></dt>
+        <dd>
+          <span>{{ enquiry.raisedDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.enquiry.subject">Subject</span></dt>
+        <dd>
+          <span>{{ enquiry.subject }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.enquiry.details">Details</span></dt>
+        <dd>
+          <span>{{ enquiry.details }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.enquiry.lastResponseDate">Last Response Date</span></dt>
+        <dd>
+          <span>{{ enquiry.lastResponseDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.enquiry.lastResponseId">Last Response Id</span></dt>
+        <dd>
+          <span>{{ enquiry.lastResponseId }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.enquiry.enquiryType">Enquiry Type</span></dt>
+        <dd>
+          <span yaliTranslate="{{ 'bisterApp.EnquiryType.' + enquiry.enquiryType }}">{{ enquiry.enquiryType }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.enquiry.status">Status</span></dt>
+        <dd>
+          <span yaliTranslate="{{ 'bisterApp.EnquiryResolutionStatus.' + enquiry.status }}">{{ enquiry.status }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.enquiry.agent">Agent</span></dt>
+        <dd>
+          <div *ngIf="enquiry.agent">
+            <a [routerLink]="['/agent', enquiry.agent.id, 'view']">{{ enquiry.agent.name }}</a>
+          </div>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.enquiry.project">Project</span></dt>
+        <dd>
+          <div *ngIf="enquiry.project">
+            <a [routerLink]="['/project', enquiry.project.id, 'view']">{{ enquiry.project.name }}</a>
+          </div>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.enquiry.product">Product</span></dt>
+        <dd>
+          <div *ngIf="enquiry.product">
+            <a [routerLink]="['/product', enquiry.product.id, 'view']">{{ enquiry.product.name }}</a>
+          </div>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.enquiry.customer">Customer</span></dt>
+        <dd>
+          <div *ngIf="enquiry.customer">
+            <a [routerLink]="['/customer', enquiry.customer.id, 'view']">{{ enquiry.customer.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span yaliTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/enquiry', enquiry.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span yaliTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

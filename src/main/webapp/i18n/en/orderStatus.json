@@ -1,0 +1,14 @@
+{
+  "bisterApp": {
+    "OrderStatus": {
+      "null": "",
+      "NEW": "NEW",
+      "PAYMENT_PENDING": "PAYMENT_PENDING",
+      "HOLD": "HOLD",
+      "ORDER_CONFIMED": "ORDER_CONFIMED",
+      "IN_DELIVERY": "IN_DELIVERY",
+      "DELIVERED": "DELIVERED",
+      "CANCELLED": "CANCELLED"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "bisterApp": {
+    "productReview": {
+      "home": {
+        "title": "Product Reviews",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Product Review",
+        "createOrEditLabel": "Create or edit a Product Review",
+        "search": "Search for Product Review",
+        "notFound": "No Product Reviews found"
+      },
+      "created": "A new Product Review is created with identifier {{ param }}",
+      "updated": "A Product Review is updated with identifier {{ param }}",
+      "deleted": "A Product Review is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Product Review {{ id }}?"
+      },
+      "detail": {
+        "title": "Product Review"
+      },
+      "id": "ID",
+      "reviewerName": "Reviewer Name",
+      "reviewerEmail": "Reviewer Email",
+      "review": "Review",
+      "rating": "Rating",
+      "status": "Status",
+      "reviewerId": "Reviewer Id",
+      "product": "Product"
+    }
+  }
+}

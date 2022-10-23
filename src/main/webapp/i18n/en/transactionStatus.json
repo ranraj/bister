@@ -1,0 +1,10 @@
+{
+  "bisterApp": {
+    "TransactionStatus": {
+      "null": "",
+      "PENDING": "PENDING",
+      "COMPLETE": "COMPLETE",
+      "REJECTED": "REJECTED"
+    }
+  }
+}

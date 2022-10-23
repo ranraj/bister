@@ -1,0 +1,11 @@
+{
+  "bisterApp": {
+    "AttachmentVisibilityType": {
+      "null": "",
+      "PRIVATE": "PRIVATE",
+      "PROTECTED": "PROTECTED",
+      "PUBLIC": "PUBLIC",
+      "LIMITED": "LIMITED"
+    }
+  }
+}

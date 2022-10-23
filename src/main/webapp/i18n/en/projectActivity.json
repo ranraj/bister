@@ -1,0 +1,28 @@
+{
+  "bisterApp": {
+    "projectActivity": {
+      "home": {
+        "title": "Project Activities",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Project Activity",
+        "createOrEditLabel": "Create or edit a Project Activity",
+        "search": "Search for Project Activity",
+        "notFound": "No Project Activities found"
+      },
+      "created": "A new Project Activity is created with identifier {{ param }}",
+      "updated": "A Project Activity is updated with identifier {{ param }}",
+      "deleted": "A Project Activity is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Project Activity {{ id }}?"
+      },
+      "detail": {
+        "title": "Project Activity"
+      },
+      "id": "ID",
+      "title": "Title",
+      "details": "Details",
+      "status": "Status",
+      "project": "Project"
+    }
+  }
+}

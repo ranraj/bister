@@ -1,0 +1,9 @@
+export enum DeliveryOption {
+  HAND_OVER = 'HAND_OVER',
+
+  LEASE = 'LEASE',
+
+  RENT = 'RENT',
+
+  CONSTRUCTION_HANDOVER = 'CONSTRUCTION_HANDOVER',
+}

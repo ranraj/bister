@@ -1,0 +1,306 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="yali-product-variation-heading"
+        data-cy="ProductVariationCreateUpdateHeading"
+        yaliTranslate="bisterApp.productVariation.home.createOrEditLabel"
+      >
+        Create or edit a Product Variation
+      </h2>
+
+      <div>
+        <yali-alert-error></yali-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" yaliTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.productVariation.assetId" for="field_assetId">Asset Id</label>
+          <input type="text" class="form-control" name="assetId" id="field_assetId" data-cy="assetId" formControlName="assetId" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.productVariation.name" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" yaliTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('name')?.errors?.minlength"
+              yaliTranslate="entity.validation.minlength"
+              [translateValues]="{ min: 1 }"
+            >
+              This field is required to be at least 1 characters.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('name')?.errors?.maxlength"
+              yaliTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 100 }"
+            >
+              This field cannot be longer than 100 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.productVariation.description" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+          <div *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('description')?.errors?.required"
+              yaliTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('description')?.errors?.minlength"
+              yaliTranslate="entity.validation.minlength"
+              [translateValues]="{ min: 10 }"
+            >
+              This field is required to be at least 10 characters.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('description')?.errors?.maxlength"
+              yaliTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 1000 }"
+            >
+              This field cannot be longer than 1000 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.productVariation.regularPrice" for="field_regularPrice">Regular Price</label>
+          <input
+            type="number"
+            class="form-control"
+            name="regularPrice"
+            id="field_regularPrice"
+            data-cy="regularPrice"
+            formControlName="regularPrice"
+          />
+          <div
+            *ngIf="editForm.get('regularPrice')!.invalid && (editForm.get('regularPrice')!.dirty || editForm.get('regularPrice')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('regularPrice')?.errors?.required"
+              yaliTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('regularPrice')?.errors?.number"
+              yaliTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.productVariation.salePrice" for="field_salePrice">Sale Price</label>
+          <input type="number" class="form-control" name="salePrice" id="field_salePrice" data-cy="salePrice" formControlName="salePrice" />
+          <div *ngIf="editForm.get('salePrice')!.invalid && (editForm.get('salePrice')!.dirty || editForm.get('salePrice')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('salePrice')?.errors?.required"
+              yaliTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('salePrice')?.errors?.number"
+              yaliTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.productVariation.dateOnSaleFrom" for="field_dateOnSaleFrom"
+            >Date On Sale From</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dateOnSaleFrom"
+              data-cy="dateOnSaleFrom"
+              type="text"
+              class="form-control"
+              name="dateOnSaleFrom"
+              ngbDatepicker
+              #dateOnSaleFromDp="ngbDatepicker"
+              formControlName="dateOnSaleFrom"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateOnSaleFromDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+          <div
+            *ngIf="
+              editForm.get('dateOnSaleFrom')!.invalid && (editForm.get('dateOnSaleFrom')!.dirty || editForm.get('dateOnSaleFrom')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dateOnSaleFrom')?.errors?.required"
+              yaliTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.productVariation.dateOnSaleTo" for="field_dateOnSaleTo">Date On Sale To</label>
+          <div class="input-group">
+            <input
+              id="field_dateOnSaleTo"
+              data-cy="dateOnSaleTo"
+              type="text"
+              class="form-control"
+              name="dateOnSaleTo"
+              ngbDatepicker
+              #dateOnSaleToDp="ngbDatepicker"
+              formControlName="dateOnSaleTo"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateOnSaleToDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+          <div
+            *ngIf="editForm.get('dateOnSaleTo')!.invalid && (editForm.get('dateOnSaleTo')!.dirty || editForm.get('dateOnSaleTo')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dateOnSaleTo')?.errors?.required"
+              yaliTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.productVariation.isDraft" for="field_isDraft">Is Draft</label>
+          <input type="checkbox" class="form-check" name="isDraft" id="field_isDraft" data-cy="isDraft" formControlName="isDraft" />
+          <div *ngIf="editForm.get('isDraft')!.invalid && (editForm.get('isDraft')!.dirty || editForm.get('isDraft')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('isDraft')?.errors?.required"
+              yaliTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.productVariation.useParentDetails" for="field_useParentDetails"
+            >Use Parent Details</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="useParentDetails"
+            id="field_useParentDetails"
+            data-cy="useParentDetails"
+            formControlName="useParentDetails"
+          />
+          <div
+            *ngIf="
+              editForm.get('useParentDetails')!.invalid &&
+              (editForm.get('useParentDetails')!.dirty || editForm.get('useParentDetails')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('useParentDetails')?.errors?.required"
+              yaliTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.productVariation.saleStatus" for="field_saleStatus">Sale Status</label>
+          <select class="form-control" name="saleStatus" formControlName="saleStatus" id="field_saleStatus" data-cy="saleStatus">
+            <option [ngValue]="null">{{ 'bisterApp.SaleStatus.null' | translate }}</option>
+            <option *ngFor="let saleStatus of saleStatusValues" [value]="saleStatus">
+              {{ 'bisterApp.SaleStatus.' + saleStatus | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('saleStatus')!.invalid && (editForm.get('saleStatus')!.dirty || editForm.get('saleStatus')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('saleStatus')?.errors?.required"
+              yaliTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.productVariation.product" for="field_product">Product</label>
+          <select
+            class="form-control"
+            id="field_product"
+            data-cy="product"
+            name="product"
+            formControlName="product"
+            [compareWith]="compareProduct"
+          >
+            <option *ngIf="editForm.get(['product'])!.value == null" [ngValue]="null" selected></option>
+            <option [ngValue]="productOption" *ngFor="let productOption of productsSharedCollection">{{ productOption.name }}</option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['product'])!.invalid && (editForm.get(['product'])!.dirty || editForm.get(['product'])!.touched)">
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['product'])?.errors?.required"
+            yaliTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span yaliTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span yaliTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

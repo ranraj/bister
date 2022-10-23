@@ -1,0 +1,139 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="yali-enquiry-response-heading"
+        data-cy="EnquiryResponseCreateUpdateHeading"
+        yaliTranslate="bisterApp.enquiryResponse.home.createOrEditLabel"
+      >
+        Create or edit a Enquiry Response
+      </h2>
+
+      <div>
+        <yali-alert-error></yali-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" yaliTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.enquiryResponse.query" for="field_query">Query</label>
+          <input type="text" class="form-control" name="query" id="field_query" data-cy="query" formControlName="query" />
+          <div *ngIf="editForm.get('query')!.invalid && (editForm.get('query')!.dirty || editForm.get('query')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('query')?.errors?.minlength"
+              yaliTranslate="entity.validation.minlength"
+              [translateValues]="{ min: 3 }"
+            >
+              This field is required to be at least 3 characters.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('query')?.errors?.maxlength"
+              yaliTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 1000 }"
+            >
+              This field cannot be longer than 1000 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.enquiryResponse.details" for="field_details">Details</label>
+          <input type="text" class="form-control" name="details" id="field_details" data-cy="details" formControlName="details" />
+          <div *ngIf="editForm.get('details')!.invalid && (editForm.get('details')!.dirty || editForm.get('details')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('details')?.errors?.minlength"
+              yaliTranslate="entity.validation.minlength"
+              [translateValues]="{ min: 3 }"
+            >
+              This field is required to be at least 3 characters.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('details')?.errors?.maxlength"
+              yaliTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 1000 }"
+            >
+              This field cannot be longer than 1000 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.enquiryResponse.enquiryResponseType" for="field_enquiryResponseType"
+            >Enquiry Response Type</label
+          >
+          <select
+            class="form-control"
+            name="enquiryResponseType"
+            formControlName="enquiryResponseType"
+            id="field_enquiryResponseType"
+            data-cy="enquiryResponseType"
+          >
+            <option [ngValue]="null">{{ 'bisterApp.EnquiryResponseType.null' | translate }}</option>
+            <option *ngFor="let enquiryResponseType of enquiryResponseTypeValues" [value]="enquiryResponseType">
+              {{ 'bisterApp.EnquiryResponseType.' + enquiryResponseType | translate }}
+            </option>
+          </select>
+          <div
+            *ngIf="
+              editForm.get('enquiryResponseType')!.invalid &&
+              (editForm.get('enquiryResponseType')!.dirty || editForm.get('enquiryResponseType')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('enquiryResponseType')?.errors?.required"
+              yaliTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.enquiryResponse.agent" for="field_agent">Agent</label>
+          <select class="form-control" id="field_agent" data-cy="agent" name="agent" formControlName="agent" [compareWith]="compareAgent">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="agentOption" *ngFor="let agentOption of agentsSharedCollection">{{ agentOption.name }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.enquiryResponse.enquiry" for="field_enquiry">Enquiry</label>
+          <select
+            class="form-control"
+            id="field_enquiry"
+            data-cy="enquiry"
+            name="enquiry"
+            formControlName="enquiry"
+            [compareWith]="compareEnquiry"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="enquiryOption" *ngFor="let enquiryOption of enquiriesSharedCollection">{{ enquiryOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span yaliTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span yaliTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

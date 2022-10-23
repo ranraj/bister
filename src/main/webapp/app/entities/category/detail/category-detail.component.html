@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="category">
+      <h2 data-cy="categoryDetailsHeading"><span yaliTranslate="bisterApp.category.detail.title">Category</span></h2>
+
+      <hr />
+
+      <yali-alert-error></yali-alert-error>
+
+      <yali-alert></yali-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span yaliTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ category.id }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.category.name">Name</span></dt>
+        <dd>
+          <span>{{ category.name }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.category.slug">Slug</span></dt>
+        <dd>
+          <span>{{ category.slug }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.category.description">Description</span></dt>
+        <dd>
+          <span>{{ category.description }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.category.categoryType">Category Type</span></dt>
+        <dd>
+          <span yaliTranslate="{{ 'bisterApp.CategoryType.' + category.categoryType }}">{{ category.categoryType }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.category.parent">Parent</span></dt>
+        <dd>
+          <div *ngIf="category.parent">
+            <a [routerLink]="['/category', category.parent.id, 'view']">{{ category.parent.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span yaliTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/category', category.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span yaliTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

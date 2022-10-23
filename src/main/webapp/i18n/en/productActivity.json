@@ -1,0 +1,28 @@
+{
+  "bisterApp": {
+    "productActivity": {
+      "home": {
+        "title": "Product Activities",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Product Activity",
+        "createOrEditLabel": "Create or edit a Product Activity",
+        "search": "Search for Product Activity",
+        "notFound": "No Product Activities found"
+      },
+      "created": "A new Product Activity is created with identifier {{ param }}",
+      "updated": "A Product Activity is updated with identifier {{ param }}",
+      "deleted": "A Product Activity is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Product Activity {{ id }}?"
+      },
+      "detail": {
+        "title": "Product Activity"
+      },
+      "id": "ID",
+      "title": "Title",
+      "details": "Details",
+      "status": "Status",
+      "product": "Product"
+    }
+  }
+}

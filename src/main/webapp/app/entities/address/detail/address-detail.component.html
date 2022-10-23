@@ -1,0 +1,72 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="address">
+      <h2 data-cy="addressDetailsHeading"><span yaliTranslate="bisterApp.address.detail.title">Address</span></h2>
+
+      <hr />
+
+      <yali-alert-error></yali-alert-error>
+
+      <yali-alert></yali-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span yaliTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ address.id }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.address.name">Name</span></dt>
+        <dd>
+          <span>{{ address.name }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.address.addressLine1">Address Line 1</span></dt>
+        <dd>
+          <span>{{ address.addressLine1 }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.address.addressLine2">Address Line 2</span></dt>
+        <dd>
+          <span>{{ address.addressLine2 }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.address.landmark">Landmark</span></dt>
+        <dd>
+          <span>{{ address.landmark }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.address.city">City</span></dt>
+        <dd>
+          <span>{{ address.city }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.address.state">State</span></dt>
+        <dd>
+          <span>{{ address.state }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.address.country">Country</span></dt>
+        <dd>
+          <span>{{ address.country }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.address.postcode">Postcode</span></dt>
+        <dd>
+          <span>{{ address.postcode }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.address.latitude">Latitude</span></dt>
+        <dd>
+          <span>{{ address.latitude }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.address.longitude">Longitude</span></dt>
+        <dd>
+          <span>{{ address.longitude }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.address.addressType">Address Type</span></dt>
+        <dd>
+          <span yaliTranslate="{{ 'bisterApp.AddressType.' + address.addressType }}">{{ address.addressType }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span yaliTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/address', address.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span yaliTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

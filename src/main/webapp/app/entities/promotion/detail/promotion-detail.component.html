@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="promotion">
+      <h2 data-cy="promotionDetailsHeading"><span yaliTranslate="bisterApp.promotion.detail.title">Promotion</span></h2>
+
+      <hr />
+
+      <yali-alert-error></yali-alert-error>
+
+      <yali-alert></yali-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span yaliTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ promotion.id }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.promotion.productId">Product Id</span></dt>
+        <dd>
+          <span>{{ promotion.productId }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.promotion.projectId">Project Id</span></dt>
+        <dd>
+          <span>{{ promotion.projectId }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.promotion.contentType">Content Type</span></dt>
+        <dd>
+          <span yaliTranslate="{{ 'bisterApp.PromotionContentType.' + promotion.contentType }}">{{ promotion.contentType }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.promotion.recipients">Recipients</span></dt>
+        <dd>
+          <span>{{ promotion.recipients }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.promotion.recipientGroup">Recipient Group</span></dt>
+        <dd>
+          <span>{{ promotion.recipientGroup }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.promotion.createdBy">Created By</span></dt>
+        <dd>
+          <span>{{ promotion.createdBy }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.promotion.createdAt">Created At</span></dt>
+        <dd>
+          <span>{{ promotion.createdAt | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.promotion.sendAt">Send At</span></dt>
+        <dd>
+          <span>{{ promotion.sendAt | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.promotion.attachmentId">Attachment Id</span></dt>
+        <dd>
+          <span>{{ promotion.attachmentId }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span yaliTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/promotion', promotion.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span yaliTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

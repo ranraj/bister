@@ -1,0 +1,11 @@
+{
+  "bisterApp": {
+    "EnquiryType": {
+      "null": "",
+      "PROJECT": "PROJECT",
+      "PRODUCT": "PRODUCT",
+      "CONSULTATION": "CONSULTATION",
+      "SERVICE": "SERVICE"
+    }
+  }
+}

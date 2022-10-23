@@ -1,0 +1,175 @@
+<div>
+  <h2 id="page-heading" data-cy="PurchaseOrderHeading">
+    <span yaliTranslate="bisterApp.purchaseOrder.home.title">Purchase Orders</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span yaliTranslate="bisterApp.purchaseOrder.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-purchase-order"
+        [routerLink]="['/purchase-order/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" yaliTranslate="bisterApp.purchaseOrder.home.createLabel"> Create a new Purchase Order </span>
+      </button>
+    </div>
+  </h2>
+
+  <yali-alert-error></yali-alert-error>
+
+  <yali-alert></yali-alert>
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" yaliTranslate="bisterApp.purchaseOrder.home.search"
+          >Search for Purchase Order</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'bisterApp.purchaseOrder.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        <button class="btn btn-danger" (click)="search('')" *ngIf="currentSearch">
+          <fa-icon icon="trash-alt"></fa-icon>
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="purchaseOrders?.length === 0">
+    <span yaliTranslate="bisterApp.purchaseOrder.home.notFound">No Purchase Orders found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="purchaseOrders && purchaseOrders.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr yaliSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" yaliSortBy="id">
+            <div class="d-flex">
+              <span yaliTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="placedDate">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.purchaseOrder.placedDate">Placed Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="status">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.purchaseOrder.status">Status</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="code">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.purchaseOrder.code">Code</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="deliveryOption">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.purchaseOrder.deliveryOption">Delivery Option</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="user.login">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.purchaseOrder.user">User</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="productVariation.name">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.purchaseOrder.productVariation">Product Variation</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let purchaseOrder of purchaseOrders; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/purchase-order', purchaseOrder.id, 'view']">{{ purchaseOrder.id }}</a>
+          </td>
+          <td>{{ purchaseOrder.placedDate | formatMediumDatetime }}</td>
+          <td yaliTranslate="{{ 'bisterApp.OrderStatus.' + purchaseOrder.status }}">{{ purchaseOrder.status }}</td>
+          <td>{{ purchaseOrder.code }}</td>
+          <td yaliTranslate="{{ 'bisterApp.DeliveryOption.' + purchaseOrder.deliveryOption }}">{{ purchaseOrder.deliveryOption }}</td>
+          <td>
+            {{ purchaseOrder.user?.login }}
+          </td>
+          <td>
+            <div *ngIf="purchaseOrder.productVariation">
+              <a [routerLink]="['/product-variation', purchaseOrder.productVariation.id, 'view']">{{
+                purchaseOrder.productVariation.name
+              }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/purchase-order', purchaseOrder.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" yaliTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/purchase-order', purchaseOrder.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" yaliTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(purchaseOrder)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" yaliTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="purchaseOrders && purchaseOrders.length > 0">
+    <div class="d-flex justify-content-center">
+      <yali-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></yali-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

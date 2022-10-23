@@ -1,0 +1,232 @@
+<div>
+  <h2 id="page-heading" data-cy="NotificationHeading">
+    <span yaliTranslate="bisterApp.notification.home.title">Notifications</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span yaliTranslate="bisterApp.notification.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-notification"
+        [routerLink]="['/notification/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" yaliTranslate="bisterApp.notification.home.createLabel"> Create a new Notification </span>
+      </button>
+    </div>
+  </h2>
+
+  <yali-alert-error></yali-alert-error>
+
+  <yali-alert></yali-alert>
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" yaliTranslate="bisterApp.notification.home.search"
+          >Search for Notification</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'bisterApp.notification.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        <button class="btn btn-danger" (click)="search('')" *ngIf="currentSearch">
+          <fa-icon icon="trash-alt"></fa-icon>
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="notifications?.length === 0">
+    <span yaliTranslate="bisterApp.notification.home.notFound">No Notifications found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="notifications && notifications.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr yaliSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" yaliSortBy="id">
+            <div class="d-flex">
+              <span yaliTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="date">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.notification.date">Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="details">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.notification.details">Details</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="sentDate">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.notification.sentDate">Sent Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="googleNotificationId">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.notification.googleNotificationId">Google Notification Id</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="whatsappNotificationId">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.notification.whatsappNotificationId">Whatsapp Notification Id</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="smsNotificationId">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.notification.smsNotificationId">Sms Notification Id</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="productId">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.notification.productId">Product Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="projectId">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.notification.projectId">Project Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="scheduleId">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.notification.scheduleId">Schedule Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="promotionId">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.notification.promotionId">Promotion Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="read">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.notification.read">Read</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="notificationSourceType">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.notification.notificationSourceType">Notification Source Type</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="notificationType">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.notification.notificationType">Notification Type</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="notificationMode">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.notification.notificationMode">Notification Mode</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="agent.id">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.notification.agent">Agent</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="user.login">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.notification.user">User</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody
+        infinite-scroll
+        (scrolled)="loadPage(page + 1)"
+        [infiniteScrollDisabled]="page - 1 >= links['last']"
+        [infiniteScrollDistance]="0"
+      >
+        <tr *ngFor="let notification of notifications; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/notification', notification.id, 'view']">{{ notification.id }}</a>
+          </td>
+          <td>{{ notification.date | formatMediumDatetime }}</td>
+          <td>{{ notification.details }}</td>
+          <td>{{ notification.sentDate | formatMediumDatetime }}</td>
+          <td>{{ notification.googleNotificationId }}</td>
+          <td>{{ notification.whatsappNotificationId }}</td>
+          <td>{{ notification.smsNotificationId }}</td>
+          <td>{{ notification.productId }}</td>
+          <td>{{ notification.projectId }}</td>
+          <td>{{ notification.scheduleId }}</td>
+          <td>{{ notification.promotionId }}</td>
+          <td>{{ notification.read }}</td>
+          <td yaliTranslate="{{ 'bisterApp.NotificationSourceType.' + notification.notificationSourceType }}">
+            {{ notification.notificationSourceType }}
+          </td>
+          <td yaliTranslate="{{ 'bisterApp.NotificationType.' + notification.notificationType }}">{{ notification.notificationType }}</td>
+          <td yaliTranslate="{{ 'bisterApp.NotificationMode.' + notification.notificationMode }}">{{ notification.notificationMode }}</td>
+          <td>
+            <div *ngIf="notification.agent">
+              <a [routerLink]="['/agent', notification.agent.id, 'view']">{{ notification.agent.id }}</a>
+            </div>
+          </td>
+          <td>
+            {{ notification.user?.login }}
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/notification', notification.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" yaliTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/notification', notification.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" yaliTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(notification)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" yaliTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

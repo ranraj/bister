@@ -1,0 +1,58 @@
+{
+  "applications": ["bister"],
+  "changelogDate": "20221023041452",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "payment_schedule",
+  "fields": [
+    {
+      "fieldName": "dueDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "totalPrice",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "remarks",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "250",
+      "fieldValidateRulesMinlength": "20"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "PaymentScheduleStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PAID,PENDING,PLANNED"
+    },
+    {
+      "fieldName": "isOverDue",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "PaymentSchedule",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "invoice",
+      "otherEntityRelationshipName": "paymentSchedule",
+      "ownerSide": true,
+      "relationshipName": "invoice",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "purchaseOrder",
+      "otherEntityRelationshipName": "paymentSchedule",
+      "relationshipName": "purchaseOrdep",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

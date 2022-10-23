@@ -1,0 +1,45 @@
+{
+  "applications": ["bister"],
+  "changelogDate": "20221023035752",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "product_activity",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength", "required"],
+      "fieldValidateRulesMaxlength": "100",
+      "fieldValidateRulesMinlength": "5"
+    },
+    {
+      "fieldName": "details",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "250",
+      "fieldValidateRulesMinlength": "20"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "ActivityStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "NEW,INPROGRESS,HOLD,CANCELLED,FAILED,COMPLETED,CLOSE,REOPEN,LOG,NOTIFICATION,UPDATE,DELETE"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "ProductActivity",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "product",
+      "otherEntityRelationshipName": "productActivity",
+      "relationshipName": "product",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "serviceClass"
+}

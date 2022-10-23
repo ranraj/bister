@@ -1,0 +1,30 @@
+{
+  "bisterApp": {
+    "refund": {
+      "home": {
+        "title": "Refunds",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Refund",
+        "createOrEditLabel": "Create or edit a Refund",
+        "search": "Search for Refund",
+        "notFound": "No Refunds found"
+      },
+      "created": "A new Refund is created with identifier {{ param }}",
+      "updated": "A Refund is updated with identifier {{ param }}",
+      "deleted": "A Refund is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Refund {{ id }}?"
+      },
+      "detail": {
+        "title": "Refund"
+      },
+      "id": "ID",
+      "amount": "Amount",
+      "reason": "Reason",
+      "orderCode": "Order Code",
+      "status": "Status",
+      "transaction": "Transaction",
+      "user": "User"
+    }
+  }
+}

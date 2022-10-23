@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="productAttributeTerm">
+      <h2 data-cy="productAttributeTermDetailsHeading">
+        <span yaliTranslate="bisterApp.productAttributeTerm.detail.title">Product Attribute Term</span>
+      </h2>
+
+      <hr />
+
+      <yali-alert-error></yali-alert-error>
+
+      <yali-alert></yali-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span yaliTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ productAttributeTerm.id }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productAttributeTerm.name">Name</span></dt>
+        <dd>
+          <span>{{ productAttributeTerm.name }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productAttributeTerm.slug">Slug</span></dt>
+        <dd>
+          <span>{{ productAttributeTerm.slug }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productAttributeTerm.description">Description</span></dt>
+        <dd>
+          <span>{{ productAttributeTerm.description }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productAttributeTerm.menuOrder">Menu Order</span></dt>
+        <dd>
+          <span>{{ productAttributeTerm.menuOrder }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productAttributeTerm.productAttribute">Product Attribute</span></dt>
+        <dd>
+          <div *ngIf="productAttributeTerm.productAttribute">
+            <a [routerLink]="['/product-attribute', productAttributeTerm.productAttribute.id, 'view']">{{
+              productAttributeTerm.productAttribute.name
+            }}</a>
+          </div>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productAttributeTerm.product">Product</span></dt>
+        <dd>
+          <div *ngIf="productAttributeTerm.product">
+            <a [routerLink]="['/product', productAttributeTerm.product.id, 'view']">{{ productAttributeTerm.product.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span yaliTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/product-attribute-term', productAttributeTerm.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span yaliTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

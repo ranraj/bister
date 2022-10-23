@@ -1,0 +1,11 @@
+export enum ProjectStatus {
+  NEW = 'NEW',
+
+  PENDING_APPROVAL = 'PENDING_APPROVAL',
+
+  UNDER_CONTRUCTION = 'UNDER_CONTRUCTION',
+
+  COMPLETED = 'COMPLETED',
+
+  SOLD = 'SOLD',
+}

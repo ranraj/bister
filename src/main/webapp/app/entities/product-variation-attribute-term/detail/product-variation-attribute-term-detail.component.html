@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="productVariationAttributeTerm">
+      <h2 data-cy="productVariationAttributeTermDetailsHeading">
+        <span yaliTranslate="bisterApp.productVariationAttributeTerm.detail.title">Product Variation Attribute Term</span>
+      </h2>
+
+      <hr />
+
+      <yali-alert-error></yali-alert-error>
+
+      <yali-alert></yali-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span yaliTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ productVariationAttributeTerm.id }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productVariationAttributeTerm.name">Name</span></dt>
+        <dd>
+          <span>{{ productVariationAttributeTerm.name }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productVariationAttributeTerm.slug">Slug</span></dt>
+        <dd>
+          <span>{{ productVariationAttributeTerm.slug }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productVariationAttributeTerm.description">Description</span></dt>
+        <dd>
+          <span>{{ productVariationAttributeTerm.description }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productVariationAttributeTerm.menuOrder">Menu Order</span></dt>
+        <dd>
+          <span>{{ productVariationAttributeTerm.menuOrder }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productVariationAttributeTerm.overRideProductAttribute">Over Ride Product Attribute</span></dt>
+        <dd>
+          <span>{{ productVariationAttributeTerm.overRideProductAttribute }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productVariationAttributeTerm.productVariation">Product Variation</span></dt>
+        <dd>
+          <div *ngIf="productVariationAttributeTerm.productVariation">
+            <a [routerLink]="['/product-variation', productVariationAttributeTerm.productVariation.id, 'view']">{{
+              productVariationAttributeTerm.productVariation.name
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span yaliTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button
+        type="button"
+        [routerLink]="['/product-variation-attribute-term', productVariationAttributeTerm.id, 'edit']"
+        class="btn btn-primary"
+      >
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span yaliTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+{
+  "bisterApp": {
+    "NotificationSourceType": {
+      "null": "",
+      "PROMOTION": "PROMOTION",
+      "PROJECT": "PROJECT",
+      "PRODUCT": "PRODUCT",
+      "SCHEDULE": "SCHEDULE",
+      "ENQUIRY": "ENQUIRY",
+      "REGISTRATION": "REGISTRATION",
+      "INFOROMATION": "INFOROMATION",
+      "REMINDER": "REMINDER"
+    }
+  }
+}

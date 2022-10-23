@@ -1,0 +1,17 @@
+export enum AgentType {
+  ENGINEER = 'ENGINEER',
+
+  SUPPORT = 'SUPPORT',
+
+  LEAD = 'LEAD',
+
+  MARKETING = 'MARKETING',
+
+  SALES = 'SALES',
+
+  FINANCE = 'FINANCE',
+
+  COUNSELLOR = 'COUNSELLOR',
+
+  ADVOCATE = 'ADVOCATE',
+}

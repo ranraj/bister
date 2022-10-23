@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="transaction">
+      <h2 data-cy="transactionDetailsHeading"><span yaliTranslate="bisterApp.transaction.detail.title">Transaction</span></h2>
+
+      <hr />
+
+      <yali-alert-error></yali-alert-error>
+
+      <yali-alert></yali-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span yaliTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ transaction.id }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.transaction.code">Code</span></dt>
+        <dd>
+          <span>{{ transaction.code }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.transaction.amount">Amount</span></dt>
+        <dd>
+          <span>{{ transaction.amount }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.transaction.status">Status</span></dt>
+        <dd>
+          <span yaliTranslate="{{ 'bisterApp.TransactionStatus.' + transaction.status }}">{{ transaction.status }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.transaction.purchaseOrder">Purchase Order</span></dt>
+        <dd>
+          <div *ngIf="transaction.purchaseOrder">
+            <a [routerLink]="['/purchase-order', transaction.purchaseOrder.id, 'view']">{{ transaction.purchaseOrder.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span yaliTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/transaction', transaction.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span yaliTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

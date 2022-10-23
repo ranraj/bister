@@ -1,0 +1,10 @@
+{
+  "bisterApp": {
+    "PaymentScheduleStatus": {
+      "null": "",
+      "PAID": "PAID",
+      "PENDING": "PENDING",
+      "PLANNED": "PLANNED"
+    }
+  }
+}

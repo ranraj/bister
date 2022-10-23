@@ -1,0 +1,26 @@
+{
+  "bisterApp": {
+    "projectType": {
+      "home": {
+        "title": "Project Types",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Project Type",
+        "createOrEditLabel": "Create or edit a Project Type",
+        "search": "Search for Project Type",
+        "notFound": "No Project Types found"
+      },
+      "created": "A new Project Type is created with identifier {{ param }}",
+      "updated": "A Project Type is updated with identifier {{ param }}",
+      "deleted": "A Project Type is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Project Type {{ id }}?"
+      },
+      "detail": {
+        "title": "Project Type"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description"
+    }
+  }
+}

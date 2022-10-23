@@ -1,0 +1,37 @@
+{
+  "bisterApp": {
+    "enquiry": {
+      "home": {
+        "title": "Enquiries",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Enquiry",
+        "createOrEditLabel": "Create or edit a Enquiry",
+        "search": "Search for Enquiry",
+        "notFound": "No Enquiries found"
+      },
+      "created": "A new Enquiry is created with identifier {{ param }}",
+      "updated": "A Enquiry is updated with identifier {{ param }}",
+      "deleted": "A Enquiry is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Enquiry {{ id }}?"
+      },
+      "detail": {
+        "title": "Enquiry"
+      },
+      "id": "ID",
+      "raisedDate": "Raised Date",
+      "subject": "Subject",
+      "details": "Details",
+      "lastResponseDate": "Last Response Date",
+      "lastResponseId": "Last Response Id",
+      "enquiryType": "Enquiry Type",
+      "status": "Status",
+      "attachment": "Attachment",
+      "enquiryResponse": "Enquiry Response",
+      "agent": "Agent",
+      "project": "Project",
+      "product": "Product",
+      "customer": "Customer"
+    }
+  }
+}

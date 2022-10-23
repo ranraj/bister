@@ -1,0 +1,178 @@
+<div>
+  <h2 id="page-heading" data-cy="ProductReviewHeading">
+    <span yaliTranslate="bisterApp.productReview.home.title">Product Reviews</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span yaliTranslate="bisterApp.productReview.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-product-review"
+        [routerLink]="['/product-review/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" yaliTranslate="bisterApp.productReview.home.createLabel"> Create a new Product Review </span>
+      </button>
+    </div>
+  </h2>
+
+  <yali-alert-error></yali-alert-error>
+
+  <yali-alert></yali-alert>
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" yaliTranslate="bisterApp.productReview.home.search"
+          >Search for Product Review</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'bisterApp.productReview.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        <button class="btn btn-danger" (click)="search('')" *ngIf="currentSearch">
+          <fa-icon icon="trash-alt"></fa-icon>
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="productReviews?.length === 0">
+    <span yaliTranslate="bisterApp.productReview.home.notFound">No Product Reviews found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="productReviews && productReviews.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr yaliSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" yaliSortBy="id">
+            <div class="d-flex">
+              <span yaliTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="reviewerName">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.productReview.reviewerName">Reviewer Name</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="reviewerEmail">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.productReview.reviewerEmail">Reviewer Email</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="review">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.productReview.review">Review</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="rating">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.productReview.rating">Rating</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="status">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.productReview.status">Status</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="reviewerId">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.productReview.reviewerId">Reviewer Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="product.name">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.productReview.product">Product</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let productReview of productReviews; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/product-review', productReview.id, 'view']">{{ productReview.id }}</a>
+          </td>
+          <td>{{ productReview.reviewerName }}</td>
+          <td>{{ productReview.reviewerEmail }}</td>
+          <td>{{ productReview.review }}</td>
+          <td>{{ productReview.rating }}</td>
+          <td yaliTranslate="{{ 'bisterApp.ReviewStatus.' + productReview.status }}">{{ productReview.status }}</td>
+          <td>{{ productReview.reviewerId }}</td>
+          <td>
+            <div *ngIf="productReview.product">
+              <a [routerLink]="['/product', productReview.product.id, 'view']">{{ productReview.product.name }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/product-review', productReview.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" yaliTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/product-review', productReview.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" yaliTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(productReview)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" yaliTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="productReviews && productReviews.length > 0">
+    <div class="d-flex justify-content-center">
+      <yali-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></yali-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

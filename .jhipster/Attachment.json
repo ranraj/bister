@@ -1,0 +1,146 @@
+{
+  "applications": ["bister"],
+  "changelogDate": "20221023041152",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "attachment",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength", "required"],
+      "fieldValidateRulesMaxlength": "100",
+      "fieldValidateRulesMinlength": "5"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "250",
+      "fieldValidateRulesMinlength": "20"
+    },
+    {
+      "fieldName": "attachmentType",
+      "fieldType": "AttachmentType",
+      "fieldValues": "IMAGE,AUDIO,VIDEO,LINK,WEBSITE,DOC,TEXT,PDF"
+    },
+    {
+      "fieldName": "link",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "250",
+      "fieldValidateRulesMinlength": "2"
+    },
+    {
+      "fieldName": "isApprovalNeeded",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "approvalStatus",
+      "fieldType": "AttachmentApprovalStatus",
+      "fieldValues": "NEW,INPROGRESS,PENDING_INFORMATION,REJECTED,APPROVED"
+    },
+    {
+      "fieldName": "approvedBy",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "attachmentSourceType",
+      "fieldType": "AttachmentSourceType",
+      "fieldValues": "Project,Product,ENQUIRY,USER,CUSTOMER,AGENT,PROMOTION,NOTIFICATION"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "customerId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "agentId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "attachmentVisibilityType",
+      "fieldType": "AttachmentVisibilityType",
+      "fieldValues": "PRIVATE,PROTECTED,PUBLIC,LIMITED"
+    },
+    {
+      "fieldName": "originalFilename",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "extension",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sizeInBytes",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "sha256",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "contentType",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Attachment",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "tag",
+      "otherEntityRelationshipName": "attachment",
+      "relationshipName": "tag",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "product",
+      "otherEntityRelationshipName": "attachment",
+      "relationshipName": "product",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "project",
+      "otherEntityRelationshipName": "attachment",
+      "relationshipName": "project",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "subject",
+      "otherEntityName": "enquiry",
+      "otherEntityRelationshipName": "attachment",
+      "relationshipName": "enquiry",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "certification",
+      "otherEntityRelationshipName": "attachment",
+      "relationshipName": "certification",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "title",
+      "otherEntityName": "productSpecification",
+      "otherEntityRelationshipName": "attachment",
+      "relationshipName": "productSpecification",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "title",
+      "otherEntityName": "projectSpecification",
+      "otherEntityRelationshipName": "attachment",
+      "relationshipName": "projectSpecification",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

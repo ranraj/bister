@@ -1,0 +1,144 @@
+{
+  "applications": ["bister"],
+  "changelogDate": "20221023035552",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "project",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength", "required"],
+      "fieldValidateRulesMaxlength": "250",
+      "fieldValidateRulesMinlength": "2"
+    },
+    {
+      "fieldName": "slug",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength", "required"],
+      "fieldValidateRulesMaxlength": "100",
+      "fieldValidateRulesMinlength": "2"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength", "required"],
+      "fieldValidateRulesMaxlength": "1000",
+      "fieldValidateRulesMinlength": "20"
+    },
+    {
+      "fieldName": "shortDescription",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "50",
+      "fieldValidateRulesMinlength": "20"
+    },
+    {
+      "fieldName": "regularPrice",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "salePrice",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "published",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateCreated",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateModified",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "projectStatus",
+      "fieldType": "ProjectStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "NEW,PENDING_APPROVAL,UNDER_CONTRUCTION,COMPLETED,SOLD"
+    },
+    {
+      "fieldName": "sharableHash",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "estimatedBudget",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Project",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "address",
+      "ownerSide": true,
+      "relationshipName": "address",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "tag",
+      "otherEntityRelationshipName": "project",
+      "relationshipName": "tag",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "projectReview",
+      "otherEntityRelationshipName": "project",
+      "relationshipName": "projectReview",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "projectSpecification",
+      "otherEntityRelationshipName": "project",
+      "relationshipName": "projectSpecification",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "attachment",
+      "otherEntityRelationshipName": "project",
+      "relationshipName": "attachment",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "enquiry",
+      "otherEntityRelationshipName": "project",
+      "relationshipName": "enquiry",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "projectActivity",
+      "otherEntityRelationshipName": "project",
+      "relationshipName": "projectActivity",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "projectType",
+      "relationshipName": "projectType",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "category",
+      "otherEntityRelationshipName": "project",
+      "ownerSide": true,
+      "relationshipName": "category",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

@@ -1,0 +1,41 @@
+{
+  "applications": ["bister"],
+  "changelogDate": "20221023042352",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "transaction",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength", "required"],
+      "fieldValidateRulesMaxlength": "100",
+      "fieldValidateRulesMinlength": "3"
+    },
+    {
+      "fieldName": "amount",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "TransactionStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PENDING,COMPLETE,REJECTED"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Transaction",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "purchaseOrder",
+      "otherEntityRelationshipName": "transaction",
+      "relationshipName": "purchaseOrder",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

@@ -1,0 +1,36 @@
+{
+  "bisterApp": {
+    "productVariation": {
+      "home": {
+        "title": "Product Variations",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Product Variation",
+        "createOrEditLabel": "Create or edit a Product Variation",
+        "search": "Search for Product Variation",
+        "notFound": "No Product Variations found"
+      },
+      "created": "A new Product Variation is created with identifier {{ param }}",
+      "updated": "A Product Variation is updated with identifier {{ param }}",
+      "deleted": "A Product Variation is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Product Variation {{ id }}?"
+      },
+      "detail": {
+        "title": "Product Variation"
+      },
+      "id": "ID",
+      "assetId": "Asset Id",
+      "name": "Name",
+      "description": "Description",
+      "regularPrice": "Regular Price",
+      "salePrice": "Sale Price",
+      "dateOnSaleFrom": "Date On Sale From",
+      "dateOnSaleTo": "Date On Sale To",
+      "isDraft": "Is Draft",
+      "useParentDetails": "Use Parent Details",
+      "saleStatus": "Sale Status",
+      "productVariationAttributeTerm": "Product Variation Attribute Term",
+      "product": "Product"
+    }
+  }
+}

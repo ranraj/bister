@@ -1,0 +1,92 @@
+{
+  "applications": ["bister"],
+  "changelogDate": "20221023042052",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "enquiry",
+  "fields": [
+    {
+      "fieldName": "raisedDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "subject",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "details",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "1000",
+      "fieldValidateRulesMinlength": "3"
+    },
+    {
+      "fieldName": "lastResponseDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastResponseId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "enquiryType",
+      "fieldType": "EnquiryType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PROJECT,PRODUCT,CONSULTATION,SERVICE"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "EnquiryResolutionStatus",
+      "fieldValues": "OPEN,INPROGRESS,WAITING_FROM_CUSTOMER_RESPONSE,HOLD,SPAM,NO_RESPONSE,CLOSED"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Enquiry",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "attachment",
+      "otherEntityRelationshipName": "enquiry",
+      "relationshipName": "attachment",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "enquiryResponse",
+      "otherEntityRelationshipName": "enquiry",
+      "relationshipName": "enquiryResponse",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "agent",
+      "relationshipName": "agent",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "project",
+      "otherEntityRelationshipName": "enquiry",
+      "relationshipName": "project",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "product",
+      "otherEntityRelationshipName": "enquiry",
+      "relationshipName": "product",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "customer",
+      "otherEntityRelationshipName": "enquiry",
+      "relationshipName": "customer",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

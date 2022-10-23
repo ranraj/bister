@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="invoice">
+      <h2 data-cy="invoiceDetailsHeading"><span yaliTranslate="bisterApp.invoice.detail.title">Invoice</span></h2>
+
+      <hr />
+
+      <yali-alert-error></yali-alert-error>
+
+      <yali-alert></yali-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span yaliTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ invoice.id }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.invoice.code">Code</span></dt>
+        <dd>
+          <span>{{ invoice.code }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.invoice.date">Date</span></dt>
+        <dd>
+          <span>{{ invoice.date | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.invoice.details">Details</span></dt>
+        <dd>
+          <span>{{ invoice.details }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.invoice.status">Status</span></dt>
+        <dd>
+          <span yaliTranslate="{{ 'bisterApp.InvoiceStatus.' + invoice.status }}">{{ invoice.status }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.invoice.paymentMethod">Payment Method</span></dt>
+        <dd>
+          <span yaliTranslate="{{ 'bisterApp.PaymentMethod.' + invoice.paymentMethod }}">{{ invoice.paymentMethod }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.invoice.paymentDate">Payment Date</span></dt>
+        <dd>
+          <span>{{ invoice.paymentDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.invoice.paymentAmount">Payment Amount</span></dt>
+        <dd>
+          <span>{{ invoice.paymentAmount }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.invoice.purchaseOrder">Purchase Order</span></dt>
+        <dd>
+          <div *ngIf="invoice.purchaseOrder">
+            <a [routerLink]="['/purchase-order', invoice.purchaseOrder.id, 'view']">{{ invoice.purchaseOrder.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span yaliTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/invoice', invoice.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span yaliTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

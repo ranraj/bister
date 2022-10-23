@@ -1,0 +1,31 @@
+{
+  "bisterApp": {
+    "projectReview": {
+      "home": {
+        "title": "Project Reviews",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Project Review",
+        "createOrEditLabel": "Create or edit a Project Review",
+        "search": "Search for Project Review",
+        "notFound": "No Project Reviews found"
+      },
+      "created": "A new Project Review is created with identifier {{ param }}",
+      "updated": "A Project Review is updated with identifier {{ param }}",
+      "deleted": "A Project Review is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Project Review {{ id }}?"
+      },
+      "detail": {
+        "title": "Project Review"
+      },
+      "id": "ID",
+      "reviewerName": "Reviewer Name",
+      "reviewerEmail": "Reviewer Email",
+      "review": "Review",
+      "rating": "Rating",
+      "status": "Status",
+      "reviewerId": "Reviewer Id",
+      "project": "Project"
+    }
+  }
+}

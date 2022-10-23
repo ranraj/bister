@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="facility">
+      <h2 data-cy="facilityDetailsHeading"><span yaliTranslate="bisterApp.facility.detail.title">Facility</span></h2>
+
+      <hr />
+
+      <yali-alert-error></yali-alert-error>
+
+      <yali-alert></yali-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span yaliTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ facility.id }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.facility.name">Name</span></dt>
+        <dd>
+          <span>{{ facility.name }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.facility.description">Description</span></dt>
+        <dd>
+          <span>{{ facility.description }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.facility.facilityType">Facility Type</span></dt>
+        <dd>
+          <span yaliTranslate="{{ 'bisterApp.FacilityType.' + facility.facilityType }}">{{ facility.facilityType }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.facility.address">Address</span></dt>
+        <dd>
+          <div *ngIf="facility.address">
+            <a [routerLink]="['/address', facility.address.id, 'view']">{{ facility.address.name }}</a>
+          </div>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.facility.user">User</span></dt>
+        <dd>
+          <span>{{ facility.user?.login }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.facility.organisation">Organisation</span></dt>
+        <dd>
+          <div *ngIf="facility.organisation">
+            <a [routerLink]="['/organisation', facility.organisation.id, 'view']">{{ facility.organisation.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span yaliTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/facility', facility.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span yaliTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="productSpecificationGroup">
+      <h2 data-cy="productSpecificationGroupDetailsHeading">
+        <span yaliTranslate="bisterApp.productSpecificationGroup.detail.title">Product Specification Group</span>
+      </h2>
+
+      <hr />
+
+      <yali-alert-error></yali-alert-error>
+
+      <yali-alert></yali-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span yaliTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ productSpecificationGroup.id }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productSpecificationGroup.title">Title</span></dt>
+        <dd>
+          <span>{{ productSpecificationGroup.title }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productSpecificationGroup.slug">Slug</span></dt>
+        <dd>
+          <span>{{ productSpecificationGroup.slug }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productSpecificationGroup.description">Description</span></dt>
+        <dd>
+          <span>{{ productSpecificationGroup.description }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productSpecificationGroup.product">Product</span></dt>
+        <dd>
+          <div *ngIf="productSpecificationGroup.product">
+            <a [routerLink]="['/product', productSpecificationGroup.product.id, 'view']">{{ productSpecificationGroup.product.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span yaliTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/product-specification-group', productSpecificationGroup.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span yaliTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

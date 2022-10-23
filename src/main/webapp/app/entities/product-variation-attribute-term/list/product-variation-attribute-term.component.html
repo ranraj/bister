@@ -1,0 +1,186 @@
+<div>
+  <h2 id="page-heading" data-cy="ProductVariationAttributeTermHeading">
+    <span yaliTranslate="bisterApp.productVariationAttributeTerm.home.title">Product Variation Attribute Terms</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span yaliTranslate="bisterApp.productVariationAttributeTerm.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-product-variation-attribute-term"
+        [routerLink]="['/product-variation-attribute-term/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" yaliTranslate="bisterApp.productVariationAttributeTerm.home.createLabel">
+          Create a new Product Variation Attribute Term
+        </span>
+      </button>
+    </div>
+  </h2>
+
+  <yali-alert-error></yali-alert-error>
+
+  <yali-alert></yali-alert>
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" yaliTranslate="bisterApp.productVariationAttributeTerm.home.search"
+          >Search for Product Variation Attribute Term</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'bisterApp.productVariationAttributeTerm.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        <button class="btn btn-danger" (click)="search('')" *ngIf="currentSearch">
+          <fa-icon icon="trash-alt"></fa-icon>
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="productVariationAttributeTerms?.length === 0">
+    <span yaliTranslate="bisterApp.productVariationAttributeTerm.home.notFound">No Product Variation Attribute Terms found</span>
+  </div>
+
+  <div
+    class="table-responsive table-entities"
+    id="entities"
+    *ngIf="productVariationAttributeTerms && productVariationAttributeTerms.length > 0"
+  >
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr yaliSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" yaliSortBy="id">
+            <div class="d-flex">
+              <span yaliTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="name">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.productVariationAttributeTerm.name">Name</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="slug">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.productVariationAttributeTerm.slug">Slug</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="description">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.productVariationAttributeTerm.description">Description</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="menuOrder">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.productVariationAttributeTerm.menuOrder">Menu Order</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="overRideProductAttribute">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.productVariationAttributeTerm.overRideProductAttribute">Over Ride Product Attribute</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="productVariation.name">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.productVariationAttributeTerm.productVariation">Product Variation</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let productVariationAttributeTerm of productVariationAttributeTerms; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/product-variation-attribute-term', productVariationAttributeTerm.id, 'view']">{{
+              productVariationAttributeTerm.id
+            }}</a>
+          </td>
+          <td>{{ productVariationAttributeTerm.name }}</td>
+          <td>{{ productVariationAttributeTerm.slug }}</td>
+          <td>{{ productVariationAttributeTerm.description }}</td>
+          <td>{{ productVariationAttributeTerm.menuOrder }}</td>
+          <td>{{ productVariationAttributeTerm.overRideProductAttribute }}</td>
+          <td>
+            <div *ngIf="productVariationAttributeTerm.productVariation">
+              <a [routerLink]="['/product-variation', productVariationAttributeTerm.productVariation.id, 'view']">{{
+                productVariationAttributeTerm.productVariation.name
+              }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/product-variation-attribute-term', productVariationAttributeTerm.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" yaliTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/product-variation-attribute-term', productVariationAttributeTerm.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" yaliTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button
+                type="submit"
+                (click)="delete(productVariationAttributeTerm)"
+                class="btn btn-danger btn-sm"
+                data-cy="entityDeleteButton"
+              >
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" yaliTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="productVariationAttributeTerms && productVariationAttributeTerms.length > 0">
+    <div class="d-flex justify-content-center">
+      <yali-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></yali-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity PurchaseOrder.
+    -->
+    <changeSet id="20221023041552-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="purchase_order"
+                                 constraintName="fk_purchase_order__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="yali_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="product_variation_id"
+                                 baseTableName="purchase_order"
+                                 constraintName="fk_purchase_order__product_variation_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product_variation"/>
+    </changeSet>
+</databaseChangeLog>

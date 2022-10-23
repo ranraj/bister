@@ -1,0 +1,28 @@
+{
+  "bisterApp": {
+    "taxClass": {
+      "home": {
+        "title": "Tax Classes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Tax Class",
+        "createOrEditLabel": "Create or edit a Tax Class",
+        "search": "Search for Tax Class",
+        "notFound": "No Tax Classes found"
+      },
+      "created": "A new Tax Class is created with identifier {{ param }}",
+      "updated": "A Tax Class is updated with identifier {{ param }}",
+      "deleted": "A Tax Class is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Tax Class {{ id }}?"
+      },
+      "detail": {
+        "title": "Tax Class"
+      },
+      "id": "ID",
+      "name": "Name",
+      "slug": "Slug",
+      "taxRate": "Tax Rate",
+      "product": "Product"
+    }
+  }
+}

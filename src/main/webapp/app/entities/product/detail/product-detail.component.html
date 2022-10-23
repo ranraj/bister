@@ -1,0 +1,95 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="product">
+      <h2 data-cy="productDetailsHeading"><span yaliTranslate="bisterApp.product.detail.title">Product</span></h2>
+
+      <hr />
+
+      <yali-alert-error></yali-alert-error>
+
+      <yali-alert></yali-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span yaliTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ product.id }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.product.name">Name</span></dt>
+        <dd>
+          <span>{{ product.name }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.product.slug">Slug</span></dt>
+        <dd>
+          <span>{{ product.slug }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.product.description">Description</span></dt>
+        <dd>
+          <span>{{ product.description }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.product.shortDescription">Short Description</span></dt>
+        <dd>
+          <span>{{ product.shortDescription }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.product.regularPrice">Regular Price</span></dt>
+        <dd>
+          <span>{{ product.regularPrice }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.product.salePrice">Sale Price</span></dt>
+        <dd>
+          <span>{{ product.salePrice }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.product.published">Published</span></dt>
+        <dd>
+          <span>{{ product.published }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.product.dateCreated">Date Created</span></dt>
+        <dd>
+          <span>{{ product.dateCreated | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.product.dateModified">Date Modified</span></dt>
+        <dd>
+          <span>{{ product.dateModified | formatMediumDate }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.product.featured">Featured</span></dt>
+        <dd>
+          <span>{{ product.featured }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.product.saleStatus">Sale Status</span></dt>
+        <dd>
+          <span yaliTranslate="{{ 'bisterApp.SaleStatus.' + product.saleStatus }}">{{ product.saleStatus }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.product.sharableHash">Sharable Hash</span></dt>
+        <dd>
+          <span>{{ product.sharableHash }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.product.project">Project</span></dt>
+        <dd>
+          <div *ngIf="product.project">
+            <a [routerLink]="['/project', product.project.id, 'view']">{{ product.project.name }}</a>
+          </div>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.product.category">Category</span></dt>
+        <dd>
+          <span *ngFor="let category of product.categories; let last = last">
+            <a [routerLink]="['/category', category.id, 'view']">{{ category.name }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.product.taxClass">Tax Class</span></dt>
+        <dd>
+          <div *ngIf="product.taxClass">
+            <a [routerLink]="['/tax-class', product.taxClass.id, 'view']">{{ product.taxClass.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span yaliTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/product', product.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span yaliTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

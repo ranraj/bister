@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="tag">
+      <h2 data-cy="tagDetailsHeading"><span yaliTranslate="bisterApp.tag.detail.title">Tag</span></h2>
+
+      <hr />
+
+      <yali-alert-error></yali-alert-error>
+
+      <yali-alert></yali-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span yaliTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ tag.id }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.tag.name">Name</span></dt>
+        <dd>
+          <span>{{ tag.name }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.tag.slug">Slug</span></dt>
+        <dd>
+          <span>{{ tag.slug }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.tag.description">Description</span></dt>
+        <dd>
+          <span>{{ tag.description }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.tag.tagType">Tag Type</span></dt>
+        <dd>
+          <span yaliTranslate="{{ 'bisterApp.TagType.' + tag.tagType }}">{{ tag.tagType }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.tag.product">Product</span></dt>
+        <dd>
+          <div *ngIf="tag.product">
+            <a [routerLink]="['/product', tag.product.id, 'view']">{{ tag.product.name }}</a>
+          </div>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.tag.project">Project</span></dt>
+        <dd>
+          <div *ngIf="tag.project">
+            <a [routerLink]="['/project', tag.project.id, 'view']">{{ tag.project.name }}</a>
+          </div>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.tag.attachment">Attachment</span></dt>
+        <dd>
+          <div *ngIf="tag.attachment">
+            <a [routerLink]="['/attachment', tag.attachment.id, 'view']">{{ tag.attachment.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span yaliTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/tag', tag.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span yaliTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

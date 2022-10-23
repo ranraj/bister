@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="agent">
+      <h2 data-cy="agentDetailsHeading"><span yaliTranslate="bisterApp.agent.detail.title">Agent</span></h2>
+
+      <hr />
+
+      <yali-alert-error></yali-alert-error>
+
+      <yali-alert></yali-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span yaliTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ agent.id }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.agent.name">Name</span></dt>
+        <dd>
+          <span>{{ agent.name }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.agent.contactNumber">Contact Number</span></dt>
+        <dd>
+          <span>{{ agent.contactNumber }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.agent.avatarUrl">Avatar Url</span></dt>
+        <dd>
+          <span>{{ agent.avatarUrl }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.agent.agentType">Agent Type</span></dt>
+        <dd>
+          <span yaliTranslate="{{ 'bisterApp.AgentType.' + agent.agentType }}">{{ agent.agentType }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.agent.user">User</span></dt>
+        <dd>
+          <span>{{ agent.user?.login }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.agent.facility">Facility</span></dt>
+        <dd>
+          <div *ngIf="agent.facility">
+            <a [routerLink]="['/facility', agent.facility.id, 'view']">{{ agent.facility.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span yaliTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/agent', agent.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span yaliTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

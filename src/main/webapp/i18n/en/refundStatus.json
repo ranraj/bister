@@ -1,0 +1,9 @@
+{
+  "bisterApp": {
+    "RefundStatus": {
+      "null": "",
+      "PENDING": "PENDING",
+      "COMPLETE": "COMPLETE"
+    }
+  }
+}

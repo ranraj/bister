@@ -1,0 +1,155 @@
+{
+  "applications": ["bister"],
+  "changelogDate": "20221023035852",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "product",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength", "required"],
+      "fieldValidateRulesMaxlength": "250",
+      "fieldValidateRulesMinlength": "2"
+    },
+    {
+      "fieldName": "slug",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength", "required"],
+      "fieldValidateRulesMaxlength": "100",
+      "fieldValidateRulesMinlength": "2"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength", "required"],
+      "fieldValidateRulesMaxlength": "1000",
+      "fieldValidateRulesMinlength": "20"
+    },
+    {
+      "fieldName": "shortDescription",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength", "required"],
+      "fieldValidateRulesMaxlength": "50",
+      "fieldValidateRulesMinlength": "20"
+    },
+    {
+      "fieldName": "regularPrice",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "salePrice",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "published",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateCreated",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateModified",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "featured",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "saleStatus",
+      "fieldType": "SaleStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "RESALE,SOLD,OPEN,DELIVERY,CLOSED"
+    },
+    {
+      "fieldName": "sharableHash",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Product",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "productVariation",
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "productVariation",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "productAttributeTerm",
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "productAttributeTerm",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "tag",
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "tag",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "productReview",
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "productReview",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "productSpecification",
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "productSpecification",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "attachment",
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "attachment",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "enquiry",
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "enquiry",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "productActivity",
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "productActivity",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "project",
+      "relationshipName": "project",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "category",
+      "otherEntityRelationshipName": "product",
+      "ownerSide": true,
+      "relationshipName": "category",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "taxClass",
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "taxClass",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "serviceClass"
+}

@@ -1,0 +1,11 @@
+export enum AttachmentApprovalStatus {
+  NEW = 'NEW',
+
+  INPROGRESS = 'INPROGRESS',
+
+  PENDING_INFORMATION = 'PENDING_INFORMATION',
+
+  REJECTED = 'REJECTED',
+
+  APPROVED = 'APPROVED',
+}

@@ -1,0 +1,142 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="attachment">
+      <h2 data-cy="attachmentDetailsHeading"><span yaliTranslate="bisterApp.attachment.detail.title">Attachment</span></h2>
+
+      <hr />
+
+      <yali-alert-error></yali-alert-error>
+
+      <yali-alert></yali-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span yaliTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ attachment.id }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.attachment.name">Name</span></dt>
+        <dd>
+          <span>{{ attachment.name }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.attachment.description">Description</span></dt>
+        <dd>
+          <span>{{ attachment.description }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.attachment.attachmentType">Attachment Type</span></dt>
+        <dd>
+          <span yaliTranslate="{{ 'bisterApp.AttachmentType.' + attachment.attachmentType }}">{{ attachment.attachmentType }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.attachment.link">Link</span></dt>
+        <dd>
+          <span>{{ attachment.link }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.attachment.isApprovalNeeded">Is Approval Needed</span></dt>
+        <dd>
+          <span>{{ attachment.isApprovalNeeded }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.attachment.approvalStatus">Approval Status</span></dt>
+        <dd>
+          <span yaliTranslate="{{ 'bisterApp.AttachmentApprovalStatus.' + attachment.approvalStatus }}">{{
+            attachment.approvalStatus
+          }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.attachment.approvedBy">Approved By</span></dt>
+        <dd>
+          <span>{{ attachment.approvedBy }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.attachment.attachmentSourceType">Attachment Source Type</span></dt>
+        <dd>
+          <span yaliTranslate="{{ 'bisterApp.AttachmentSourceType.' + attachment.attachmentSourceType }}">{{
+            attachment.attachmentSourceType
+          }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.attachment.createdBy">Created By</span></dt>
+        <dd>
+          <span>{{ attachment.createdBy }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.attachment.customerId">Customer Id</span></dt>
+        <dd>
+          <span>{{ attachment.customerId }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.attachment.agentId">Agent Id</span></dt>
+        <dd>
+          <span>{{ attachment.agentId }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.attachment.attachmentVisibilityType">Attachment Visibility Type</span></dt>
+        <dd>
+          <span yaliTranslate="{{ 'bisterApp.AttachmentVisibilityType.' + attachment.attachmentVisibilityType }}">{{
+            attachment.attachmentVisibilityType
+          }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.attachment.originalFilename">Original Filename</span></dt>
+        <dd>
+          <span>{{ attachment.originalFilename }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.attachment.extension">Extension</span></dt>
+        <dd>
+          <span>{{ attachment.extension }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.attachment.sizeInBytes">Size In Bytes</span></dt>
+        <dd>
+          <span>{{ attachment.sizeInBytes }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.attachment.sha256">Sha 256</span></dt>
+        <dd>
+          <span>{{ attachment.sha256 }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.attachment.contentType">Content Type</span></dt>
+        <dd>
+          <span>{{ attachment.contentType }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.attachment.product">Product</span></dt>
+        <dd>
+          <div *ngIf="attachment.product">
+            <a [routerLink]="['/product', attachment.product.id, 'view']">{{ attachment.product.name }}</a>
+          </div>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.attachment.project">Project</span></dt>
+        <dd>
+          <div *ngIf="attachment.project">
+            <a [routerLink]="['/project', attachment.project.id, 'view']">{{ attachment.project.name }}</a>
+          </div>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.attachment.enquiry">Enquiry</span></dt>
+        <dd>
+          <div *ngIf="attachment.enquiry">
+            <a [routerLink]="['/enquiry', attachment.enquiry.id, 'view']">{{ attachment.enquiry.subject }}</a>
+          </div>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.attachment.certification">Certification</span></dt>
+        <dd>
+          <div *ngIf="attachment.certification">
+            <a [routerLink]="['/certification', attachment.certification.id, 'view']">{{ attachment.certification.name }}</a>
+          </div>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.attachment.productSpecification">Product Specification</span></dt>
+        <dd>
+          <div *ngIf="attachment.productSpecification">
+            <a [routerLink]="['/product-specification', attachment.productSpecification.id, 'view']">{{
+              attachment.productSpecification.title
+            }}</a>
+          </div>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.attachment.projectSpecification">Project Specification</span></dt>
+        <dd>
+          <div *ngIf="attachment.projectSpecification">
+            <a [routerLink]="['/project-specification', attachment.projectSpecification.id, 'view']">{{
+              attachment.projectSpecification.title
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span yaliTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/attachment', attachment.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span yaliTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

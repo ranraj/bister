@@ -1,0 +1,36 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="projectType">
+      <h2 data-cy="projectTypeDetailsHeading"><span yaliTranslate="bisterApp.projectType.detail.title">Project Type</span></h2>
+
+      <hr />
+
+      <yali-alert-error></yali-alert-error>
+
+      <yali-alert></yali-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span yaliTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ projectType.id }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.projectType.name">Name</span></dt>
+        <dd>
+          <span>{{ projectType.name }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.projectType.description">Description</span></dt>
+        <dd>
+          <span>{{ projectType.description }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span yaliTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/project-type', projectType.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span yaliTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

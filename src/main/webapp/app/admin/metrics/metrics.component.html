@@ -1,0 +1,51 @@
+<div>
+  <h2>
+    <span id="metrics-page-heading" yaliTranslate="metrics.title" data-cy="metricsPageHeading">Application Metrics</span>
+
+    <button class="btn btn-primary float-end" (click)="refresh()">
+      <fa-icon icon="sync"></fa-icon> <span yaliTranslate="metrics.refresh.button">Refresh</span>
+    </button>
+  </h2>
+
+  <h3 yaliTranslate="metrics.jvm.title">JVM Metrics</h3>
+
+  <div class="row" *ngIf="metrics && !updatingMetrics">
+    <yali-jvm-memory class="col-md-4" [updating]="updatingMetrics" [jvmMemoryMetrics]="metrics.jvm"></yali-jvm-memory>
+
+    <yali-jvm-threads class="col-md-4" [threads]="threads"></yali-jvm-threads>
+
+    <yali-metrics-system class="col-md-4" [updating]="updatingMetrics" [systemMetrics]="metrics.processMetrics"></yali-metrics-system>
+  </div>
+
+  <yali-metrics-garbagecollector
+    *ngIf="metrics && metricsKeyExists('garbageCollector')"
+    [updating]="updatingMetrics"
+    [garbageCollectorMetrics]="metrics.garbageCollector"
+  ></yali-metrics-garbagecollector>
+
+  <div class="well well-lg" *ngIf="updatingMetrics" yaliTranslate="metrics.updating">Updating...</div>
+
+  <yali-metrics-request
+    *ngIf="metrics && metricsKeyExists('http.server.requests')"
+    [updating]="updatingMetrics"
+    [requestMetrics]="metrics['http.server.requests']"
+  ></yali-metrics-request>
+
+  <yali-metrics-endpoints-requests
+    *ngIf="metrics && metricsKeyExists('services')"
+    [updating]="updatingMetrics"
+    [endpointsRequestsMetrics]="metrics.services"
+  ></yali-metrics-endpoints-requests>
+
+  <yali-metrics-cache
+    *ngIf="metrics && metricsKeyExists('cache')"
+    [updating]="updatingMetrics"
+    [cacheMetrics]="metrics.cache"
+  ></yali-metrics-cache>
+
+  <yali-metrics-datasource
+    *ngIf="metrics && metricsKeyExistsAndObjectNotEmpty('databases')"
+    [updating]="updatingMetrics"
+    [datasourceMetrics]="metrics.databases"
+  ></yali-metrics-datasource>
+</div>

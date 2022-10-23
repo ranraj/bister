@@ -1,0 +1,57 @@
+{
+  "applications": ["bister"],
+  "changelogDate": "20221023035352",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "agent",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength", "required"],
+      "fieldValidateRulesMaxlength": "250",
+      "fieldValidateRulesMinlength": "1"
+    },
+    {
+      "fieldName": "contactNumber",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength", "required"],
+      "fieldValidateRulesMaxlength": "15",
+      "fieldValidateRulesMinlength": "10"
+    },
+    {
+      "fieldName": "avatarUrl",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "agentType",
+      "fieldType": "AgentType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ENGINEER,SUPPORT,LEAD,MARKETING,SALES,FINANCE,COUNSELLOR,ADVOCATE"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "Business Agents",
+  "jpaMetamodelFiltering": false,
+  "name": "Agent",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "ownerSide": true,
+      "relationshipName": "user",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "facility",
+      "relationshipName": "facility",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "serviceClass"
+}

@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="productReview">
+      <h2 data-cy="productReviewDetailsHeading"><span yaliTranslate="bisterApp.productReview.detail.title">Product Review</span></h2>
+
+      <hr />
+
+      <yali-alert-error></yali-alert-error>
+
+      <yali-alert></yali-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span yaliTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ productReview.id }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productReview.reviewerName">Reviewer Name</span></dt>
+        <dd>
+          <span>{{ productReview.reviewerName }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productReview.reviewerEmail">Reviewer Email</span></dt>
+        <dd>
+          <span>{{ productReview.reviewerEmail }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productReview.review">Review</span></dt>
+        <dd>
+          <span>{{ productReview.review }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productReview.rating">Rating</span></dt>
+        <dd>
+          <span>{{ productReview.rating }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productReview.status">Status</span></dt>
+        <dd>
+          <span yaliTranslate="{{ 'bisterApp.ReviewStatus.' + productReview.status }}">{{ productReview.status }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productReview.reviewerId">Reviewer Id</span></dt>
+        <dd>
+          <span>{{ productReview.reviewerId }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productReview.product">Product</span></dt>
+        <dd>
+          <div *ngIf="productReview.product">
+            <a [routerLink]="['/product', productReview.product.id, 'view']">{{ productReview.product.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span yaliTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/product-review', productReview.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span yaliTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

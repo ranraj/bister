@@ -1,0 +1,427 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="yali-project-heading" data-cy="ProjectCreateUpdateHeading" yaliTranslate="bisterApp.project.home.createOrEditLabel">
+        Create or edit a Project
+      </h2>
+
+      <div>
+        <yali-alert-error></yali-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" yaliTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.project.name" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" yaliTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('name')?.errors?.minlength"
+              yaliTranslate="entity.validation.minlength"
+              [translateValues]="{ min: 2 }"
+            >
+              This field is required to be at least 2 characters.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('name')?.errors?.maxlength"
+              yaliTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 250 }"
+            >
+              This field cannot be longer than 250 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.project.slug" for="field_slug">Slug</label>
+          <input type="text" class="form-control" name="slug" id="field_slug" data-cy="slug" formControlName="slug" />
+          <div *ngIf="editForm.get('slug')!.invalid && (editForm.get('slug')!.dirty || editForm.get('slug')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('slug')?.errors?.required" yaliTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('slug')?.errors?.minlength"
+              yaliTranslate="entity.validation.minlength"
+              [translateValues]="{ min: 2 }"
+            >
+              This field is required to be at least 2 characters.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('slug')?.errors?.maxlength"
+              yaliTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 100 }"
+            >
+              This field cannot be longer than 100 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.project.description" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+          <div *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('description')?.errors?.required"
+              yaliTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('description')?.errors?.minlength"
+              yaliTranslate="entity.validation.minlength"
+              [translateValues]="{ min: 20 }"
+            >
+              This field is required to be at least 20 characters.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('description')?.errors?.maxlength"
+              yaliTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 1000 }"
+            >
+              This field cannot be longer than 1000 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.project.shortDescription" for="field_shortDescription"
+            >Short Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="shortDescription"
+            id="field_shortDescription"
+            data-cy="shortDescription"
+            formControlName="shortDescription"
+          />
+          <div
+            *ngIf="
+              editForm.get('shortDescription')!.invalid &&
+              (editForm.get('shortDescription')!.dirty || editForm.get('shortDescription')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('shortDescription')?.errors?.minlength"
+              yaliTranslate="entity.validation.minlength"
+              [translateValues]="{ min: 20 }"
+            >
+              This field is required to be at least 20 characters.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('shortDescription')?.errors?.maxlength"
+              yaliTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.project.regularPrice" for="field_regularPrice">Regular Price</label>
+          <input
+            type="number"
+            class="form-control"
+            name="regularPrice"
+            id="field_regularPrice"
+            data-cy="regularPrice"
+            formControlName="regularPrice"
+          />
+          <div
+            *ngIf="editForm.get('regularPrice')!.invalid && (editForm.get('regularPrice')!.dirty || editForm.get('regularPrice')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('regularPrice')?.errors?.required"
+              yaliTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('regularPrice')?.errors?.number"
+              yaliTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.project.salePrice" for="field_salePrice">Sale Price</label>
+          <input type="number" class="form-control" name="salePrice" id="field_salePrice" data-cy="salePrice" formControlName="salePrice" />
+          <div *ngIf="editForm.get('salePrice')!.invalid && (editForm.get('salePrice')!.dirty || editForm.get('salePrice')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('salePrice')?.errors?.required"
+              yaliTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('salePrice')?.errors?.number"
+              yaliTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.project.published" for="field_published">Published</label>
+          <input type="checkbox" class="form-check" name="published" id="field_published" data-cy="published" formControlName="published" />
+          <div *ngIf="editForm.get('published')!.invalid && (editForm.get('published')!.dirty || editForm.get('published')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('published')?.errors?.required"
+              yaliTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.project.dateCreated" for="field_dateCreated">Date Created</label>
+          <div class="d-flex">
+            <input
+              id="field_dateCreated"
+              data-cy="dateCreated"
+              type="datetime-local"
+              class="form-control"
+              name="dateCreated"
+              formControlName="dateCreated"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('dateCreated')!.invalid && (editForm.get('dateCreated')!.dirty || editForm.get('dateCreated')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dateCreated')?.errors?.required"
+              yaliTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('dateCreated')?.errors?.datetimelocal"
+              yaliTranslate="entity.validation.datetimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.project.dateModified" for="field_dateModified">Date Modified</label>
+          <div class="input-group">
+            <input
+              id="field_dateModified"
+              data-cy="dateModified"
+              type="text"
+              class="form-control"
+              name="dateModified"
+              ngbDatepicker
+              #dateModifiedDp="ngbDatepicker"
+              formControlName="dateModified"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateModifiedDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+          <div
+            *ngIf="editForm.get('dateModified')!.invalid && (editForm.get('dateModified')!.dirty || editForm.get('dateModified')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dateModified')?.errors?.required"
+              yaliTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.project.projectStatus" for="field_projectStatus">Project Status</label>
+          <select
+            class="form-control"
+            name="projectStatus"
+            formControlName="projectStatus"
+            id="field_projectStatus"
+            data-cy="projectStatus"
+          >
+            <option [ngValue]="null">{{ 'bisterApp.ProjectStatus.null' | translate }}</option>
+            <option *ngFor="let projectStatus of projectStatusValues" [value]="projectStatus">
+              {{ 'bisterApp.ProjectStatus.' + projectStatus | translate }}
+            </option>
+          </select>
+          <div
+            *ngIf="
+              editForm.get('projectStatus')!.invalid && (editForm.get('projectStatus')!.dirty || editForm.get('projectStatus')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('projectStatus')?.errors?.required"
+              yaliTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.project.sharableHash" for="field_sharableHash">Sharable Hash</label>
+          <input
+            type="text"
+            class="form-control"
+            name="sharableHash"
+            id="field_sharableHash"
+            data-cy="sharableHash"
+            formControlName="sharableHash"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.project.estimatedBudget" for="field_estimatedBudget">Estimated Budget</label>
+          <input
+            type="number"
+            class="form-control"
+            name="estimatedBudget"
+            id="field_estimatedBudget"
+            data-cy="estimatedBudget"
+            formControlName="estimatedBudget"
+          />
+          <div
+            *ngIf="
+              editForm.get('estimatedBudget')!.invalid &&
+              (editForm.get('estimatedBudget')!.dirty || editForm.get('estimatedBudget')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('estimatedBudget')?.errors?.required"
+              yaliTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('estimatedBudget')?.errors?.number"
+              yaliTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.project.address" for="field_address">Address</label>
+          <select
+            class="form-control"
+            id="field_address"
+            data-cy="address"
+            name="address"
+            formControlName="address"
+            [compareWith]="compareAddress"
+          >
+            <option *ngIf="!editForm.get('address')!.value" [ngValue]="null" selected></option>
+            <option [ngValue]="addressOption" *ngFor="let addressOption of addressesSharedCollection">{{ addressOption.name }}</option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['address'])!.invalid && (editForm.get(['address'])!.dirty || editForm.get(['address'])!.touched)">
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['address'])?.errors?.required"
+            yaliTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.project.projectType" for="field_projectType">Project Type</label>
+          <select
+            class="form-control"
+            id="field_projectType"
+            data-cy="projectType"
+            name="projectType"
+            formControlName="projectType"
+            [compareWith]="compareProjectType"
+          >
+            <option *ngIf="!editForm.get('projectType')!.value" [ngValue]="null" selected></option>
+            <option [ngValue]="projectTypeOption" *ngFor="let projectTypeOption of projectTypesSharedCollection">
+              {{ projectTypeOption.name }}
+            </option>
+          </select>
+        </div>
+        <div
+          *ngIf="editForm.get(['projectType'])!.invalid && (editForm.get(['projectType'])!.dirty || editForm.get(['projectType'])!.touched)"
+        >
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['projectType'])?.errors?.required"
+            yaliTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+        </div>
+
+        <div class="row mb-3">
+          <label yaliTranslate="bisterApp.project.category" for="field_categories">Category</label>
+          <select
+            class="form-control"
+            id="field_categories"
+            data-cy="category"
+            multiple
+            name="categories"
+            formControlName="categories"
+            [compareWith]="compareCategory"
+          >
+            <option [ngValue]="categoryOption" *ngFor="let categoryOption of categoriesSharedCollection">{{ categoryOption.name }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span yaliTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span yaliTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

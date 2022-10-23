@@ -1,0 +1,56 @@
+{
+  "applications": ["bister"],
+  "changelogDate": "20221023041352",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "promotion",
+  "fields": [
+    {
+      "fieldName": "productId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "projectId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "contentType",
+      "fieldType": "PromotionContentType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "TEMPLATE,ATTACHMENT,ATTACHMENT_TEMPLATE"
+    },
+    {
+      "fieldName": "recipients",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "recipientGroup",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "createdAt",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "sendAt",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "attachmentId",
+      "fieldType": "Long"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Promotion",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceClass"
+}

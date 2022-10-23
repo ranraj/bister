@@ -1,0 +1,10 @@
+{
+  "bisterApp": {
+    "TagType": {
+      "null": "",
+      "Project": "Project",
+      "Product": "Product",
+      "Attachment": "Attachment"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "bisterApp": {
+    "enquiryResponse": {
+      "home": {
+        "title": "Enquiry Responses",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Enquiry Response",
+        "createOrEditLabel": "Create or edit a Enquiry Response",
+        "search": "Search for Enquiry Response",
+        "notFound": "No Enquiry Responses found"
+      },
+      "created": "A new Enquiry Response is created with identifier {{ param }}",
+      "updated": "A Enquiry Response is updated with identifier {{ param }}",
+      "deleted": "A Enquiry Response is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Enquiry Response {{ id }}?"
+      },
+      "detail": {
+        "title": "Enquiry Response"
+      },
+      "id": "ID",
+      "query": "Query",
+      "details": "Details",
+      "enquiryResponseType": "Enquiry Response Type",
+      "agent": "Agent",
+      "enquiry": "Enquiry"
+    }
+  }
+}

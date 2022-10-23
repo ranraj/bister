@@ -1,0 +1,30 @@
+{
+  "bisterApp": {
+    "productVariationAttributeTerm": {
+      "home": {
+        "title": "Product Variation Attribute Terms",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Product Variation Attribute Term",
+        "createOrEditLabel": "Create or edit a Product Variation Attribute Term",
+        "search": "Search for Product Variation Attribute Term",
+        "notFound": "No Product Variation Attribute Terms found"
+      },
+      "created": "A new Product Variation Attribute Term is created with identifier {{ param }}",
+      "updated": "A Product Variation Attribute Term is updated with identifier {{ param }}",
+      "deleted": "A Product Variation Attribute Term is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Product Variation Attribute Term {{ id }}?"
+      },
+      "detail": {
+        "title": "Product Variation Attribute Term"
+      },
+      "id": "ID",
+      "name": "Name",
+      "slug": "Slug",
+      "description": "Description",
+      "menuOrder": "Menu Order",
+      "overRideProductAttribute": "Over Ride Product Attribute",
+      "productVariation": "Product Variation"
+    }
+  }
+}

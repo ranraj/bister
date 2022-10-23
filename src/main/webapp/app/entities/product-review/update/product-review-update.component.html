@@ -1,0 +1,232 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="yali-product-review-heading"
+        data-cy="ProductReviewCreateUpdateHeading"
+        yaliTranslate="bisterApp.productReview.home.createOrEditLabel"
+      >
+        Create or edit a Product Review
+      </h2>
+
+      <div>
+        <yali-alert-error></yali-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" yaliTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.productReview.reviewerName" for="field_reviewerName">Reviewer Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="reviewerName"
+            id="field_reviewerName"
+            data-cy="reviewerName"
+            formControlName="reviewerName"
+          />
+          <div
+            *ngIf="editForm.get('reviewerName')!.invalid && (editForm.get('reviewerName')!.dirty || editForm.get('reviewerName')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('reviewerName')?.errors?.required"
+              yaliTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('reviewerName')?.errors?.minlength"
+              yaliTranslate="entity.validation.minlength"
+              [translateValues]="{ min: 1 }"
+            >
+              This field is required to be at least 1 characters.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('reviewerName')?.errors?.maxlength"
+              yaliTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 250 }"
+            >
+              This field cannot be longer than 250 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.productReview.reviewerEmail" for="field_reviewerEmail">Reviewer Email</label>
+          <input
+            type="text"
+            class="form-control"
+            name="reviewerEmail"
+            id="field_reviewerEmail"
+            data-cy="reviewerEmail"
+            formControlName="reviewerEmail"
+          />
+          <div
+            *ngIf="
+              editForm.get('reviewerEmail')!.invalid && (editForm.get('reviewerEmail')!.dirty || editForm.get('reviewerEmail')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('reviewerEmail')?.errors?.required"
+              yaliTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('reviewerEmail')?.errors?.pattern"
+              yaliTranslate="entity.validation.pattern"
+              [translateValues]="{ pattern: 'Reviewer Email' }"
+            >
+              This field should follow pattern for Reviewer Email.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.productReview.review" for="field_review">Review</label>
+          <input type="text" class="form-control" name="review" id="field_review" data-cy="review" formControlName="review" />
+          <div *ngIf="editForm.get('review')!.invalid && (editForm.get('review')!.dirty || editForm.get('review')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('review')?.errors?.required"
+              yaliTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('review')?.errors?.minlength"
+              yaliTranslate="entity.validation.minlength"
+              [translateValues]="{ min: 5 }"
+            >
+              This field is required to be at least 5 characters.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('review')?.errors?.maxlength"
+              yaliTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 1000 }"
+            >
+              This field cannot be longer than 1000 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.productReview.rating" for="field_rating">Rating</label>
+          <input type="number" class="form-control" name="rating" id="field_rating" data-cy="rating" formControlName="rating" />
+          <div *ngIf="editForm.get('rating')!.invalid && (editForm.get('rating')!.dirty || editForm.get('rating')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('rating')?.errors?.required"
+              yaliTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('rating')?.errors?.number"
+              yaliTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.productReview.status" for="field_status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'bisterApp.ReviewStatus.null' | translate }}</option>
+            <option *ngFor="let reviewStatus of reviewStatusValues" [value]="reviewStatus">
+              {{ 'bisterApp.ReviewStatus.' + reviewStatus | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('status')!.invalid && (editForm.get('status')!.dirty || editForm.get('status')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('status')?.errors?.required"
+              yaliTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.productReview.reviewerId" for="field_reviewerId">Reviewer Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="reviewerId"
+            id="field_reviewerId"
+            data-cy="reviewerId"
+            formControlName="reviewerId"
+          />
+          <div *ngIf="editForm.get('reviewerId')!.invalid && (editForm.get('reviewerId')!.dirty || editForm.get('reviewerId')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('reviewerId')?.errors?.required"
+              yaliTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('reviewerId')?.errors?.number"
+              yaliTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.productReview.product" for="field_product">Product</label>
+          <select
+            class="form-control"
+            id="field_product"
+            data-cy="product"
+            name="product"
+            formControlName="product"
+            [compareWith]="compareProduct"
+          >
+            <option *ngIf="editForm.get(['product'])!.value == null" [ngValue]="null" selected></option>
+            <option [ngValue]="productOption" *ngFor="let productOption of productsSharedCollection">{{ productOption.name }}</option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['product'])!.invalid && (editForm.get(['product'])!.dirty || editForm.get(['product'])!.touched)">
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['product'])?.errors?.required"
+            yaliTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span yaliTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span yaliTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

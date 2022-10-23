@@ -1,0 +1,377 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="yali-attachment-heading" data-cy="AttachmentCreateUpdateHeading" yaliTranslate="bisterApp.attachment.home.createOrEditLabel">
+        Create or edit a Attachment
+      </h2>
+
+      <div>
+        <yali-alert-error></yali-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" yaliTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.attachment.name" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" yaliTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('name')?.errors?.minlength"
+              yaliTranslate="entity.validation.minlength"
+              [translateValues]="{ min: 5 }"
+            >
+              This field is required to be at least 5 characters.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('name')?.errors?.maxlength"
+              yaliTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 100 }"
+            >
+              This field cannot be longer than 100 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.attachment.description" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+          <div *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('description')?.errors?.minlength"
+              yaliTranslate="entity.validation.minlength"
+              [translateValues]="{ min: 20 }"
+            >
+              This field is required to be at least 20 characters.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('description')?.errors?.maxlength"
+              yaliTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 250 }"
+            >
+              This field cannot be longer than 250 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.attachment.attachmentType" for="field_attachmentType">Attachment Type</label>
+          <select
+            class="form-control"
+            name="attachmentType"
+            formControlName="attachmentType"
+            id="field_attachmentType"
+            data-cy="attachmentType"
+          >
+            <option [ngValue]="null">{{ 'bisterApp.AttachmentType.null' | translate }}</option>
+            <option *ngFor="let attachmentType of attachmentTypeValues" [value]="attachmentType">
+              {{ 'bisterApp.AttachmentType.' + attachmentType | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.attachment.link" for="field_link">Link</label>
+          <input type="text" class="form-control" name="link" id="field_link" data-cy="link" formControlName="link" />
+          <div *ngIf="editForm.get('link')!.invalid && (editForm.get('link')!.dirty || editForm.get('link')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('link')?.errors?.minlength"
+              yaliTranslate="entity.validation.minlength"
+              [translateValues]="{ min: 2 }"
+            >
+              This field is required to be at least 2 characters.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('link')?.errors?.maxlength"
+              yaliTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 250 }"
+            >
+              This field cannot be longer than 250 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.attachment.isApprovalNeeded" for="field_isApprovalNeeded"
+            >Is Approval Needed</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="isApprovalNeeded"
+            id="field_isApprovalNeeded"
+            data-cy="isApprovalNeeded"
+            formControlName="isApprovalNeeded"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.attachment.approvalStatus" for="field_approvalStatus">Approval Status</label>
+          <select
+            class="form-control"
+            name="approvalStatus"
+            formControlName="approvalStatus"
+            id="field_approvalStatus"
+            data-cy="approvalStatus"
+          >
+            <option [ngValue]="null">{{ 'bisterApp.AttachmentApprovalStatus.null' | translate }}</option>
+            <option *ngFor="let attachmentApprovalStatus of attachmentApprovalStatusValues" [value]="attachmentApprovalStatus">
+              {{ 'bisterApp.AttachmentApprovalStatus.' + attachmentApprovalStatus | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.attachment.approvedBy" for="field_approvedBy">Approved By</label>
+          <input
+            type="number"
+            class="form-control"
+            name="approvedBy"
+            id="field_approvedBy"
+            data-cy="approvedBy"
+            formControlName="approvedBy"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.attachment.attachmentSourceType" for="field_attachmentSourceType"
+            >Attachment Source Type</label
+          >
+          <select
+            class="form-control"
+            name="attachmentSourceType"
+            formControlName="attachmentSourceType"
+            id="field_attachmentSourceType"
+            data-cy="attachmentSourceType"
+          >
+            <option [ngValue]="null">{{ 'bisterApp.AttachmentSourceType.null' | translate }}</option>
+            <option *ngFor="let attachmentSourceType of attachmentSourceTypeValues" [value]="attachmentSourceType">
+              {{ 'bisterApp.AttachmentSourceType.' + attachmentSourceType | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.attachment.createdBy" for="field_createdBy">Created By</label>
+          <input type="number" class="form-control" name="createdBy" id="field_createdBy" data-cy="createdBy" formControlName="createdBy" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.attachment.customerId" for="field_customerId">Customer Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="customerId"
+            id="field_customerId"
+            data-cy="customerId"
+            formControlName="customerId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.attachment.agentId" for="field_agentId">Agent Id</label>
+          <input type="number" class="form-control" name="agentId" id="field_agentId" data-cy="agentId" formControlName="agentId" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.attachment.attachmentVisibilityType" for="field_attachmentVisibilityType"
+            >Attachment Visibility Type</label
+          >
+          <select
+            class="form-control"
+            name="attachmentVisibilityType"
+            formControlName="attachmentVisibilityType"
+            id="field_attachmentVisibilityType"
+            data-cy="attachmentVisibilityType"
+          >
+            <option [ngValue]="null">{{ 'bisterApp.AttachmentVisibilityType.null' | translate }}</option>
+            <option *ngFor="let attachmentVisibilityType of attachmentVisibilityTypeValues" [value]="attachmentVisibilityType">
+              {{ 'bisterApp.AttachmentVisibilityType.' + attachmentVisibilityType | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.attachment.originalFilename" for="field_originalFilename"
+            >Original Filename</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="originalFilename"
+            id="field_originalFilename"
+            data-cy="originalFilename"
+            formControlName="originalFilename"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.attachment.extension" for="field_extension">Extension</label>
+          <input type="text" class="form-control" name="extension" id="field_extension" data-cy="extension" formControlName="extension" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.attachment.sizeInBytes" for="field_sizeInBytes">Size In Bytes</label>
+          <input
+            type="number"
+            class="form-control"
+            name="sizeInBytes"
+            id="field_sizeInBytes"
+            data-cy="sizeInBytes"
+            formControlName="sizeInBytes"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.attachment.sha256" for="field_sha256">Sha 256</label>
+          <input type="text" class="form-control" name="sha256" id="field_sha256" data-cy="sha256" formControlName="sha256" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.attachment.contentType" for="field_contentType">Content Type</label>
+          <input
+            type="text"
+            class="form-control"
+            name="contentType"
+            id="field_contentType"
+            data-cy="contentType"
+            formControlName="contentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.attachment.product" for="field_product">Product</label>
+          <select
+            class="form-control"
+            id="field_product"
+            data-cy="product"
+            name="product"
+            formControlName="product"
+            [compareWith]="compareProduct"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="productOption" *ngFor="let productOption of productsSharedCollection">{{ productOption.name }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.attachment.project" for="field_project">Project</label>
+          <select
+            class="form-control"
+            id="field_project"
+            data-cy="project"
+            name="project"
+            formControlName="project"
+            [compareWith]="compareProject"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="projectOption" *ngFor="let projectOption of projectsSharedCollection">{{ projectOption.name }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.attachment.enquiry" for="field_enquiry">Enquiry</label>
+          <select
+            class="form-control"
+            id="field_enquiry"
+            data-cy="enquiry"
+            name="enquiry"
+            formControlName="enquiry"
+            [compareWith]="compareEnquiry"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="enquiryOption" *ngFor="let enquiryOption of enquiriesSharedCollection">{{ enquiryOption.subject }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.attachment.certification" for="field_certification">Certification</label>
+          <select
+            class="form-control"
+            id="field_certification"
+            data-cy="certification"
+            name="certification"
+            formControlName="certification"
+            [compareWith]="compareCertification"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="certificationOption" *ngFor="let certificationOption of certificationsSharedCollection">
+              {{ certificationOption.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.attachment.productSpecification" for="field_productSpecification"
+            >Product Specification</label
+          >
+          <select
+            class="form-control"
+            id="field_productSpecification"
+            data-cy="productSpecification"
+            name="productSpecification"
+            formControlName="productSpecification"
+            [compareWith]="compareProductSpecification"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="productSpecificationOption" *ngFor="let productSpecificationOption of productSpecificationsSharedCollection">
+              {{ productSpecificationOption.title }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.attachment.projectSpecification" for="field_projectSpecification"
+            >Project Specification</label
+          >
+          <select
+            class="form-control"
+            id="field_projectSpecification"
+            data-cy="projectSpecification"
+            name="projectSpecification"
+            formControlName="projectSpecification"
+            [compareWith]="compareProjectSpecification"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="projectSpecificationOption" *ngFor="let projectSpecificationOption of projectSpecificationsSharedCollection">
+              {{ projectSpecificationOption.title }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span yaliTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span yaliTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

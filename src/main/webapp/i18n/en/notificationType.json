@@ -1,0 +1,11 @@
+{
+  "bisterApp": {
+    "NotificationType": {
+      "null": "",
+      "INPERSON": "INPERSON",
+      "PHYSICAL": "PHYSICAL",
+      "DIGITAL": "DIGITAL",
+      "CALL": "CALL"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "bisterApp": {
+    "certification": {
+      "home": {
+        "title": "Certifications",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Certification",
+        "createOrEditLabel": "Create or edit a Certification",
+        "search": "Search for Certification",
+        "notFound": "No Certifications found"
+      },
+      "created": "A new Certification is created with identifier {{ param }}",
+      "updated": "A Certification is updated with identifier {{ param }}",
+      "deleted": "A Certification is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Certification {{ id }}?"
+      },
+      "detail": {
+        "title": "Certification"
+      },
+      "id": "ID",
+      "name": "Name",
+      "slug": "Slug",
+      "authority": "Authority",
+      "status": "Status",
+      "projectId": "Project Id",
+      "prodcut": "Prodcut",
+      "orgId": "Org Id",
+      "facitlityId": "Facitlity Id",
+      "createdBy": "Created By",
+      "createdAt": "Created At",
+      "attachment": "Attachment"
+    }
+  }
+}

@@ -1,0 +1,100 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="notification">
+      <h2 data-cy="notificationDetailsHeading"><span yaliTranslate="bisterApp.notification.detail.title">Notification</span></h2>
+
+      <hr />
+
+      <yali-alert-error></yali-alert-error>
+
+      <yali-alert></yali-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span yaliTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ notification.id }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.notification.date">Date</span></dt>
+        <dd>
+          <span>{{ notification.date | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.notification.details">Details</span></dt>
+        <dd>
+          <span>{{ notification.details }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.notification.sentDate">Sent Date</span></dt>
+        <dd>
+          <span>{{ notification.sentDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.notification.googleNotificationId">Google Notification Id</span></dt>
+        <dd>
+          <span>{{ notification.googleNotificationId }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.notification.whatsappNotificationId">Whatsapp Notification Id</span></dt>
+        <dd>
+          <span>{{ notification.whatsappNotificationId }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.notification.smsNotificationId">Sms Notification Id</span></dt>
+        <dd>
+          <span>{{ notification.smsNotificationId }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.notification.productId">Product Id</span></dt>
+        <dd>
+          <span>{{ notification.productId }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.notification.projectId">Project Id</span></dt>
+        <dd>
+          <span>{{ notification.projectId }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.notification.scheduleId">Schedule Id</span></dt>
+        <dd>
+          <span>{{ notification.scheduleId }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.notification.promotionId">Promotion Id</span></dt>
+        <dd>
+          <span>{{ notification.promotionId }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.notification.read">Read</span></dt>
+        <dd>
+          <span>{{ notification.read }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.notification.notificationSourceType">Notification Source Type</span></dt>
+        <dd>
+          <span yaliTranslate="{{ 'bisterApp.NotificationSourceType.' + notification.notificationSourceType }}">{{
+            notification.notificationSourceType
+          }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.notification.notificationType">Notification Type</span></dt>
+        <dd>
+          <span yaliTranslate="{{ 'bisterApp.NotificationType.' + notification.notificationType }}">{{
+            notification.notificationType
+          }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.notification.notificationMode">Notification Mode</span></dt>
+        <dd>
+          <span yaliTranslate="{{ 'bisterApp.NotificationMode.' + notification.notificationMode }}">{{
+            notification.notificationMode
+          }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.notification.agent">Agent</span></dt>
+        <dd>
+          <div *ngIf="notification.agent">
+            <a [routerLink]="['/agent', notification.agent.id, 'view']">{{ notification.agent.id }}</a>
+          </div>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.notification.user">User</span></dt>
+        <dd>
+          <span>{{ notification.user?.login }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span yaliTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/notification', notification.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span yaliTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

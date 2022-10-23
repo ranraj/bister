@@ -1,0 +1,11 @@
+{
+  "bisterApp": {
+    "EnquiryResponseType": {
+      "null": "",
+      "INPERSON": "INPERSON",
+      "CALL": "CALL",
+      "CHAT": "CHAT",
+      "SITE_VISIT": "SITE_VISIT"
+    }
+  }
+}

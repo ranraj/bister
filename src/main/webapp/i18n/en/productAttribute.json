@@ -1,0 +1,30 @@
+{
+  "bisterApp": {
+    "productAttribute": {
+      "home": {
+        "title": "Product Attributes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Product Attribute",
+        "createOrEditLabel": "Create or edit a Product Attribute",
+        "search": "Search for Product Attribute",
+        "notFound": "No Product Attributes found"
+      },
+      "created": "A new Product Attribute is created with identifier {{ param }}",
+      "updated": "A Product Attribute is updated with identifier {{ param }}",
+      "deleted": "A Product Attribute is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Product Attribute {{ id }}?"
+      },
+      "detail": {
+        "title": "Product Attribute"
+      },
+      "id": "ID",
+      "name": "Name",
+      "slug": "Slug",
+      "type": "Type",
+      "notes": "Notes",
+      "visible": "Visible",
+      "productAttributeTerm": "Product Attribute Term"
+    }
+  }
+}

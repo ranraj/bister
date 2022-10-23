@@ -1,0 +1,27 @@
+{
+  "bisterApp": {
+    "businessPartner": {
+      "home": {
+        "title": "Business Partners",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Business Partner",
+        "createOrEditLabel": "Create or edit a Business Partner",
+        "search": "Search for Business Partner",
+        "notFound": "No Business Partners found"
+      },
+      "created": "A new Business Partner is created with identifier {{ param }}",
+      "updated": "A Business Partner is updated with identifier {{ param }}",
+      "deleted": "A Business Partner is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Business Partner {{ id }}?"
+      },
+      "detail": {
+        "title": "Business Partner"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "key": "Key"
+    }
+  }
+}

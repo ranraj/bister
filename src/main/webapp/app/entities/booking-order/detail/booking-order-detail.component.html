@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="bookingOrder">
+      <h2 data-cy="bookingOrderDetailsHeading"><span yaliTranslate="bisterApp.bookingOrder.detail.title">Booking Order</span></h2>
+
+      <hr />
+
+      <yali-alert-error></yali-alert-error>
+
+      <yali-alert></yali-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span yaliTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ bookingOrder.id }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.bookingOrder.placedDate">Placed Date</span></dt>
+        <dd>
+          <span>{{ bookingOrder.placedDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.bookingOrder.status">Status</span></dt>
+        <dd>
+          <span yaliTranslate="{{ 'bisterApp.BookingOrderStatus.' + bookingOrder.status }}">{{ bookingOrder.status }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.bookingOrder.code">Code</span></dt>
+        <dd>
+          <span>{{ bookingOrder.code }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.bookingOrder.bookingExpieryDate">Booking Expiery Date</span></dt>
+        <dd>
+          <span>{{ bookingOrder.bookingExpieryDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.bookingOrder.customer">Customer</span></dt>
+        <dd>
+          <div *ngIf="bookingOrder.customer">
+            <a [routerLink]="['/customer', bookingOrder.customer.id, 'view']">{{ bookingOrder.customer.name }}</a>
+          </div>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.bookingOrder.productVariation">Product Variation</span></dt>
+        <dd>
+          <div *ngIf="bookingOrder.productVariation">
+            <a [routerLink]="['/product-variation', bookingOrder.productVariation.id, 'view']">{{ bookingOrder.productVariation.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span yaliTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/booking-order', bookingOrder.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span yaliTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+{
+  "bisterApp": {
+    "bookingOrder": {
+      "home": {
+        "title": "Booking Orders",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Booking Order",
+        "createOrEditLabel": "Create or edit a Booking Order",
+        "search": "Search for Booking Order",
+        "notFound": "No Booking Orders found"
+      },
+      "created": "A new Booking Order is created with identifier {{ param }}",
+      "updated": "A Booking Order is updated with identifier {{ param }}",
+      "deleted": "A Booking Order is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Booking Order {{ id }}?"
+      },
+      "detail": {
+        "title": "Booking Order"
+      },
+      "id": "ID",
+      "placedDate": "Placed Date",
+      "status": "Status",
+      "code": "Code",
+      "bookingExpieryDate": "Booking Expiery Date",
+      "customer": "Customer",
+      "productVariation": "Product Variation"
+    }
+  }
+}

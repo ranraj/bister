@@ -1,0 +1,33 @@
+{
+  "bisterApp": {
+    "promotion": {
+      "home": {
+        "title": "Promotions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Promotion",
+        "createOrEditLabel": "Create or edit a Promotion",
+        "search": "Search for Promotion",
+        "notFound": "No Promotions found"
+      },
+      "created": "A new Promotion is created with identifier {{ param }}",
+      "updated": "A Promotion is updated with identifier {{ param }}",
+      "deleted": "A Promotion is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Promotion {{ id }}?"
+      },
+      "detail": {
+        "title": "Promotion"
+      },
+      "id": "ID",
+      "productId": "Product Id",
+      "projectId": "Project Id",
+      "contentType": "Content Type",
+      "recipients": "Recipients",
+      "recipientGroup": "Recipient Group",
+      "createdBy": "Created By",
+      "createdAt": "Created At",
+      "sendAt": "Send At",
+      "attachmentId": "Attachment Id"
+    }
+  }
+}

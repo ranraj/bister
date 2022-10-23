@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="purchaseOrder">
+      <h2 data-cy="purchaseOrderDetailsHeading"><span yaliTranslate="bisterApp.purchaseOrder.detail.title">Purchase Order</span></h2>
+
+      <hr />
+
+      <yali-alert-error></yali-alert-error>
+
+      <yali-alert></yali-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span yaliTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ purchaseOrder.id }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.purchaseOrder.placedDate">Placed Date</span></dt>
+        <dd>
+          <span>{{ purchaseOrder.placedDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.purchaseOrder.status">Status</span></dt>
+        <dd>
+          <span yaliTranslate="{{ 'bisterApp.OrderStatus.' + purchaseOrder.status }}">{{ purchaseOrder.status }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.purchaseOrder.code">Code</span></dt>
+        <dd>
+          <span>{{ purchaseOrder.code }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.purchaseOrder.deliveryOption">Delivery Option</span></dt>
+        <dd>
+          <span yaliTranslate="{{ 'bisterApp.DeliveryOption.' + purchaseOrder.deliveryOption }}">{{ purchaseOrder.deliveryOption }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.purchaseOrder.user">User</span></dt>
+        <dd>
+          <span>{{ purchaseOrder.user?.login }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.purchaseOrder.productVariation">Product Variation</span></dt>
+        <dd>
+          <div *ngIf="purchaseOrder.productVariation">
+            <a [routerLink]="['/product-variation', purchaseOrder.productVariation.id, 'view']">{{
+              purchaseOrder.productVariation.name
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span yaliTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/purchase-order', purchaseOrder.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span yaliTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

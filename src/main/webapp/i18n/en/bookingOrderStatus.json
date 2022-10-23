@@ -1,0 +1,12 @@
+{
+  "bisterApp": {
+    "BookingOrderStatus": {
+      "null": "",
+      "BLOCKED": "BLOCKED",
+      "BOOKED": "BOOKED",
+      "PURCHASED": "PURCHASED",
+      "EXPIRED": "EXPIRED",
+      "CANCELLED": "CANCELLED"
+    }
+  }
+}

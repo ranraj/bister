@@ -1,0 +1,17 @@
+export enum CertificationStatus {
+  PLANNED = 'PLANNED',
+
+  PREPARATION = 'PREPARATION',
+
+  INITIATED = 'INITIATED',
+
+  FILED = 'FILED',
+
+  INPROGRESS = 'INPROGRESS',
+
+  REJECTED = 'REJECTED',
+
+  HOLD = 'HOLD',
+
+  COMPLETED = 'COMPLETED',
+}

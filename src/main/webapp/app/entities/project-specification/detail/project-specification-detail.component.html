@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="projectSpecification">
+      <h2 data-cy="projectSpecificationDetailsHeading">
+        <span yaliTranslate="bisterApp.projectSpecification.detail.title">Project Specification</span>
+      </h2>
+
+      <hr />
+
+      <yali-alert-error></yali-alert-error>
+
+      <yali-alert></yali-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span yaliTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ projectSpecification.id }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.projectSpecification.title">Title</span></dt>
+        <dd>
+          <span>{{ projectSpecification.title }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.projectSpecification.value">Value</span></dt>
+        <dd>
+          <span>{{ projectSpecification.value }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.projectSpecification.description">Description</span></dt>
+        <dd>
+          <span>{{ projectSpecification.description }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.projectSpecification.projectSpecificationGroup">Project Specification Group</span></dt>
+        <dd>
+          <div *ngIf="projectSpecification.projectSpecificationGroup">
+            <a [routerLink]="['/project-specification-group', projectSpecification.projectSpecificationGroup.id, 'view']">{{
+              projectSpecification.projectSpecificationGroup.title
+            }}</a>
+          </div>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.projectSpecification.project">Project</span></dt>
+        <dd>
+          <div *ngIf="projectSpecification.project">
+            <a [routerLink]="['/project', projectSpecification.project.id, 'view']">{{ projectSpecification.project.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span yaliTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/project-specification', projectSpecification.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span yaliTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

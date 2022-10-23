@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="enquiryResponse">
+      <h2 data-cy="enquiryResponseDetailsHeading"><span yaliTranslate="bisterApp.enquiryResponse.detail.title">Enquiry Response</span></h2>
+
+      <hr />
+
+      <yali-alert-error></yali-alert-error>
+
+      <yali-alert></yali-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span yaliTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ enquiryResponse.id }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.enquiryResponse.query">Query</span></dt>
+        <dd>
+          <span>{{ enquiryResponse.query }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.enquiryResponse.details">Details</span></dt>
+        <dd>
+          <span>{{ enquiryResponse.details }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.enquiryResponse.enquiryResponseType">Enquiry Response Type</span></dt>
+        <dd>
+          <span yaliTranslate="{{ 'bisterApp.EnquiryResponseType.' + enquiryResponse.enquiryResponseType }}">{{
+            enquiryResponse.enquiryResponseType
+          }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.enquiryResponse.agent">Agent</span></dt>
+        <dd>
+          <div *ngIf="enquiryResponse.agent">
+            <a [routerLink]="['/agent', enquiryResponse.agent.id, 'view']">{{ enquiryResponse.agent.name }}</a>
+          </div>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.enquiryResponse.enquiry">Enquiry</span></dt>
+        <dd>
+          <div *ngIf="enquiryResponse.enquiry">
+            <a [routerLink]="['/enquiry', enquiryResponse.enquiry.id, 'view']">{{ enquiryResponse.enquiry.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span yaliTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/enquiry-response', enquiryResponse.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span yaliTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

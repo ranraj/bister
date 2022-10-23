@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="projectReview">
+      <h2 data-cy="projectReviewDetailsHeading"><span yaliTranslate="bisterApp.projectReview.detail.title">Project Review</span></h2>
+
+      <hr />
+
+      <yali-alert-error></yali-alert-error>
+
+      <yali-alert></yali-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span yaliTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ projectReview.id }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.projectReview.reviewerName">Reviewer Name</span></dt>
+        <dd>
+          <span>{{ projectReview.reviewerName }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.projectReview.reviewerEmail">Reviewer Email</span></dt>
+        <dd>
+          <span>{{ projectReview.reviewerEmail }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.projectReview.review">Review</span></dt>
+        <dd>
+          <span>{{ projectReview.review }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.projectReview.rating">Rating</span></dt>
+        <dd>
+          <span>{{ projectReview.rating }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.projectReview.status">Status</span></dt>
+        <dd>
+          <span yaliTranslate="{{ 'bisterApp.ReviewStatus.' + projectReview.status }}">{{ projectReview.status }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.projectReview.reviewerId">Reviewer Id</span></dt>
+        <dd>
+          <span>{{ projectReview.reviewerId }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.projectReview.project">Project</span></dt>
+        <dd>
+          <div *ngIf="projectReview.project">
+            <a [routerLink]="['/project', projectReview.project.id, 'view']">{{ projectReview.project.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span yaliTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/project-review', projectReview.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span yaliTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

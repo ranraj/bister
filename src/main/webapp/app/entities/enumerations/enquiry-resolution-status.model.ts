@@ -1,0 +1,15 @@
+export enum EnquiryResolutionStatus {
+  OPEN = 'OPEN',
+
+  INPROGRESS = 'INPROGRESS',
+
+  WAITING_FROM_CUSTOMER_RESPONSE = 'WAITING_FROM_CUSTOMER_RESPONSE',
+
+  HOLD = 'HOLD',
+
+  SPAM = 'SPAM',
+
+  NO_RESPONSE = 'NO_RESPONSE',
+
+  CLOSED = 'CLOSED',
+}

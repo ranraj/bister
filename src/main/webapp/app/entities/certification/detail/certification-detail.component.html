@@ -1,0 +1,68 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="certification">
+      <h2 data-cy="certificationDetailsHeading"><span yaliTranslate="bisterApp.certification.detail.title">Certification</span></h2>
+
+      <hr />
+
+      <yali-alert-error></yali-alert-error>
+
+      <yali-alert></yali-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span yaliTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ certification.id }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.certification.name">Name</span></dt>
+        <dd>
+          <span>{{ certification.name }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.certification.slug">Slug</span></dt>
+        <dd>
+          <span>{{ certification.slug }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.certification.authority">Authority</span></dt>
+        <dd>
+          <span>{{ certification.authority }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.certification.status">Status</span></dt>
+        <dd>
+          <span yaliTranslate="{{ 'bisterApp.CertificationStatus.' + certification.status }}">{{ certification.status }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.certification.projectId">Project Id</span></dt>
+        <dd>
+          <span>{{ certification.projectId }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.certification.prodcut">Prodcut</span></dt>
+        <dd>
+          <span>{{ certification.prodcut }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.certification.orgId">Org Id</span></dt>
+        <dd>
+          <span>{{ certification.orgId }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.certification.facitlityId">Facitlity Id</span></dt>
+        <dd>
+          <span>{{ certification.facitlityId }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.certification.createdBy">Created By</span></dt>
+        <dd>
+          <span>{{ certification.createdBy }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.certification.createdAt">Created At</span></dt>
+        <dd>
+          <span>{{ certification.createdAt | formatMediumDatetime }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span yaliTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/certification', certification.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span yaliTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

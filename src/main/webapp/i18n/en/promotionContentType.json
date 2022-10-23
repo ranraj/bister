@@ -1,0 +1,10 @@
+{
+  "bisterApp": {
+    "PromotionContentType": {
+      "null": "",
+      "TEMPLATE": "TEMPLATE",
+      "ATTACHMENT": "ATTACHMENT",
+      "ATTACHMENT_TEMPLATE": "ATTACHMENT_TEMPLATE"
+    }
+  }
+}

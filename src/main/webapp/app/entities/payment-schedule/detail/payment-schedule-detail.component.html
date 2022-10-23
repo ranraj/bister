@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="paymentSchedule">
+      <h2 data-cy="paymentScheduleDetailsHeading"><span yaliTranslate="bisterApp.paymentSchedule.detail.title">Payment Schedule</span></h2>
+
+      <hr />
+
+      <yali-alert-error></yali-alert-error>
+
+      <yali-alert></yali-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span yaliTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ paymentSchedule.id }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.paymentSchedule.dueDate">Due Date</span></dt>
+        <dd>
+          <span>{{ paymentSchedule.dueDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.paymentSchedule.totalPrice">Total Price</span></dt>
+        <dd>
+          <span>{{ paymentSchedule.totalPrice }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.paymentSchedule.remarks">Remarks</span></dt>
+        <dd>
+          <span>{{ paymentSchedule.remarks }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.paymentSchedule.status">Status</span></dt>
+        <dd>
+          <span yaliTranslate="{{ 'bisterApp.PaymentScheduleStatus.' + paymentSchedule.status }}">{{ paymentSchedule.status }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.paymentSchedule.isOverDue">Is Over Due</span></dt>
+        <dd>
+          <span>{{ paymentSchedule.isOverDue }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.paymentSchedule.invoice">Invoice</span></dt>
+        <dd>
+          <div *ngIf="paymentSchedule.invoice">
+            <a [routerLink]="['/invoice', paymentSchedule.invoice.id, 'view']">{{ paymentSchedule.invoice.id }}</a>
+          </div>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.paymentSchedule.purchaseOrdep">Purchase Ordep</span></dt>
+        <dd>
+          <div *ngIf="paymentSchedule.purchaseOrdep">
+            <a [routerLink]="['/purchase-order', paymentSchedule.purchaseOrdep.id, 'view']">{{ paymentSchedule.purchaseOrdep.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span yaliTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/payment-schedule', paymentSchedule.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span yaliTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

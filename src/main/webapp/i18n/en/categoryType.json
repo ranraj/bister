@@ -1,0 +1,9 @@
+{
+  "bisterApp": {
+    "CategoryType": {
+      "null": "",
+      "Project": "Project",
+      "Product": "Product"
+    }
+  }
+}

@@ -1,0 +1,316 @@
+<div>
+  <h2 id="page-heading" data-cy="AttachmentHeading">
+    <span yaliTranslate="bisterApp.attachment.home.title">Attachments</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span yaliTranslate="bisterApp.attachment.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-attachment"
+        [routerLink]="['/attachment/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" yaliTranslate="bisterApp.attachment.home.createLabel"> Create a new Attachment </span>
+      </button>
+    </div>
+  </h2>
+
+  <yali-alert-error></yali-alert-error>
+
+  <yali-alert></yali-alert>
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" yaliTranslate="bisterApp.attachment.home.search">Search for Attachment</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'bisterApp.attachment.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        <button class="btn btn-danger" (click)="search('')" *ngIf="currentSearch">
+          <fa-icon icon="trash-alt"></fa-icon>
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="attachments?.length === 0">
+    <span yaliTranslate="bisterApp.attachment.home.notFound">No Attachments found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="attachments && attachments.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr yaliSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" yaliSortBy="id">
+            <div class="d-flex">
+              <span yaliTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="name">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.attachment.name">Name</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="description">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.attachment.description">Description</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="attachmentType">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.attachment.attachmentType">Attachment Type</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="link">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.attachment.link">Link</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="isApprovalNeeded">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.attachment.isApprovalNeeded">Is Approval Needed</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="approvalStatus">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.attachment.approvalStatus">Approval Status</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="approvedBy">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.attachment.approvedBy">Approved By</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="attachmentSourceType">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.attachment.attachmentSourceType">Attachment Source Type</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="createdBy">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.attachment.createdBy">Created By</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="customerId">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.attachment.customerId">Customer Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="agentId">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.attachment.agentId">Agent Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="attachmentVisibilityType">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.attachment.attachmentVisibilityType">Attachment Visibility Type</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="originalFilename">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.attachment.originalFilename">Original Filename</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="extension">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.attachment.extension">Extension</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="sizeInBytes">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.attachment.sizeInBytes">Size In Bytes</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="sha256">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.attachment.sha256">Sha 256</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="contentType">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.attachment.contentType">Content Type</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="product.name">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.attachment.product">Product</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="project.name">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.attachment.project">Project</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="enquiry.subject">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.attachment.enquiry">Enquiry</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="certification.name">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.attachment.certification">Certification</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="productSpecification.title">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.attachment.productSpecification">Product Specification</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" yaliSortBy="projectSpecification.title">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.attachment.projectSpecification">Project Specification</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let attachment of attachments; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/attachment', attachment.id, 'view']">{{ attachment.id }}</a>
+          </td>
+          <td>{{ attachment.name }}</td>
+          <td>{{ attachment.description }}</td>
+          <td yaliTranslate="{{ 'bisterApp.AttachmentType.' + attachment.attachmentType }}">{{ attachment.attachmentType }}</td>
+          <td>{{ attachment.link }}</td>
+          <td>{{ attachment.isApprovalNeeded }}</td>
+          <td yaliTranslate="{{ 'bisterApp.AttachmentApprovalStatus.' + attachment.approvalStatus }}">{{ attachment.approvalStatus }}</td>
+          <td>{{ attachment.approvedBy }}</td>
+          <td yaliTranslate="{{ 'bisterApp.AttachmentSourceType.' + attachment.attachmentSourceType }}">
+            {{ attachment.attachmentSourceType }}
+          </td>
+          <td>{{ attachment.createdBy }}</td>
+          <td>{{ attachment.customerId }}</td>
+          <td>{{ attachment.agentId }}</td>
+          <td yaliTranslate="{{ 'bisterApp.AttachmentVisibilityType.' + attachment.attachmentVisibilityType }}">
+            {{ attachment.attachmentVisibilityType }}
+          </td>
+          <td>{{ attachment.originalFilename }}</td>
+          <td>{{ attachment.extension }}</td>
+          <td>{{ attachment.sizeInBytes }}</td>
+          <td>{{ attachment.sha256 }}</td>
+          <td>{{ attachment.contentType }}</td>
+          <td>
+            <div *ngIf="attachment.product">
+              <a [routerLink]="['/product', attachment.product.id, 'view']">{{ attachment.product.name }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="attachment.project">
+              <a [routerLink]="['/project', attachment.project.id, 'view']">{{ attachment.project.name }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="attachment.enquiry">
+              <a [routerLink]="['/enquiry', attachment.enquiry.id, 'view']">{{ attachment.enquiry.subject }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="attachment.certification">
+              <a [routerLink]="['/certification', attachment.certification.id, 'view']">{{ attachment.certification.name }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="attachment.productSpecification">
+              <a [routerLink]="['/product-specification', attachment.productSpecification.id, 'view']">{{
+                attachment.productSpecification.title
+              }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="attachment.projectSpecification">
+              <a [routerLink]="['/project-specification', attachment.projectSpecification.id, 'view']">{{
+                attachment.projectSpecification.title
+              }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/attachment', attachment.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" yaliTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/attachment', attachment.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" yaliTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(attachment)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" yaliTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="attachments && attachments.length > 0">
+    <div class="d-flex justify-content-center">
+      <yali-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></yali-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

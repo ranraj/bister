@@ -1,0 +1,7 @@
+export enum PromotionContentType {
+  TEMPLATE = 'TEMPLATE',
+
+  ATTACHMENT = 'ATTACHMENT',
+
+  ATTACHMENT_TEMPLATE = 'ATTACHMENT_TEMPLATE',
+}

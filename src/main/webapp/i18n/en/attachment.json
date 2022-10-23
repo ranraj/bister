@@ -1,0 +1,48 @@
+{
+  "bisterApp": {
+    "attachment": {
+      "home": {
+        "title": "Attachments",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Attachment",
+        "createOrEditLabel": "Create or edit a Attachment",
+        "search": "Search for Attachment",
+        "notFound": "No Attachments found"
+      },
+      "created": "A new Attachment is created with identifier {{ param }}",
+      "updated": "A Attachment is updated with identifier {{ param }}",
+      "deleted": "A Attachment is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Attachment {{ id }}?"
+      },
+      "detail": {
+        "title": "Attachment"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "attachmentType": "Attachment Type",
+      "link": "Link",
+      "isApprovalNeeded": "Is Approval Needed",
+      "approvalStatus": "Approval Status",
+      "approvedBy": "Approved By",
+      "attachmentSourceType": "Attachment Source Type",
+      "createdBy": "Created By",
+      "customerId": "Customer Id",
+      "agentId": "Agent Id",
+      "attachmentVisibilityType": "Attachment Visibility Type",
+      "originalFilename": "Original Filename",
+      "extension": "Extension",
+      "sizeInBytes": "Size In Bytes",
+      "sha256": "Sha 256",
+      "contentType": "Content Type",
+      "tag": "Tag",
+      "product": "Product",
+      "project": "Project",
+      "enquiry": "Enquiry",
+      "certification": "Certification",
+      "productSpecification": "Product Specification",
+      "projectSpecification": "Project Specification"
+    }
+  }
+}

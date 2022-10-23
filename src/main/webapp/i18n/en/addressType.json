@@ -1,0 +1,14 @@
+{
+  "bisterApp": {
+    "AddressType": {
+      "null": "",
+      "HOME": "HOME",
+      "OFFICE": "OFFICE",
+      "BILLING": "BILLING",
+      "PERMANENT_RESIDENT": "PERMANENT_RESIDENT",
+      "TEMPORARY_RESIDENT": "TEMPORARY_RESIDENT",
+      "PROJECT_SITE": "PROJECT_SITE",
+      "NEW_SITE": "NEW_SITE"
+    }
+  }
+}

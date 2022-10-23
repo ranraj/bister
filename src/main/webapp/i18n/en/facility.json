@@ -1,0 +1,30 @@
+{
+  "bisterApp": {
+    "facility": {
+      "home": {
+        "title": "Facilities",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Facility",
+        "createOrEditLabel": "Create or edit a Facility",
+        "search": "Search for Facility",
+        "notFound": "No Facilities found"
+      },
+      "created": "A new Facility is created with identifier {{ param }}",
+      "updated": "A Facility is updated with identifier {{ param }}",
+      "deleted": "A Facility is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Facility {{ id }}?"
+      },
+      "detail": {
+        "title": "Facility"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "facilityType": "Facility Type",
+      "address": "Address",
+      "user": "User",
+      "organisation": "Organisation"
+    }
+  }
+}

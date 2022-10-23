@@ -1,0 +1,33 @@
+{
+  "bisterApp": {
+    "taxRate": {
+      "home": {
+        "title": "Tax Rates",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Tax Rate",
+        "createOrEditLabel": "Create or edit a Tax Rate",
+        "search": "Search for Tax Rate",
+        "notFound": "No Tax Rates found"
+      },
+      "created": "A new Tax Rate is created with identifier {{ param }}",
+      "updated": "A Tax Rate is updated with identifier {{ param }}",
+      "deleted": "A Tax Rate is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Tax Rate {{ id }}?"
+      },
+      "detail": {
+        "title": "Tax Rate"
+      },
+      "id": "ID",
+      "country": "Country",
+      "state": "State",
+      "postcode": "Postcode",
+      "city": "City",
+      "rate": "Rate",
+      "name": "Name",
+      "compound": "Compound",
+      "priority": "Priority",
+      "taxClass": "Tax Class"
+    }
+  }
+}

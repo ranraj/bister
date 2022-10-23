@@ -1,0 +1,28 @@
+<form *ngIf="bookingOrder" name="deleteForm" (ngSubmit)="confirmDelete(bookingOrder.id!)">
+  <div class="modal-header">
+    <h4 class="modal-title" data-cy="bookingOrderDeleteDialogHeading" yaliTranslate="entity.delete.title">Confirm delete operation</h4>
+
+    <button type="button" class="btn-close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
+  </div>
+
+  <div class="modal-body">
+    <yali-alert-error></yali-alert-error>
+    <p
+      id="yali-delete-bookingOrder-heading"
+      yaliTranslate="bisterApp.bookingOrder.delete.question"
+      [translateValues]="{ id: bookingOrder.id }"
+    >
+      Are you sure you want to delete Booking Order {{ bookingOrder.id }}?
+    </p>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+      <fa-icon icon="ban"></fa-icon>&nbsp;<span yaliTranslate="entity.action.cancel">Cancel</span>
+    </button>
+
+    <button id="yali-confirm-delete-bookingOrder" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+      <fa-icon icon="times"></fa-icon>&nbsp;<span yaliTranslate="entity.action.delete">Delete</span>
+    </button>
+  </div>
+</form>

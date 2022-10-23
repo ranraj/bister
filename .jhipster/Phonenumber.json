@@ -1,0 +1,62 @@
+{
+  "applications": ["bister"],
+  "changelogDate": "20221023041852",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "phonenumber",
+  "fields": [
+    {
+      "fieldName": "country",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "50",
+      "fieldValidateRulesMinlength": "3"
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength", "required"],
+      "fieldValidateRulesMaxlength": "10",
+      "fieldValidateRulesMinlength": "3"
+    },
+    {
+      "fieldName": "contactNumber",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength", "required"],
+      "fieldValidateRulesMaxlength": "15",
+      "fieldValidateRulesMinlength": "10"
+    },
+    {
+      "fieldName": "phonenumberType",
+      "fieldType": "PhonenumberType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "OFFICE_PRIMARY,OFFICE_SECONDARY,OFFICIAL_NUMBER1,OFFICIAL_NUMBER2,PERSONAL_PRIMARY,PERSONAL_SECONDARY,EMERYGENCY1,EMERYGENCY2,WHATSAPP1,WHATSAPP2"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Phonenumber",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "relationshipName": "user",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "organisation",
+      "relationshipName": "organisation",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "facility",
+      "relationshipName": "facility",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

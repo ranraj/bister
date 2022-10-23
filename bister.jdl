@@ -1,0 +1,569 @@
+application {
+  config {
+    baseName bister,
+    applicationType monolith,
+    packageName com.yalisoft.bister,
+    authenticationType jwt,
+    prodDatabaseType mysql,
+    devDatabaseType mysql,
+    clientFramework angular
+    buildTool gradle
+    testFrameworks [cypress, cucumber, gatling]
+    clientTheme minty
+    enableSwaggerCodegen true
+    jhiPrefix yali
+    //messageBroker kafka
+    searchEngine elasticsearch
+    reactive true   
+    //dto mapstruct
+  }
+  entities *
+}
+
+entity BusinessPartner{
+    name String minlength(1) maxlength(250) required
+    description String minlength(5) maxlength(250) required
+    key String required
+}
+
+entity Organisation{
+    name String minlength(1) maxlength(250)  required
+    description String minlength(5) maxlength(250) required
+    key String required
+}
+
+entity Facility{
+    name String minlength(1) maxlength(250)  required
+    description String minlength(5) maxlength(250) required       
+    facilityType FacilityType required
+}
+enum FacilityType{
+    FRONT_OFFICE , BACK_OFFICE , CONSULTING , SALES , PROMOTION , STALL , DEMO, HEAD_OFFICE, BRANCH_OFFICE
+}
+entity Customer {
+    name String minlength(1) maxlength(250)  required
+    contactNumber String minlength(10) maxlength(15) required
+    avatarUrl String
+}
+/**
+* Business Agents
+*/
+entity Agent {
+    name String minlength(1) maxlength(250) required
+    contactNumber String minlength(10) maxlength(15) required
+    avatarUrl String
+    agentType AgentType required
+}
+
+enum AgentType{
+    ENGINEER, SUPPORT, LEAD, MARKETING, SALES, FINANCE, COUNSELLOR, ADVOCATE
+}
+
+entity ProjectType {
+    name String minlength(1) maxlength(250)  required
+    description String minlength(10) maxlength(100)
+}
+
+entity Project {
+    name String minlength(2) maxlength(250) required  
+    slug String minlength(2) maxlength(100)  required
+    description String minlength(20) maxlength(1000) required
+    shortDescription String minlength(20) maxlength(50) 
+    regularPrice BigDecimal required
+    salePrice BigDecimal required
+    published Boolean required
+    dateCreated Instant required
+    dateModified LocalDate required    
+    projectStatus ProjectStatus required // defaults to in stock
+    sharableHash String    
+    estimatedBudget BigDecimal required
+}
+
+entity ProjectActivity{
+    title String minlength(5) maxlength(100) required 
+    details String minlength(20) maxlength(250)
+    status ActivityStatus required    
+}
+
+entity ProductActivity{
+    title String minlength(5) maxlength(100) required 
+    details String minlength(20) maxlength(250)
+    status ActivityStatus required    
+}
+
+enum ActivityStatus{
+    NEW, INPROGRESS, HOLD, CANCELLED, FAILED, COMPLETED, CLOSE, REOPEN, LOG, NOTIFICATION, UPDATE, DELETE
+}
+
+entity Product {
+    name String minlength(2) maxlength(250) required  
+    slug String minlength(2) maxlength(100)  required
+    description String minlength(20) maxlength(1000) required
+    shortDescription String minlength(20) maxlength(50) required
+    regularPrice BigDecimal required
+    salePrice BigDecimal required
+    published Boolean required
+    dateCreated Instant required
+    dateModified LocalDate required
+    featured Boolean required    
+    saleStatus SaleStatus required // defaults to in stock    
+    sharableHash String    
+}
+entity Tag {
+    name String minlength(2) maxlength(100) required
+    slug String minlength(2) maxlength(100)  required
+    description String minlength(20) maxlength(1000) required
+    tagType TagType required
+}
+enum SaleStatus {
+    RESALE, SOLD, OPEN, DELIVERY, CLOSED
+}
+
+enum ProjectStatus {
+    NEW, PENDING_APPROVAL, UNDER_CONTRUCTION, COMPLETED, SOLD
+}
+
+//set by admin
+entity Category {
+    name String minlength(2) maxlength(100) required
+    slug String minlength(2) maxlength(100) required
+    description String minlength(20) maxlength(1000)
+    categoryType CategoryType
+}
+
+enum TagType {
+    Project, Product, Attachment
+}
+
+enum CategoryType {
+    Project, Product
+}
+
+entity ProductAttribute {
+    name String minlength(2) maxlength(100) required
+    slug String minlength(2) maxlength(100) required
+    type String required // defaults to select, i dunno what else can be contained for this
+    notes String minlength(5) maxlength(1000) required
+    visible Boolean 
+}
+
+entity ProductAttributeTerm {
+    name String minlength(2) maxlength(100) required
+    slug String minlength(2) maxlength(100) required
+    description String minlength(5) maxlength(1000) required
+    menuOrder Integer required
+}
+
+entity ProductVariationAttributeTerm {
+    name String minlength(2) maxlength(100) required
+    slug String minlength(2) maxlength(100) required
+    description String minlength(5) maxlength(1000) required
+    menuOrder Integer required
+    overRideProductAttribute Boolean
+}
+
+entity ProductReview {
+    reviewerName String minlength(1) maxlength(250) required
+    reviewerEmail String required pattern(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)
+    review String minlength(5) maxlength(1000) required
+    rating Integer required
+    status ReviewStatus required
+    reviewerId Long required
+}
+
+entity ProjectReview {
+    reviewerName String minlength(1) maxlength(250) required
+    reviewerEmail String required pattern(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)
+    review String minlength(20) maxlength(1000) required
+    rating Integer required
+    status ReviewStatus required
+    reviewerId Long required
+}
+enum ReviewStatus {
+    APPROVED, HOLD, SPAM, UNSPAM, TRASH, UNTRASH
+}
+entity ProductVariation {
+    assetId String
+    name String minlength(1) maxlength(100) required
+    description String minlength(10) maxlength(1000) required
+    regularPrice BigDecimal required
+    salePrice BigDecimal required
+    dateOnSaleFrom LocalDate required
+    dateOnSaleTo LocalDate required
+    isDraft Boolean required
+    useParentDetails Boolean required
+    saleStatus SaleStatus required // defaults to in stock 
+}
+
+entity ProjectSpecificationGroup{
+    title String required    
+    slug String 
+    description String 
+}
+
+entity ProductSpecificationGroup{
+    title String minlength(5) maxlength(100) required  
+    slug String minlength(2) maxlength(100) required 
+    description String minlength(20) maxlength(250) 
+}
+
+entity ProjectSpecification {
+    title String minlength(5) maxlength(100) required  
+    value String minlength(2) maxlength(100) required 
+    description String minlength(20) maxlength(250) 
+}
+
+entity ProductSpecification {
+    title String minlength(5) maxlength(100) required  
+    value String minlength(2) maxlength(100) required 
+    description String minlength(20) maxlength(250) 
+}
+
+entity Attachment{
+    name String minlength(5) maxlength(100) required 
+    description String minlength(20) maxlength(250) 
+    attachmentType AttachmentType
+    link String minlength(2) maxlength(250) 
+    isApprovalNeeded Boolean
+    approvalStatus AttachmentApprovalStatus
+    approvedBy Long    
+    attachmentSourceType AttachmentSourceType
+    createdBy Long
+    customerId Long
+    agentId Long     
+    attachmentVisibilityType AttachmentVisibilityType
+
+    originalFilename String 	// Original filename on the users computer
+	extension String 
+	sizeInBytes Integer 
+	sha256 String 
+    contentType String
+}
+
+enum AttachmentType {
+    IMAGE , AUDIO , VIDEO , LINK , WEBSITE , DOC , TEXT , PDF
+}
+enum AttachmentApprovalStatus {
+    NEW, INPROGRESS, PENDING_INFORMATION, REJECTED, APPROVED
+}
+
+enum AttachmentSourceType{
+    Project, Product, ENQUIRY, USER, CUSTOMER, AGENT, PROMOTION, NOTIFICATION
+}
+
+enum AttachmentVisibilityType{
+    PRIVATE, PROTECTED, PUBLIC, LIMITED
+}
+
+entity Certification {
+    name String minlength(2) maxlength(100) required 
+    slug String minlength(2) maxlength(100) 
+    authority String required minlength(5) maxlength(100) required 
+    status CertificationStatus required
+    projectId Long
+    prodcut Long
+    orgId Long
+    facitlityId Long 
+    createdBy Long required
+    createdAt Instant required       
+}
+
+enum CertificationStatus{
+    PLANNED, PREPARATION, INITIATED, FILED, INPROGRESS, REJECTED, HOLD, COMPLETED
+}
+
+entity Promotion{
+    productId Long
+    projectId Long
+    contentType PromotionContentType required
+    recipients String
+    recipientGroup String
+    createdBy Long
+    createdAt Instant required
+    sendAt Instant required
+    attachmentId Long
+}
+
+enum PromotionContentType{
+    TEMPLATE, ATTACHMENT, ATTACHMENT_TEMPLATE
+}
+
+entity PaymentSchedule {
+    dueDate Instant required
+    totalPrice BigDecimal required min(0)
+    remarks String minlength(20) maxlength(250) 
+    status PaymentScheduleStatus required
+    isOverDue Boolean
+}
+
+enum PaymentScheduleStatus{
+    PAID, PENDING, PLANNED
+}
+
+entity PurchaseOrder {
+    placedDate Instant required
+    status OrderStatus required
+    code String minlength(20) maxlength(250) 
+    deliveryOption DeliveryOption required
+    
+}
+entity BookingOrder {
+    placedDate Instant required
+    status BookingOrderStatus required
+    code String minlength(20) maxlength(250)     
+    bookingExpieryDate Instant    
+}
+enum BookingOrderStatus{
+    BLOCKED, BOOKED, PURCHASED, EXPIRED, CANCELLED
+}
+
+entity Address {
+    name String minlength(20) maxlength(250) required
+    addressLine1 String minlength(3) maxlength(250) required
+    addressLine2 String minlength(3) maxlength(250) 
+    landmark String minlength(3) maxlength(250)  
+    city String minlength(3) maxlength(50)  
+    state String minlength(3) maxlength(50)  
+    country String minlength(3) maxlength(50)  
+    postcode String minlength(3) maxlength(20) required
+    latitude String minlength(3) maxlength(50)
+    longitude String minlength(3) maxlength(50)
+    addressType AddressType required
+}
+enum AddressType{
+    HOME, OFFICE, BILLING, PERMANENT_RESIDENT, TEMPORARY_RESIDENT, PROJECT_SITE, NEW_SITE
+}
+entity Phonenumber{
+    country String minlength(3) maxlength(50)
+    code String minlength(3) maxlength(10) required
+    contactNumber String minlength(10) maxlength(15) required
+    phonenumberType PhonenumberType required
+}
+enum PhonenumberType{
+    OFFICE_PRIMARY, OFFICE_SECONDARY, OFFICIAL_NUMBER1, OFFICIAL_NUMBER2 ,PERSONAL_PRIMARY, PERSONAL_SECONDARY, EMERYGENCY1, EMERYGENCY2,
+    WHATSAPP1, WHATSAPP2 
+}
+
+entity Notification {
+    date Instant required
+    details String minlength(3) maxlength(1000) 
+    sentDate Instant required
+    
+    googleNotificationId String minlength(3) maxlength(50)
+    whatsappNotificationId String minlength(3) maxlength(50)
+    smsNotificationId String minlength(3) maxlength(50)
+    productId Long
+    projectId Long
+    scheduleId Long
+    promotionId Long
+    read Boolean required
+
+    notificationSourceType NotificationSourceType required
+    notificationType NotificationType
+    notificationMode NotificationMode required
+}
+
+enum NotificationType {
+    INPERSON, PHYSICAL, DIGITAL, CALL
+}
+enum NotificationSourceType {
+    PROMOTION, PROJECT, PRODUCT, SCHEDULE, ENQUIRY, REGISTRATION, INFOROMATION, REMINDER
+}
+enum NotificationMode {
+    EMAIL, SMS,WHATSAPP_MESSAGE, WHATSAPP_CALL, PHONECALL, COURIER, PARCEL
+}
+
+entity Enquiry {
+    raisedDate Instant required
+    subject String required
+    details String minlength(3) maxlength(1000)
+    lastResponseDate Instant
+    lastResponseId Long
+    enquiryType EnquiryType required    
+    status EnquiryResolutionStatus 
+}
+entity EnquiryResponse {
+    query String minlength(3) maxlength(1000)
+    details String minlength(3) maxlength(1000)
+    enquiryResponseType EnquiryResponseType required   
+}
+
+enum EnquiryType{
+    PROJECT, PRODUCT, CONSULTATION, SERVICE
+}
+enum EnquiryResponseType{
+    INPERSON, CALL, CHAT, SITE_VISIT
+}
+enum EnquiryResolutionStatus{
+    OPEN, INPROGRESS, WAITING_FROM_CUSTOMER_RESPONSE, HOLD, SPAM, NO_RESPONSE, CLOSED
+}
+
+entity Invoice {
+    code String minlength(3) maxlength(100) required
+    date Instant required
+    details String minlength(3) maxlength(1000)
+    status InvoiceStatus required
+    paymentMethod PaymentMethod required
+    paymentDate Instant required
+    paymentAmount BigDecimal required
+}
+entity Transaction {
+    code String minlength(3) maxlength(100) required
+    amount BigDecimal required
+    status TransactionStatus required
+}
+entity TaxRate {
+    country String minlength(3) maxlength(50)required
+    state String minlength(3) maxlength(50) required
+    postcode String minlength(3) maxlength(20) required
+    city String minlength(3) maxlength(50) required
+    //should have cities and postcodes also?
+    rate String minlength(3) maxlength(50) required
+    name String minlength(2) maxlength(250) required    
+    compound Boolean required // defaults to false
+    priority Integer required // defaults to 1
+}
+entity TaxClass {
+    name String minlength(3) maxlength(100) required
+    slug String minlength(3) maxlength(100) required
+// be sure to enter STANDARD as a tax class
+}
+entity Refund {
+    amount BigDecimal required
+    reason String minlength(3) maxlength(1000) required
+    //line items data
+    orderCode Long required
+    status RefundStatus required // defaults to pending
+}
+enum RefundStatus {
+    PENDING, COMPLETE
+}
+enum DeliveryOption {
+    HAND_OVER, LEASE, RENT, CONSTRUCTION_HANDOVER
+}
+enum InvoiceStatus {
+    PAID, ISSUED, CANCELLED
+}
+enum OrderStatus {
+    NEW, PAYMENT_PENDING, HOLD,ORDER_CONFIMED, IN_DELIVERY, DELIVERED, CANCELLED
+}
+enum TransactionStatus {
+    PENDING, COMPLETE, REJECTED
+}
+enum PaymentMethod {
+    DEBIT_CARD, CASH, CREDIT_CARD, PAYPAL, CRYPTO
+}
+
+/**
+ * One to one relationship.
+ */
+relationship OneToOne {
+    Customer{user(login) required} to User
+    Agent{user(login) required} to User
+    Customer{address(name) required} to Address  
+    Facility{address(name) required} to Address        
+    Facility{user(login) required} to User
+    Organisation{address(name) required} to Address
+    Refund{transaction(code) required} to Transaction
+    Project{address(name) required} to Address    
+
+    PaymentSchedule to Invoice 
+    Invoice to PurchaseOrder
+    Notification{agent} to Agent
+    BookingOrder{customer(name)} to Customer
+}
+
+/**
+ * One to many relationship.
+ */
+relationship OneToMany {
+    PurchaseOrder to PaymentSchedule{PurchaseOrdep}
+
+    //one product has many variations
+    Product to ProductVariation{product(name) required}
+
+    //product attribute to product attribute terms? XXS is an example of product attribute term, so product attribute is Size
+    ProductAttribute to ProductAttributeTerm{productAttribute(name) required}
+
+    //one product can have many attributes
+    Product to ProductAttributeTerm{product(name) required}    
+    ProductVariation to ProductVariationAttributeTerm{productVariation(name)}
+
+    //tax rates and tax classes?
+    TaxClass to TaxRate{taxClass(name) required}
+
+    TaxClass to Product{taxClass(name) required}
+
+    //one product has many product tags?
+    Product to Tag{product(name)}
+    Project to Tag{project(name)}            
+    Attachment to Tag{attachment(name)}
+
+    //one product has many reviews
+    Product to ProductReview{product(name) required}
+    Project to ProjectReview{project(name) required}
+    PurchaseOrder{transaction(code) required} to Transaction
+
+    Product to ProductSpecification{product(name) required}
+    Project to ProjectSpecification{project(name) required}
+
+    Product to Attachment{product(name)}
+    Project to Attachment{project(name)}
+    Enquiry to Attachment{enquiry(subject)}
+    Certification to Attachment{certification(name)}
+
+    ProductSpecification to Attachment{productSpecification(title)}
+    ProjectSpecification to Attachment{projectSpecification(title)}
+
+    Enquiry to EnquiryResponse
+    Project to Enquiry{project(name)}
+    Product to Enquiry{product(name)}    
+    Project to ProjectActivity{project(name) required}
+    Product to ProductActivity{product(name) required} 
+    Customer to Enquiry{customer(name)}
+    
+}
+
+/**
+ * Many to one relationship. 
+ */
+relationship ManyToOne {
+    Notification{user(login) required} to User
+    PurchaseOrder{user(login) required} to User
+    Phonenumber{user(login)} to User
+    Phonenumber{organisation(name)} to Organisation
+    Phonenumber{facility(name)} to Facility    
+    //refund belongs to user, for sure
+    Refund{user required} to User
+    Facility{organisation(name) required} to Organisation
+    Organisation{businessPartner(name)} to BusinessPartner
+    
+    Enquiry{agent(name)} to Agent
+    EnquiryResponse{agent(name)} to Agent
+
+    Agent{facility(name) required} to Facility
+    
+    Category{parent} to Category
+
+    Project{projectType(name) required} to ProjectType
+    Product{project(name)} to Project
+
+    ProjectSpecificationGroup{project(name)} to Project
+    ProductSpecificationGroup{product(name)} to Product
+    ProductSpecification{productSpecificationGroup(title)} to ProductSpecificationGroup
+    ProjectSpecification{projectSpecificationGroup(title)} to ProjectSpecificationGroup
+
+    BookingOrder{productVariation(name) required} to ProductVariation  
+    PurchaseOrder{productVariation(name) required} to ProductVariation
+}
+
+relationship ManyToMany{
+    Product{category(name)} to Category{product(name)}
+    Project{category(name)} to Category{project(name)}
+}
+
+service * with serviceClass
+paginate * with pagination except Notification
+paginate Notification with infinite-scroll
+dto all with mapstruct
+filter all

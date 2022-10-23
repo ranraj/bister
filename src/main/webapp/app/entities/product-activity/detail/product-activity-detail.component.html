@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="productActivity">
+      <h2 data-cy="productActivityDetailsHeading"><span yaliTranslate="bisterApp.productActivity.detail.title">Product Activity</span></h2>
+
+      <hr />
+
+      <yali-alert-error></yali-alert-error>
+
+      <yali-alert></yali-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span yaliTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ productActivity.id }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productActivity.title">Title</span></dt>
+        <dd>
+          <span>{{ productActivity.title }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productActivity.details">Details</span></dt>
+        <dd>
+          <span>{{ productActivity.details }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productActivity.status">Status</span></dt>
+        <dd>
+          <span yaliTranslate="{{ 'bisterApp.ActivityStatus.' + productActivity.status }}">{{ productActivity.status }}</span>
+        </dd>
+        <dt><span yaliTranslate="bisterApp.productActivity.product">Product</span></dt>
+        <dd>
+          <div *ngIf="productActivity.product">
+            <a [routerLink]="['/product', productActivity.product.id, 'view']">{{ productActivity.product.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span yaliTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/product-activity', productActivity.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span yaliTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
