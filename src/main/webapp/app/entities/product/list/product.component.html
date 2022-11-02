@@ -1,6 +1,28 @@
 <div>
   <h2 id="page-heading" data-cy="ProductHeading">
-    <span yaliTranslate="bisterApp.product.home.title">Products</span>
+    <form name="searchForm" class="row row-cols-sm-auto align-items-center justify-content-center">
+      <div class="col-sm-12 col-md-6 mb-4">
+        <div class="input-group w-100 mt-3">
+          <label class="visually-hidden" for="currentSearch" yaliTranslate="bisterApp.product.home.search">Search for Product</label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="currentSearch"
+            id="currentSearch"
+            name="currentSearch"
+            placeholder="{{ 'bisterApp.product.home.search' | translate }}"
+          />
+
+          <button class="btn btn-info" (click)="search(currentSearch)">
+            <fa-icon icon="search"></fa-icon>
+          </button>
+
+          <button class="btn btn-danger" (click)="search('')" *ngIf="currentSearch">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        </div>
+      </div>
+    </form>
 
     <div class="d-flex justify-content-end">
       <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
@@ -25,30 +47,6 @@
 
   <yali-alert></yali-alert>
 
-  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
-    <div class="col-sm-12">
-      <div class="input-group w-100 mt-3">
-        <label class="visually-hidden" for="currentSearch" yaliTranslate="bisterApp.product.home.search">Search for Product</label>
-        <input
-          type="text"
-          class="form-control"
-          [(ngModel)]="currentSearch"
-          id="currentSearch"
-          name="currentSearch"
-          placeholder="{{ 'bisterApp.product.home.search' | translate }}"
-        />
-
-        <button class="btn btn-info" (click)="search(currentSearch)">
-          <fa-icon icon="search"></fa-icon>
-        </button>
-
-        <button class="btn btn-danger" (click)="search('')" *ngIf="currentSearch">
-          <fa-icon icon="trash-alt"></fa-icon>
-        </button>
-      </div>
-    </div>
-  </form>
-
   <div class="alert alert-warning" id="no-result" *ngIf="products?.length === 0">
     <span yaliTranslate="bisterApp.product.home.notFound">No Products found</span>
   </div>
@@ -60,15 +58,14 @@
           <a [routerLink]="['/product', product.id, 'view']">
             <h5 class="mb-1">{{ product.name }}</h5>
           </a>
-          <!-- <small *ngIf="product.productCategory">
-            <a [routerLink]="['/product-category', product
-               .productCategory?.id, 'view']">
-              {{ product.productCategory?.id }}
-            </a>
-          </small> -->
+
           <div *ngIf="product.project">
             <a [routerLink]="['/project', product.project.id, 'view']">{{ product.project.name }}</a>
           </div>
+
+          <a [routerLink]="['/product-category', product.productCategory?.id, 'view']">
+            {{ product.productCategory?.id }}
+          </a>
         </div>
         <small class="mb-1">{{ product.description }}</small>
         <p class="mb-1"><span yaliTranslate="bisterApp.product.salePrice">Sale Price : </span> {{ product.salePrice }}</p>

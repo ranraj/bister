@@ -16,7 +16,6 @@ application {
     searchEngine elasticsearch
     reactive true    
     cacheProvider memcached   
-    
   }
   entities *
 }
