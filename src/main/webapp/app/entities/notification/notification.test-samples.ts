@@ -8,8 +8,8 @@ import { INotification, NewNotification } from './notification.model';
 
 export const sampleWithRequiredData: INotification = {
   id: 30621,
-  date: dayjs('2022-10-23T03:55'),
-  sentDate: dayjs('2022-10-22T20:49'),
+  date: dayjs('2022-10-28T14:32'),
+  sentDate: dayjs('2022-10-28T07:25'),
   read: true,
   notificationSourceType: NotificationSourceType['ENQUIRY'],
   notificationMode: NotificationMode['COURIER'],
@@ -17,9 +17,9 @@ export const sampleWithRequiredData: INotification = {
 
 export const sampleWithPartialData: INotification = {
   id: 14097,
-  date: dayjs('2022-10-22T16:03'),
+  date: dayjs('2022-10-28T02:39'),
   details: 'Garden quantify',
-  sentDate: dayjs('2022-10-22T23:35'),
+  sentDate: dayjs('2022-10-28T10:11'),
   promotionId: 67933,
   read: true,
   notificationSourceType: NotificationSourceType['PRODUCT'],
@@ -28,9 +28,9 @@ export const sampleWithPartialData: INotification = {
 
 export const sampleWithFullData: INotification = {
   id: 32316,
-  date: dayjs('2022-10-22T18:20'),
+  date: dayjs('2022-10-28T04:56'),
   details: 'generate Buckinghamshire',
-  sentDate: dayjs('2022-10-22T07:18'),
+  sentDate: dayjs('2022-10-27T17:54'),
   googleNotificationId: 'Market hacking Wyoming',
   whatsappNotificationId: 'tan',
   smsNotificationId: 'Gorgeous Savings',
@@ -45,8 +45,8 @@ export const sampleWithFullData: INotification = {
 };
 
 export const sampleWithNewData: NewNotification = {
-  date: dayjs('2022-10-23T03:51'),
-  sentDate: dayjs('2022-10-23T04:00'),
+  date: dayjs('2022-10-28T14:27'),
+  sentDate: dayjs('2022-10-28T14:36'),
   read: false,
   notificationSourceType: NotificationSourceType['SCHEDULE'],
   notificationMode: NotificationMode['WHATSAPP_MESSAGE'],

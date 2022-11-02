@@ -30,7 +30,7 @@ describe('ProductActivity e2e test', () => {
     cy.authenticatedRequest({
       method: 'POST',
       url: '/api/products',
-      body: {"name":"Frozen Toys","slug":"Mauritius","description":"CheckingXXXXXXXXXXXX","shortDescription":"Handcrafted Practical calculating","regularPrice":99966,"salePrice":42648,"published":true,"dateCreated":"2022-10-22T11:33:34.190Z","dateModified":"2022-10-22","featured":true,"saleStatus":"RESALE","sharableHash":"Group Inverse payment"},
+      body: {"name":"Frozen Toys","slug":"Mauritius","description":"CheckingXXXXXXXXXXXX","shortDescription":"Handcrafted Practical calculating","regularPrice":99966,"salePrice":42648,"published":true,"dateCreated":"2022-10-27T22:09:37.190Z","dateModified":"2022-10-27","featured":true,"saleStatus":"RESALE","sharableHash":"Group Inverse payment"},
     }).then(({ body }) => {
       product = body;
     });

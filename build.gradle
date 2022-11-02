@@ -239,6 +239,10 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher:${junitPlatformLauncherVersion}'
     testImplementation "com.tngtech.archunit:archunit-junit5-api:${archunitJunit5Version}"
     testRuntimeOnly "com.tngtech.archunit:archunit-junit5-engine:${archunitJunit5Version}"
+    implementation "org.springframework.cloud:spring-cloud-stream"
+    implementation "org.springframework.cloud:spring-cloud-starter-stream-kafka"
+    testImplementation "org.springframework.cloud:spring-cloud-stream-test-support"
+    testImplementation "org.testcontainers:kafka"
     implementation "org.zalando:problem-spring-webflux"
     implementation "io.jsonwebtoken:jjwt-api"
     if (!project.hasProperty("gae")) {

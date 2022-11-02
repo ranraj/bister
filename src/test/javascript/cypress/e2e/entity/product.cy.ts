@@ -23,8 +23,8 @@ describe('Product e2e test', () => {
     regularPrice: 41970,
     salePrice: 1025,
     published: true,
-    dateCreated: '2022-10-22T19:38:57.037Z',
-    dateModified: '2022-10-22',
+    dateCreated: '2022-10-28T06:15:00.037Z',
+    dateModified: '2022-10-27',
     featured: false,
     saleStatus: 'RESALE',
   };
@@ -271,9 +271,9 @@ describe('Product e2e test', () => {
       cy.get(`[data-cy="published"]`).should('not.be.checked');
       cy.get(`[data-cy="published"]`).click().should('be.checked');
 
-      cy.get(`[data-cy="dateCreated"]`).type('2022-10-22T09:52').blur().should('have.value', '2022-10-22T09:52');
+      cy.get(`[data-cy="dateCreated"]`).type('2022-10-27T20:28').blur().should('have.value', '2022-10-27T20:28');
 
-      cy.get(`[data-cy="dateModified"]`).type('2022-10-22').blur().should('have.value', '2022-10-22');
+      cy.get(`[data-cy="dateModified"]`).type('2022-10-27').blur().should('have.value', '2022-10-27');
 
       cy.get(`[data-cy="featured"]`).should('not.be.checked');
       cy.get(`[data-cy="featured"]`).click().should('be.checked');

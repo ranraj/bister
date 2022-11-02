@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity Promotion.
+    -->
+    <changeSet id="20221028144955-1" author="jhipster">
+        <createTable tableName="promotion">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="product_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="project_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="content_type" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="recipients" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="recipient_group" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="created_by" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="created_at" type="${datetimeType}">
+                <constraints nullable="false" />
+            </column>
+            <column name="send_at" type="${datetimeType}">
+                <constraints nullable="false" />
+            </column>
+            <column name="attachment_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+        <dropDefaultValue tableName="promotion" columnName="created_at" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="promotion" columnName="send_at" columnDataType="${datetimeType}"/>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+</databaseChangeLog>

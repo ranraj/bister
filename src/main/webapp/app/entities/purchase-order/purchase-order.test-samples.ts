@@ -7,14 +7,14 @@ import { IPurchaseOrder, NewPurchaseOrder } from './purchase-order.model';
 
 export const sampleWithRequiredData: IPurchaseOrder = {
   id: 1775,
-  placedDate: dayjs('2022-10-22T12:44'),
+  placedDate: dayjs('2022-10-27T23:20'),
   status: OrderStatus['PAYMENT_PENDING'],
   deliveryOption: DeliveryOption['RENT'],
 };
 
 export const sampleWithPartialData: IPurchaseOrder = {
   id: 20490,
-  placedDate: dayjs('2022-10-22T17:30'),
+  placedDate: dayjs('2022-10-28T04:06'),
   status: OrderStatus['PAYMENT_PENDING'],
   code: 'high-level skyXXXXXX',
   deliveryOption: DeliveryOption['RENT'],
@@ -22,14 +22,14 @@ export const sampleWithPartialData: IPurchaseOrder = {
 
 export const sampleWithFullData: IPurchaseOrder = {
   id: 9779,
-  placedDate: dayjs('2022-10-22T23:06'),
+  placedDate: dayjs('2022-10-28T09:42'),
   status: OrderStatus['DELIVERED'],
   code: 'MarylandXXXXXXXXXXXX',
   deliveryOption: DeliveryOption['LEASE'],
 };
 
 export const sampleWithNewData: NewPurchaseOrder = {
-  placedDate: dayjs('2022-10-22T19:06'),
+  placedDate: dayjs('2022-10-28T05:42'),
   status: OrderStatus['ORDER_CONFIMED'],
   deliveryOption: DeliveryOption['HAND_OVER'],
   id: null,

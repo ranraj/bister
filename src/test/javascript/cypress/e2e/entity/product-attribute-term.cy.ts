@@ -39,7 +39,7 @@ describe('ProductAttributeTerm e2e test', () => {
     cy.authenticatedRequest({
       method: 'POST',
       url: '/api/products',
-      body: {"name":"mint","slug":"Argentine Synchronised incubate","description":"Music neural Bahamas","shortDescription":"SSLXXXXXXXXXXXXXXXXX","regularPrice":21972,"salePrice":31979,"published":false,"dateCreated":"2022-10-22T20:06:10.569Z","dateModified":"2022-10-23","featured":true,"saleStatus":"CLOSED","sharableHash":"Plastic Paradigm"},
+      body: {"name":"mint","slug":"Argentine Synchronised incubate","description":"Music neural Bahamas","shortDescription":"SSLXXXXXXXXXXXXXXXXX","regularPrice":21972,"salePrice":31979,"published":false,"dateCreated":"2022-10-28T06:42:13.569Z","dateModified":"2022-10-28","featured":true,"saleStatus":"CLOSED","sharableHash":"Plastic Paradigm"},
     }).then(({ body }) => {
       product = body;
     });

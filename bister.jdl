@@ -12,10 +12,9 @@ application {
     clientTheme minty
     enableSwaggerCodegen true
     jhiPrefix yali
-    //messageBroker kafka
+    messageBroker kafka
     searchEngine elasticsearch
-    reactive true   
-    //dto mapstruct
+    reactive true       
   }
   entities *
 }

@@ -15,7 +15,7 @@ describe('PurchaseOrder e2e test', () => {
   const purchaseOrderPageUrlPattern = new RegExp('/purchase-order(\\?.*)?$');
   const username = Cypress.env('E2E_USERNAME') ?? 'user';
   const password = Cypress.env('E2E_PASSWORD') ?? 'user';
-  // const purchaseOrderSample = {"placedDate":"2022-10-22T15:06:13.194Z","status":"HOLD","deliveryOption":"RENT"};
+  // const purchaseOrderSample = {"placedDate":"2022-10-28T01:42:16.194Z","status":"HOLD","deliveryOption":"RENT"};
 
   let purchaseOrder;
   // let transaction;
@@ -48,7 +48,7 @@ describe('PurchaseOrder e2e test', () => {
     cy.authenticatedRequest({
       method: 'POST',
       url: '/api/product-variations',
-      body: {"assetId":"Fuerte Cambridgeshire","name":"Colombian","description":"Car Future","regularPrice":58643,"salePrice":83195,"dateOnSaleFrom":"2022-10-22","dateOnSaleTo":"2022-10-22","isDraft":true,"useParentDetails":true,"saleStatus":"DELIVERY"},
+      body: {"assetId":"Fuerte Cambridgeshire","name":"Colombian","description":"Car Future","regularPrice":58643,"salePrice":83195,"dateOnSaleFrom":"2022-10-28","dateOnSaleTo":"2022-10-28","isDraft":true,"useParentDetails":true,"saleStatus":"DELIVERY"},
     }).then(({ body }) => {
       productVariation = body;
     });
@@ -269,7 +269,7 @@ describe('PurchaseOrder e2e test', () => {
     });
 
     it.skip('should create an instance of PurchaseOrder', () => {
-      cy.get(`[data-cy="placedDate"]`).type('2022-10-22T18:43').blur().should('have.value', '2022-10-22T18:43');
+      cy.get(`[data-cy="placedDate"]`).type('2022-10-28T05:19').blur().should('have.value', '2022-10-28T05:19');
 
       cy.get(`[data-cy="status"]`).select('PAYMENT_PENDING');
 

@@ -1,6 +1,28 @@
 <div>
   <h2 id="page-heading" data-cy="ProductHeading">
-    <span yaliTranslate="bisterApp.product.home.title">Products</span>
+    <form name="searchForm" class="row row-cols-sm-auto align-items-center justify-content-center">
+      <div class="col-sm-12 col-md-6 mb-4">
+        <div class="input-group w-100 mt-3">
+          <label class="visually-hidden" for="currentSearch" yaliTranslate="bisterApp.product.home.search">Search for Product</label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="currentSearch"
+            id="currentSearch"
+            name="currentSearch"
+            placeholder="{{ 'bisterApp.product.home.search' | translate }}"
+          />
+
+          <button class="btn btn-info" (click)="search(currentSearch)">
+            <fa-icon icon="search"></fa-icon>
+          </button>
+
+          <button class="btn btn-danger" (click)="search('')" *ngIf="currentSearch">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        </div>
+      </div>
+    </form>
 
     <div class="d-flex justify-content-end">
       <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
@@ -24,189 +46,34 @@
 
   <yali-alert></yali-alert>
 
-  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
-    <div class="col-sm-12">
-      <div class="input-group w-100 mt-3">
-        <label class="visually-hidden" for="currentSearch" yaliTranslate="bisterApp.product.home.search">Search for Product</label>
-        <input
-          type="text"
-          class="form-control"
-          [(ngModel)]="currentSearch"
-          id="currentSearch"
-          name="currentSearch"
-          placeholder="{{ 'bisterApp.product.home.search' | translate }}"
-        />
-
-        <button class="btn btn-info" (click)="search(currentSearch)">
-          <fa-icon icon="search"></fa-icon>
-        </button>
-
-        <button class="btn btn-danger" (click)="search('')" *ngIf="currentSearch">
-          <fa-icon icon="trash-alt"></fa-icon>
-        </button>
-      </div>
-    </div>
-  </form>
-
   <div class="alert alert-warning" id="no-result" *ngIf="products?.length === 0">
     <span yaliTranslate="bisterApp.product.home.notFound">No Products found</span>
   </div>
 
-  <div class="table-responsive table-entities" id="entities" *ngIf="products && products.length > 0">
-    <table class="table table-striped" aria-describedby="page-heading">
-      <thead>
-        <tr yaliSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
-          <th scope="col" yaliSortBy="id">
-            <div class="d-flex">
-              <span yaliTranslate="global.field.id">ID</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" yaliSortBy="name">
-            <div class="d-flex">
-              <span yaliTranslate="bisterApp.product.name">Name</span>
-              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" yaliSortBy="slug">
-            <div class="d-flex">
-              <span yaliTranslate="bisterApp.product.slug">Slug</span>
-              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" yaliSortBy="description">
-            <div class="d-flex">
-              <span yaliTranslate="bisterApp.product.description">Description</span>
-              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" yaliSortBy="shortDescription">
-            <div class="d-flex">
-              <span yaliTranslate="bisterApp.product.shortDescription">Short Description</span>
-              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" yaliSortBy="regularPrice">
-            <div class="d-flex">
-              <span yaliTranslate="bisterApp.product.regularPrice">Regular Price</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" yaliSortBy="salePrice">
-            <div class="d-flex">
-              <span yaliTranslate="bisterApp.product.salePrice">Sale Price</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" yaliSortBy="published">
-            <div class="d-flex">
-              <span yaliTranslate="bisterApp.product.published">Published</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" yaliSortBy="dateCreated">
-            <div class="d-flex">
-              <span yaliTranslate="bisterApp.product.dateCreated">Date Created</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" yaliSortBy="dateModified">
-            <div class="d-flex">
-              <span yaliTranslate="bisterApp.product.dateModified">Date Modified</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" yaliSortBy="featured">
-            <div class="d-flex">
-              <span yaliTranslate="bisterApp.product.featured">Featured</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" yaliSortBy="saleStatus">
-            <div class="d-flex">
-              <span yaliTranslate="bisterApp.product.saleStatus">Sale Status</span>
-              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" yaliSortBy="sharableHash">
-            <div class="d-flex">
-              <span yaliTranslate="bisterApp.product.sharableHash">Sharable Hash</span>
-              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" yaliSortBy="project.name">
-            <div class="d-flex">
-              <span yaliTranslate="bisterApp.product.project">Project</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" yaliSortBy="taxClass.name">
-            <div class="d-flex">
-              <span yaliTranslate="bisterApp.product.taxClass">Tax Class</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let product of products; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/product', product.id, 'view']">{{ product.id }}</a>
-          </td>
-          <td>{{ product.name }}</td>
-          <td>{{ product.slug }}</td>
-          <td>{{ product.description }}</td>
-          <td>{{ product.shortDescription }}</td>
-          <td>{{ product.regularPrice }}</td>
-          <td>{{ product.salePrice }}</td>
-          <td>{{ product.published }}</td>
-          <td>{{ product.dateCreated | formatMediumDatetime }}</td>
-          <td>{{ product.dateModified | formatMediumDate }}</td>
-          <td>{{ product.featured }}</td>
-          <td yaliTranslate="{{ 'bisterApp.SaleStatus.' + product.saleStatus }}">{{ product.saleStatus }}</td>
-          <td>{{ product.sharableHash }}</td>
-          <td>
-            <div *ngIf="product.project">
-              <a [routerLink]="['/project', product.project.id, 'view']">{{ product.project.name }}</a>
-            </div>
-          </td>
-          <td>
-            <div *ngIf="product.taxClass">
-              <a [routerLink]="['/tax-class', product.taxClass.id, 'view']">{{ product.taxClass.name }}</a>
-            </div>
-          </td>
-          <td class="text-end">
-            <div class="btn-group">
-              <button
-                type="submit"
-                [routerLink]="['/product', product.id, 'view']"
-                class="btn btn-info btn-sm"
-                data-cy="entityDetailsButton"
-              >
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline" yaliTranslate="entity.action.view">View</span>
-              </button>
-
-              <button
-                type="submit"
-                [routerLink]="['/product', product.id, 'edit']"
-                class="btn btn-primary btn-sm"
-                data-cy="entityEditButton"
-              >
-                <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline" yaliTranslate="entity.action.edit">Edit</span>
-              </button>
-
-              <button type="submit" (click)="delete(product)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
-                <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline" yaliTranslate="entity.action.delete">Delete</span>
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <div *ngIf="products && products.length > 0" class="mt-0">
+    <div class="list-group">
+      <a class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let product of products; trackBy: trackId">
+        <div class="d-flex w-100 justify-content-between">
+          <a [routerLink]="['/product', product.id, 'view']">
+            <h5 class="mb-1">{{ product.name }}</h5>
+          </a>
+          <!-- <small *ngIf="product.productCategory">
+           <a [routerLink]="['/product-category', product
+               .productCategory?.id, 'view']">
+             {{ product.productCategory?.id }}
+           </a>
+         </small> -->
+        </div>
+        <small class="mb-1">{{ product.description }}</small>
+        <p class="mb-1"><span yaliTranslate="bisterApp.product.salePrice">Sale Price : </span> {{ product.salePrice }}</p>
+        <small>
+          <p>
+            <span yaliTranslate="bisterApp.product.sharableHash">Sharable Hash :</span>
+            {{ product.sharableHash }}
+          </p>
+        </small>
+      </a>
+    </div>
   </div>
 
   <div *ngIf="products && products.length > 0">

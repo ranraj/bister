@@ -3,6 +3,7 @@ package com.yalisoft.bister;
 import com.yalisoft.bister.BisterApp;
 import com.yalisoft.bister.config.AsyncSyncConfiguration;
 import com.yalisoft.bister.config.EmbeddedElasticsearch;
+import com.yalisoft.bister.config.EmbeddedKafka;
 import com.yalisoft.bister.config.EmbeddedSQL;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -18,6 +19,7 @@ import org.springframework.test.annotation.DirtiesContext;
 @Retention(RetentionPolicy.RUNTIME)
 @SpringBootTest(classes = { BisterApp.class, AsyncSyncConfiguration.class })
 @EmbeddedElasticsearch
+@EmbeddedKafka
 @EmbeddedSQL
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 public @interface IntegrationTest {

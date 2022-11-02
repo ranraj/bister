@@ -10,7 +10,7 @@ export const sampleWithRequiredData: ICertification = {
   authority: 'reciprocal Supervisor transform',
   status: CertificationStatus['PLANNED'],
   createdBy: 52629,
-  createdAt: dayjs('2022-10-22T07:55'),
+  createdAt: dayjs('2022-10-27T18:31'),
 };
 
 export const sampleWithPartialData: ICertification = {
@@ -22,7 +22,7 @@ export const sampleWithPartialData: ICertification = {
   orgId: 48180,
   facitlityId: 91115,
   createdBy: 91482,
-  createdAt: dayjs('2022-10-22T05:08'),
+  createdAt: dayjs('2022-10-27T15:44'),
 };
 
 export const sampleWithFullData: ICertification = {
@@ -36,7 +36,7 @@ export const sampleWithFullData: ICertification = {
   orgId: 79397,
   facitlityId: 56457,
   createdBy: 7904,
-  createdAt: dayjs('2022-10-23T02:31'),
+  createdAt: dayjs('2022-10-28T13:07'),
 };
 
 export const sampleWithNewData: NewCertification = {
@@ -44,7 +44,7 @@ export const sampleWithNewData: NewCertification = {
   authority: 'Licensed',
   status: CertificationStatus['INPROGRESS'],
   createdBy: 3972,
-  createdAt: dayjs('2022-10-23T03:44'),
+  createdAt: dayjs('2022-10-28T14:20'),
   id: null,
 };
 

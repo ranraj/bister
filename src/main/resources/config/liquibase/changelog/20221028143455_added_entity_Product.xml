@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity Product.
+    -->
+    <changeSet id="20221028143455-1" author="jhipster">
+        <createTable tableName="product">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(250)">
+                <constraints nullable="false" />
+            </column>
+            <column name="slug" type="varchar(100)">
+                <constraints nullable="false" />
+            </column>
+            <column name="description" type="varchar(1000)">
+                <constraints nullable="false" />
+            </column>
+            <column name="short_description" type="varchar(50)">
+                <constraints nullable="false" />
+            </column>
+            <column name="regular_price" type="decimal(21,2)">
+                <constraints nullable="false" />
+            </column>
+            <column name="sale_price" type="decimal(21,2)">
+                <constraints nullable="false" />
+            </column>
+            <column name="published" type="boolean">
+                <constraints nullable="false" />
+            </column>
+            <column name="date_created" type="${datetimeType}">
+                <constraints nullable="false" />
+            </column>
+            <column name="date_modified" type="date">
+                <constraints nullable="false" />
+            </column>
+            <column name="featured" type="boolean">
+                <constraints nullable="false" />
+            </column>
+            <column name="sale_status" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="sharable_hash" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="project_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="tax_class_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+        <dropDefaultValue tableName="product" columnName="date_created" columnDataType="${datetimeType}"/>
+    </changeSet>
+
+    <changeSet id="20221028143455-1-relations" author="jhipster">
+
+        <createTable tableName="rel_product__category">
+            <column name="category_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="product_id, category_id" tableName="rel_product__category"/>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+</databaseChangeLog>

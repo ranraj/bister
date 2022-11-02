@@ -15,7 +15,7 @@ describe('ProductVariation e2e test', () => {
   const productVariationPageUrlPattern = new RegExp('/product-variation(\\?.*)?$');
   const username = Cypress.env('E2E_USERNAME') ?? 'user';
   const password = Cypress.env('E2E_PASSWORD') ?? 'user';
-  // const productVariationSample = {"name":"database","description":"GamesXXXXX","regularPrice":4348,"salePrice":80012,"dateOnSaleFrom":"2022-10-22","dateOnSaleTo":"2022-10-22","isDraft":true,"useParentDetails":false,"saleStatus":"DELIVERY"};
+  // const productVariationSample = {"name":"database","description":"GamesXXXXX","regularPrice":4348,"salePrice":80012,"dateOnSaleFrom":"2022-10-28","dateOnSaleTo":"2022-10-27","isDraft":true,"useParentDetails":false,"saleStatus":"DELIVERY"};
 
   let productVariation;
   // let product;
@@ -30,7 +30,7 @@ describe('ProductVariation e2e test', () => {
     cy.authenticatedRequest({
       method: 'POST',
       url: '/api/products',
-      body: {"name":"withdrawal bypassing","slug":"Handcrafted Solutions","description":"cultivate expediteXX","shortDescription":"PCI BelizeXXXXXXXXXX","regularPrice":9201,"salePrice":81937,"published":false,"dateCreated":"2022-10-22T13:29:31.218Z","dateModified":"2022-10-23","featured":true,"saleStatus":"DELIVERY","sharableHash":"Bacon Principal"},
+      body: {"name":"withdrawal bypassing","slug":"Handcrafted Solutions","description":"cultivate expediteXX","shortDescription":"PCI BelizeXXXXXXXXXX","regularPrice":9201,"salePrice":81937,"published":false,"dateCreated":"2022-10-28T00:05:34.218Z","dateModified":"2022-10-28","featured":true,"saleStatus":"DELIVERY","sharableHash":"Bacon Principal"},
     }).then(({ body }) => {
       product = body;
     });
@@ -228,9 +228,9 @@ describe('ProductVariation e2e test', () => {
 
       cy.get(`[data-cy="salePrice"]`).type('692').should('have.value', '692');
 
-      cy.get(`[data-cy="dateOnSaleFrom"]`).type('2022-10-22').blur().should('have.value', '2022-10-22');
+      cy.get(`[data-cy="dateOnSaleFrom"]`).type('2022-10-28').blur().should('have.value', '2022-10-28');
 
-      cy.get(`[data-cy="dateOnSaleTo"]`).type('2022-10-22').blur().should('have.value', '2022-10-22');
+      cy.get(`[data-cy="dateOnSaleTo"]`).type('2022-10-28').blur().should('have.value', '2022-10-28');
 
       cy.get(`[data-cy="isDraft"]`).should('not.be.checked');
       cy.get(`[data-cy="isDraft"]`).click().should('be.checked');

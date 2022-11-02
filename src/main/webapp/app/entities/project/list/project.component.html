@@ -1,6 +1,28 @@
 <div>
   <h2 id="page-heading" data-cy="ProjectHeading">
-    <span yaliTranslate="bisterApp.project.home.title">Projects</span>
+    <form name="searchForm" class="row row-cols-sm-auto align-items-center justify-content-center">
+      <div class="col-sm-12 col-md-6 mb-4">
+        <div class="input-group w-100 mt-3">
+          <label class="visually-hidden" for="currentSearch" yaliTranslate="bisterApp.project.home.search">Search for Project</label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="currentSearch"
+            id="currentSearch"
+            name="currentSearch"
+            placeholder="{{ 'bisterApp.project.home.search' | translate }}"
+          />
+
+          <button class="btn btn-info" (click)="search(currentSearch)">
+            <fa-icon icon="search"></fa-icon>
+          </button>
+
+          <button class="btn btn-danger" (click)="search('')" *ngIf="currentSearch">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        </div>
+      </div>
+    </form>
 
     <div class="d-flex justify-content-end">
       <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
@@ -24,189 +46,52 @@
 
   <yali-alert></yali-alert>
 
-  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
-    <div class="col-sm-12">
-      <div class="input-group w-100 mt-3">
-        <label class="visually-hidden" for="currentSearch" yaliTranslate="bisterApp.project.home.search">Search for Project</label>
-        <input
-          type="text"
-          class="form-control"
-          [(ngModel)]="currentSearch"
-          id="currentSearch"
-          name="currentSearch"
-          placeholder="{{ 'bisterApp.project.home.search' | translate }}"
-        />
-
-        <button class="btn btn-info" (click)="search(currentSearch)">
-          <fa-icon icon="search"></fa-icon>
-        </button>
-
-        <button class="btn btn-danger" (click)="search('')" *ngIf="currentSearch">
-          <fa-icon icon="trash-alt"></fa-icon>
-        </button>
-      </div>
-    </div>
-  </form>
-
   <div class="alert alert-warning" id="no-result" *ngIf="projects?.length === 0">
     <span yaliTranslate="bisterApp.project.home.notFound">No Projects found</span>
   </div>
 
-  <div class="table-responsive table-entities" id="entities" *ngIf="projects && projects.length > 0">
-    <table class="table table-striped" aria-describedby="page-heading">
-      <thead>
-        <tr yaliSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
-          <th scope="col" yaliSortBy="id">
-            <div class="d-flex">
-              <span yaliTranslate="global.field.id">ID</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
+  <div *ngIf="projects && projects.length > 0" id="entities" class="mt-0">
+    <div class="list-group">
+      <a class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let project of projects; trackBy: trackId">
+        <div class="row">
+          <div class="col-2 col-xs-12 justify-content-center">
+            <img src="../content/images/pexels-photo-439391.jpeg" style="max-height: 150px" alt="product image" />
+          </div>
+          <div class="col col-xs-12">
+            <div class="d-flex w-100 justify-content-between">
+              <a [routerLink]="['/project', project.id, 'view']">
+                <h5 class="mb-1">{{ project.name }}</h5>
+              </a>
+              <div class="row row-cols-sm-auto align-items-center">
+                <small *ngIf="project.projectType">
+                  <a [routerLink]="['/project-type', project.projectType.id, 'view']">{{ project.projectType.name }}</a>
+                </small>
+                <button
+                  id="jh-create-entity"
+                  data-cy="entityCreateButton"
+                  class="btn btn-primary jh-create-entity create-enquiry"
+                  [routerLink]="['/enquiry/new']"
+                >
+                  <fa-icon icon="plus"></fa-icon>
+                  <span class="hidden-sm-down" yaliTranslate="bisterApp.enquiry.home.createLabel"> Create a new Enquiry </span>
+                </button>
+              </div>
             </div>
-          </th>
-          <th scope="col" yaliSortBy="name">
-            <div class="d-flex">
-              <span yaliTranslate="bisterApp.project.name">Name</span>
-              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" yaliSortBy="slug">
-            <div class="d-flex">
-              <span yaliTranslate="bisterApp.project.slug">Slug</span>
-              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" yaliSortBy="description">
-            <div class="d-flex">
-              <span yaliTranslate="bisterApp.project.description">Description</span>
-              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" yaliSortBy="shortDescription">
-            <div class="d-flex">
-              <span yaliTranslate="bisterApp.project.shortDescription">Short Description</span>
-              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" yaliSortBy="regularPrice">
-            <div class="d-flex">
-              <span yaliTranslate="bisterApp.project.regularPrice">Regular Price</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" yaliSortBy="salePrice">
-            <div class="d-flex">
-              <span yaliTranslate="bisterApp.project.salePrice">Sale Price</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" yaliSortBy="published">
-            <div class="d-flex">
-              <span yaliTranslate="bisterApp.project.published">Published</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" yaliSortBy="dateCreated">
-            <div class="d-flex">
-              <span yaliTranslate="bisterApp.project.dateCreated">Date Created</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" yaliSortBy="dateModified">
-            <div class="d-flex">
-              <span yaliTranslate="bisterApp.project.dateModified">Date Modified</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" yaliSortBy="projectStatus">
-            <div class="d-flex">
-              <span yaliTranslate="bisterApp.project.projectStatus">Project Status</span>
-              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" yaliSortBy="sharableHash">
-            <div class="d-flex">
-              <span yaliTranslate="bisterApp.project.sharableHash">Sharable Hash</span>
-              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" yaliSortBy="estimatedBudget">
-            <div class="d-flex">
-              <span yaliTranslate="bisterApp.project.estimatedBudget">Estimated Budget</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" yaliSortBy="address.name">
-            <div class="d-flex">
-              <span yaliTranslate="bisterApp.project.address">Address</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" yaliSortBy="projectType.name">
-            <div class="d-flex">
-              <span yaliTranslate="bisterApp.project.projectType">Project Type</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let project of projects; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/project', project.id, 'view']">{{ project.id }}</a>
-          </td>
-          <td>{{ project.name }}</td>
-          <td>{{ project.slug }}</td>
-          <td>{{ project.description }}</td>
-          <td>{{ project.shortDescription }}</td>
-          <td>{{ project.regularPrice }}</td>
-          <td>{{ project.salePrice }}</td>
-          <td>{{ project.published }}</td>
-          <td>{{ project.dateCreated | formatMediumDatetime }}</td>
-          <td>{{ project.dateModified | formatMediumDate }}</td>
-          <td yaliTranslate="{{ 'bisterApp.ProjectStatus.' + project.projectStatus }}">{{ project.projectStatus }}</td>
-          <td>{{ project.sharableHash }}</td>
-          <td>{{ project.estimatedBudget }}</td>
-          <td>
-            <div *ngIf="project.address">
-              <a [routerLink]="['/address', project.address.id, 'view']">{{ project.address.name }}</a>
-            </div>
-          </td>
-          <td>
-            <div *ngIf="project.projectType">
-              <a [routerLink]="['/project-type', project.projectType.id, 'view']">{{ project.projectType.name }}</a>
-            </div>
-          </td>
-          <td class="text-end">
-            <div class="btn-group">
-              <button
-                type="submit"
-                [routerLink]="['/project', project.id, 'view']"
-                class="btn btn-info btn-sm"
-                data-cy="entityDetailsButton"
-              >
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline" yaliTranslate="entity.action.view">View</span>
-              </button>
 
-              <button
-                type="submit"
-                [routerLink]="['/project', project.id, 'edit']"
-                class="btn btn-primary btn-sm"
-                data-cy="entityEditButton"
-              >
-                <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline" yaliTranslate="entity.action.edit">Edit</span>
-              </button>
-
-              <button type="submit" (click)="delete(project)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
-                <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline" yaliTranslate="entity.action.delete">Delete</span>
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+            <small class="mb-1">{{ project.description }}</small>
+            <p class="mb-1">
+              <span yaliTranslate="bisterApp.project.estimatedBudget">Estimated Budget : </span> {{ project.estimatedBudget }}
+            </p>
+            <small>
+              <p>
+                <span yaliTranslate="bisterApp.project.sharableHash">Sharable Hash :</span>
+                {{ project.sharableHash }}
+              </p>
+            </small>
+          </div>
+        </div>
+      </a>
+    </div>
   </div>
 
   <div *ngIf="projects && projects.length > 0">

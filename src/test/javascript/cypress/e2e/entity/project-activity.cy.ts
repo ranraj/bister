@@ -30,7 +30,7 @@ describe('ProjectActivity e2e test', () => {
     cy.authenticatedRequest({
       method: 'POST',
       url: '/api/projects',
-      body: {"name":"Response back","slug":"invoice","description":"copying Function-based","shortDescription":"withdrawalXXXXXXXXXX","regularPrice":98862,"salePrice":80379,"published":false,"dateCreated":"2022-10-22T14:14:12.519Z","dateModified":"2022-10-22","projectStatus":"NEW","sharableHash":"Cambridgeshire Switchable","estimatedBudget":72936},
+      body: {"name":"Response back","slug":"invoice","description":"copying Function-based","shortDescription":"withdrawalXXXXXXXXXX","regularPrice":98862,"salePrice":80379,"published":false,"dateCreated":"2022-10-28T00:50:15.519Z","dateModified":"2022-10-27","projectStatus":"NEW","sharableHash":"Cambridgeshire Switchable","estimatedBudget":72936},
     }).then(({ body }) => {
       project = body;
     });

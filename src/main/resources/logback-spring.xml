@@ -44,6 +44,7 @@
     <logger name="io.searchbox" level="WARN"/>
     <logger name="io.r2dbc" level="WARN"/>
     <logger name="org.apache" level="WARN"/>
+    <logger name="org.apache.kafka" level="INFO"/>
     <logger name="org.apache.catalina.startup.DigesterFactory" level="OFF"/>
     <logger name="org.bson" level="WARN"/>
     <logger name="org.elasticsearch" level="WARN"/>

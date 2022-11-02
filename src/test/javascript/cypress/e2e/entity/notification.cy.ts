@@ -15,7 +15,7 @@ describe('Notification e2e test', () => {
   const notificationPageUrlPattern = new RegExp('/notification(\\?.*)?$');
   const username = Cypress.env('E2E_USERNAME') ?? 'user';
   const password = Cypress.env('E2E_PASSWORD') ?? 'user';
-  // const notificationSample = {"date":"2022-10-22T09:06:52.537Z","sentDate":"2022-10-22T23:39:15.230Z","read":true,"notificationSourceType":"PROMOTION","notificationMode":"SMS"};
+  // const notificationSample = {"date":"2022-10-27T19:42:55.537Z","sentDate":"2022-10-28T10:15:18.230Z","read":true,"notificationSourceType":"PROMOTION","notificationMode":"SMS"};
 
   let notification;
   // let user;
@@ -218,11 +218,11 @@ describe('Notification e2e test', () => {
     });
 
     it.skip('should create an instance of Notification', () => {
-      cy.get(`[data-cy="date"]`).type('2022-10-22T06:44').blur().should('have.value', '2022-10-22T06:44');
+      cy.get(`[data-cy="date"]`).type('2022-10-27T17:20').blur().should('have.value', '2022-10-27T17:20');
 
       cy.get(`[data-cy="details"]`).type('firewall multimedia').should('have.value', 'firewall multimedia');
 
-      cy.get(`[data-cy="sentDate"]`).type('2022-10-22T16:23').blur().should('have.value', '2022-10-22T16:23');
+      cy.get(`[data-cy="sentDate"]`).type('2022-10-28T03:00').blur().should('have.value', '2022-10-28T03:00');
 
       cy.get(`[data-cy="googleNotificationId"]`).type('multi-byte teal').should('have.value', 'multi-byte teal');
 

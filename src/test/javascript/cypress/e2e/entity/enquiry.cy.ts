@@ -15,7 +15,7 @@ describe('Enquiry e2e test', () => {
   const enquiryPageUrlPattern = new RegExp('/enquiry(\\?.*)?$');
   const username = Cypress.env('E2E_USERNAME') ?? 'user';
   const password = Cypress.env('E2E_PASSWORD') ?? 'user';
-  const enquirySample = { raisedDate: '2022-10-23T04:06:15.122Z', subject: 'program', enquiryType: 'CONSULTATION' };
+  const enquirySample = { raisedDate: '2022-10-28T14:42:18.122Z', subject: 'program', enquiryType: 'CONSULTATION' };
 
   let enquiry;
 
@@ -160,13 +160,13 @@ describe('Enquiry e2e test', () => {
     });
 
     it('should create an instance of Enquiry', () => {
-      cy.get(`[data-cy="raisedDate"]`).type('2022-10-22T23:30').blur().should('have.value', '2022-10-22T23:30');
+      cy.get(`[data-cy="raisedDate"]`).type('2022-10-28T10:06').blur().should('have.value', '2022-10-28T10:06');
 
       cy.get(`[data-cy="subject"]`).type('virtual New compressing').should('have.value', 'virtual New compressing');
 
       cy.get(`[data-cy="details"]`).type('Berkshire holistic Fresh').should('have.value', 'Berkshire holistic Fresh');
 
-      cy.get(`[data-cy="lastResponseDate"]`).type('2022-10-22T12:58').blur().should('have.value', '2022-10-22T12:58');
+      cy.get(`[data-cy="lastResponseDate"]`).type('2022-10-27T23:34').blur().should('have.value', '2022-10-27T23:34');
 
       cy.get(`[data-cy="lastResponseId"]`).type('38048').should('have.value', '38048');
 

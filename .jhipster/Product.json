@@ -1,6 +1,6 @@
 {
   "applications": ["bister"],
-  "changelogDate": "20221023035852",
+  "changelogDate": "20221028143455",
   "dto": "mapstruct",
   "embedded": false,
   "entityTableName": "product",

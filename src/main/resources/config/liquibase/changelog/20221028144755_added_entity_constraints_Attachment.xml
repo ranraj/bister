@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Attachment.
+    -->
+    <changeSet id="20221028144755-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="product_id"
+                                 baseTableName="attachment"
+                                 constraintName="fk_attachment__product_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product"/>
+
+        <addForeignKeyConstraint baseColumnNames="project_id"
+                                 baseTableName="attachment"
+                                 constraintName="fk_attachment__project_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="project"/>
+
+        <addForeignKeyConstraint baseColumnNames="enquiry_id"
+                                 baseTableName="attachment"
+                                 constraintName="fk_attachment__enquiry_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="enquiry"/>
+
+        <addForeignKeyConstraint baseColumnNames="certification_id"
+                                 baseTableName="attachment"
+                                 constraintName="fk_attachment__certification_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="certification"/>
+
+        <addForeignKeyConstraint baseColumnNames="product_specification_id"
+                                 baseTableName="attachment"
+                                 constraintName="fk_attachment__product_specification_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product_specification"/>
+
+        <addForeignKeyConstraint baseColumnNames="project_specification_id"
+                                 baseTableName="attachment"
+                                 constraintName="fk_attachment__project_specification_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="project_specification"/>
+    </changeSet>
+</databaseChangeLog>

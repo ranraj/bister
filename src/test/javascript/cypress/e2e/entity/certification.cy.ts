@@ -20,7 +20,7 @@ describe('Certification e2e test', () => {
     authority: 'Computers silver',
     status: 'INITIATED',
     createdBy: 38119,
-    createdAt: '2022-10-22T11:04:31.935Z',
+    createdAt: '2022-10-27T21:40:34.935Z',
   };
 
   let certification;
@@ -184,7 +184,7 @@ describe('Certification e2e test', () => {
 
       cy.get(`[data-cy="createdBy"]`).type('63209').should('have.value', '63209');
 
-      cy.get(`[data-cy="createdAt"]`).type('2022-10-22T13:51').blur().should('have.value', '2022-10-22T13:51');
+      cy.get(`[data-cy="createdAt"]`).type('2022-10-28T00:27').blur().should('have.value', '2022-10-28T00:27');
 
       cy.get(entityCreateSaveButtonSelector).click();
 

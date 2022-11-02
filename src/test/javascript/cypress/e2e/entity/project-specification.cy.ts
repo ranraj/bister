@@ -30,7 +30,7 @@ describe('ProjectSpecification e2e test', () => {
     cy.authenticatedRequest({
       method: 'POST',
       url: '/api/projects',
-      body: {"name":"regional bifurcated facilitate","slug":"expedite","description":"Cotton magenta Up-sized","shortDescription":"turquoiseXXXXXXXXXXX","regularPrice":23952,"salePrice":46495,"published":true,"dateCreated":"2022-10-22T13:55:41.597Z","dateModified":"2022-10-22","projectStatus":"PENDING_APPROVAL","sharableHash":"optical","estimatedBudget":78146},
+      body: {"name":"regional bifurcated facilitate","slug":"expedite","description":"Cotton magenta Up-sized","shortDescription":"turquoiseXXXXXXXXXXX","regularPrice":23952,"salePrice":46495,"published":true,"dateCreated":"2022-10-28T00:31:44.597Z","dateModified":"2022-10-28","projectStatus":"PENDING_APPROVAL","sharableHash":"optical","estimatedBudget":78146},
     }).then(({ body }) => {
       project = body;
     });

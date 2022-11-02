@@ -15,7 +15,7 @@ describe('Promotion e2e test', () => {
   const promotionPageUrlPattern = new RegExp('/promotion(\\?.*)?$');
   const username = Cypress.env('E2E_USERNAME') ?? 'user';
   const password = Cypress.env('E2E_PASSWORD') ?? 'user';
-  const promotionSample = { contentType: 'TEMPLATE', createdAt: '2022-10-22T21:37:37.560Z', sendAt: '2022-10-22T17:02:02.849Z' };
+  const promotionSample = { contentType: 'TEMPLATE', createdAt: '2022-10-28T08:13:40.560Z', sendAt: '2022-10-28T03:38:05.849Z' };
 
   let promotion;
 
@@ -172,9 +172,9 @@ describe('Promotion e2e test', () => {
 
       cy.get(`[data-cy="createdBy"]`).type('16218').should('have.value', '16218');
 
-      cy.get(`[data-cy="createdAt"]`).type('2022-10-22T15:50').blur().should('have.value', '2022-10-22T15:50');
+      cy.get(`[data-cy="createdAt"]`).type('2022-10-28T02:26').blur().should('have.value', '2022-10-28T02:26');
 
-      cy.get(`[data-cy="sendAt"]`).type('2022-10-22T16:06').blur().should('have.value', '2022-10-22T16:06');
+      cy.get(`[data-cy="sendAt"]`).type('2022-10-28T02:42').blur().should('have.value', '2022-10-28T02:42');
 
       cy.get(`[data-cy="attachmentId"]`).type('64024').should('have.value', '64024');
 

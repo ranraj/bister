@@ -30,7 +30,7 @@ describe('ProjectReview e2e test', () => {
     cy.authenticatedRequest({
       method: 'POST',
       url: '/api/projects',
-      body: {"name":"paradigms","slug":"connecting","description":"SecurityXXXXXXXXXXXX","shortDescription":"Personal AvonXXXXXXX","regularPrice":2038,"salePrice":61182,"published":false,"dateCreated":"2022-10-22T07:09:50.477Z","dateModified":"2022-10-22","projectStatus":"SOLD","sharableHash":"Sausages","estimatedBudget":28741},
+      body: {"name":"paradigms","slug":"connecting","description":"SecurityXXXXXXXXXXXX","shortDescription":"Personal AvonXXXXXXX","regularPrice":2038,"salePrice":61182,"published":false,"dateCreated":"2022-10-27T17:45:53.477Z","dateModified":"2022-10-28","projectStatus":"SOLD","sharableHash":"Sausages","estimatedBudget":28741},
     }).then(({ body }) => {
       project = body;
     });

@@ -7,8 +7,8 @@ import { IPromotion, NewPromotion } from './promotion.model';
 export const sampleWithRequiredData: IPromotion = {
   id: 46788,
   contentType: PromotionContentType['ATTACHMENT_TEMPLATE'],
-  createdAt: dayjs('2022-10-22T21:21'),
-  sendAt: dayjs('2022-10-22T11:05'),
+  createdAt: dayjs('2022-10-28T07:57'),
+  sendAt: dayjs('2022-10-27T21:41'),
 };
 
 export const sampleWithPartialData: IPromotion = {
@@ -18,8 +18,8 @@ export const sampleWithPartialData: IPromotion = {
   contentType: PromotionContentType['ATTACHMENT_TEMPLATE'],
   recipients: 'generate Keyboard Applications',
   createdBy: 85458,
-  createdAt: dayjs('2022-10-22T05:48'),
-  sendAt: dayjs('2022-10-22T20:32'),
+  createdAt: dayjs('2022-10-27T16:24'),
+  sendAt: dayjs('2022-10-28T07:08'),
 };
 
 export const sampleWithFullData: IPromotion = {
@@ -30,15 +30,15 @@ export const sampleWithFullData: IPromotion = {
   recipients: 'firewall e-tailers',
   recipientGroup: 'core Arizona synthesizing',
   createdBy: 26439,
-  createdAt: dayjs('2022-10-22T09:13'),
-  sendAt: dayjs('2022-10-22T12:26'),
+  createdAt: dayjs('2022-10-27T19:49'),
+  sendAt: dayjs('2022-10-27T23:02'),
   attachmentId: 42050,
 };
 
 export const sampleWithNewData: NewPromotion = {
   contentType: PromotionContentType['TEMPLATE'],
-  createdAt: dayjs('2022-10-23T03:01'),
-  sendAt: dayjs('2022-10-22T22:39'),
+  createdAt: dayjs('2022-10-28T13:37'),
+  sendAt: dayjs('2022-10-28T09:15'),
   id: null,
 };
 

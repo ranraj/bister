@@ -30,7 +30,7 @@ describe('ProductReview e2e test', () => {
     cy.authenticatedRequest({
       method: 'POST',
       url: '/api/products',
-      body: {"name":"system-worthy salmon Louisiana","slug":"index","description":"integrated violetXXX","shortDescription":"Regional ClonedXXXXX","regularPrice":66594,"salePrice":17361,"published":false,"dateCreated":"2022-10-22T23:08:04.257Z","dateModified":"2022-10-22","featured":true,"saleStatus":"RESALE","sharableHash":"navigating"},
+      body: {"name":"system-worthy salmon Louisiana","slug":"index","description":"integrated violetXXX","shortDescription":"Regional ClonedXXXXX","regularPrice":66594,"salePrice":17361,"published":false,"dateCreated":"2022-10-28T09:44:07.257Z","dateModified":"2022-10-28","featured":true,"saleStatus":"RESALE","sharableHash":"navigating"},
     }).then(({ body }) => {
       product = body;
     });

@@ -15,7 +15,7 @@ describe('BookingOrder e2e test', () => {
   const bookingOrderPageUrlPattern = new RegExp('/booking-order(\\?.*)?$');
   const username = Cypress.env('E2E_USERNAME') ?? 'user';
   const password = Cypress.env('E2E_PASSWORD') ?? 'user';
-  // const bookingOrderSample = {"placedDate":"2022-10-22T08:39:57.821Z","status":"BOOKED"};
+  // const bookingOrderSample = {"placedDate":"2022-10-27T19:16:00.821Z","status":"BOOKED"};
 
   let bookingOrder;
   // let productVariation;
@@ -30,7 +30,7 @@ describe('BookingOrder e2e test', () => {
     cy.authenticatedRequest({
       method: 'POST',
       url: '/api/product-variations',
-      body: {"assetId":"Knolls","name":"payment","description":"Cape Glens","regularPrice":96403,"salePrice":50692,"dateOnSaleFrom":"2022-10-22","dateOnSaleTo":"2022-10-22","isDraft":true,"useParentDetails":false,"saleStatus":"OPEN"},
+      body: {"assetId":"Knolls","name":"payment","description":"Cape Glens","regularPrice":96403,"salePrice":50692,"dateOnSaleFrom":"2022-10-28","dateOnSaleTo":"2022-10-27","isDraft":true,"useParentDetails":false,"saleStatus":"OPEN"},
     }).then(({ body }) => {
       productVariation = body;
     });
@@ -218,13 +218,13 @@ describe('BookingOrder e2e test', () => {
     });
 
     it.skip('should create an instance of BookingOrder', () => {
-      cy.get(`[data-cy="placedDate"]`).type('2022-10-22T23:21').blur().should('have.value', '2022-10-22T23:21');
+      cy.get(`[data-cy="placedDate"]`).type('2022-10-28T09:57').blur().should('have.value', '2022-10-28T09:57');
 
       cy.get(`[data-cy="status"]`).select('BLOCKED');
 
       cy.get(`[data-cy="code"]`).type('AssuranceXXXXXXXXXXX').should('have.value', 'AssuranceXXXXXXXXXXX');
 
-      cy.get(`[data-cy="bookingExpieryDate"]`).type('2022-10-22T10:05').blur().should('have.value', '2022-10-22T10:05');
+      cy.get(`[data-cy="bookingExpieryDate"]`).type('2022-10-27T20:41').blur().should('have.value', '2022-10-27T20:41');
 
       cy.get(`[data-cy="productVariation"]`).select(1);
 

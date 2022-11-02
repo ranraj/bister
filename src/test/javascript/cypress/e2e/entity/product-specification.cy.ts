@@ -30,7 +30,7 @@ describe('ProductSpecification e2e test', () => {
     cy.authenticatedRequest({
       method: 'POST',
       url: '/api/products',
-      body: {"name":"payment","slug":"Ergonomic Investor Home","description":"Rubber Solutions Fantastic","shortDescription":"generate KidsXXXXXXX","regularPrice":82848,"salePrice":31133,"published":false,"dateCreated":"2022-10-22T09:03:59.417Z","dateModified":"2022-10-23","featured":true,"saleStatus":"CLOSED","sharableHash":"challenge Kids Networked"},
+      body: {"name":"payment","slug":"Ergonomic Investor Home","description":"Rubber Solutions Fantastic","shortDescription":"generate KidsXXXXXXX","regularPrice":82848,"salePrice":31133,"published":false,"dateCreated":"2022-10-27T19:40:02.417Z","dateModified":"2022-10-28","featured":true,"saleStatus":"CLOSED","sharableHash":"challenge Kids Networked"},
     }).then(({ body }) => {
       product = body;
     });

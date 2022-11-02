@@ -22,8 +22,8 @@ describe('Project e2e test', () => {
     regularPrice: 82807,
     salePrice: 50948,
     published: false,
-    dateCreated: '2022-10-22T06:51:47.568Z',
-    dateModified: '2022-10-22',
+    dateCreated: '2022-10-27T17:27:50.568Z',
+    dateModified: '2022-10-28',
     projectStatus: 'NEW',
     estimatedBudget: 90609,
   };
@@ -290,9 +290,9 @@ describe('Project e2e test', () => {
       cy.get(`[data-cy="published"]`).should('not.be.checked');
       cy.get(`[data-cy="published"]`).click().should('be.checked');
 
-      cy.get(`[data-cy="dateCreated"]`).type('2022-10-22T07:41').blur().should('have.value', '2022-10-22T07:41');
+      cy.get(`[data-cy="dateCreated"]`).type('2022-10-27T18:17').blur().should('have.value', '2022-10-27T18:17');
 
-      cy.get(`[data-cy="dateModified"]`).type('2022-10-22').blur().should('have.value', '2022-10-22');
+      cy.get(`[data-cy="dateModified"]`).type('2022-10-28').blur().should('have.value', '2022-10-28');
 
       cy.get(`[data-cy="projectStatus"]`).select('NEW');
 

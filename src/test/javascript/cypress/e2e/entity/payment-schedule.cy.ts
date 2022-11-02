@@ -15,7 +15,7 @@ describe('PaymentSchedule e2e test', () => {
   const paymentSchedulePageUrlPattern = new RegExp('/payment-schedule(\\?.*)?$');
   const username = Cypress.env('E2E_USERNAME') ?? 'user';
   const password = Cypress.env('E2E_PASSWORD') ?? 'user';
-  const paymentScheduleSample = { dueDate: '2022-10-22T07:21:19.755Z', totalPrice: 49546, status: 'PENDING' };
+  const paymentScheduleSample = { dueDate: '2022-10-27T17:57:22.755Z', totalPrice: 49546, status: 'PENDING' };
 
   let paymentSchedule;
 
@@ -160,7 +160,7 @@ describe('PaymentSchedule e2e test', () => {
     });
 
     it('should create an instance of PaymentSchedule', () => {
-      cy.get(`[data-cy="dueDate"]`).type('2022-10-23T02:35').blur().should('have.value', '2022-10-23T02:35');
+      cy.get(`[data-cy="dueDate"]`).type('2022-10-28T13:11').blur().should('have.value', '2022-10-28T13:11');
 
       cy.get(`[data-cy="totalPrice"]`).type('42840').should('have.value', '42840');
 
