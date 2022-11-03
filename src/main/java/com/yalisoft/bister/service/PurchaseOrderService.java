@@ -5,6 +5,8 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 import com.yalisoft.bister.domain.PurchaseOrder;
 import com.yalisoft.bister.repository.PurchaseOrderRepository;
 import com.yalisoft.bister.repository.search.PurchaseOrderSearchRepository;
+import com.yalisoft.bister.security.AuthoritiesConstants;
+import com.yalisoft.bister.security.SecurityUtils;
 import com.yalisoft.bister.service.dto.PurchaseOrderDTO;
 import com.yalisoft.bister.service.mapper.PurchaseOrderMapper;
 import java.util.LinkedList;
@@ -106,7 +108,20 @@ public class PurchaseOrderService {
     @Transactional(readOnly = true)
     public Flux<PurchaseOrderDTO> findAll(Pageable pageable) {
         log.debug("Request to get all PurchaseOrders");
-        return purchaseOrderRepository.findAllBy(pageable).map(purchaseOrderMapper::toDto);
+        return SecurityUtils
+            .hasCurrentUserThisAuthority(AuthoritiesConstants.ADMIN)
+            .flatMapMany(isAdmin -> {
+                if (isAdmin) {
+                    return purchaseOrderRepository.findAllBy(pageable).map(purchaseOrderMapper::toDto);
+                } else {
+                    return SecurityUtils
+                        .getCurrentUserLogin()
+                        .flatMapMany(name -> {
+                            System.out.println("$$$$$$$" + name);
+                            return purchaseOrderRepository.findAllByCustomerUserLogin(name, pageable).map(purchaseOrderMapper::toDto);
+                        });
+                }
+            });
     }
 
     /**

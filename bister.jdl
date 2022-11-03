@@ -14,7 +14,8 @@ application {
     jhiPrefix yali
     messageBroker kafka
     searchEngine elasticsearch
-    reactive true       
+    reactive true    
+    cacheProvider redis   
   }
   entities *
 }
