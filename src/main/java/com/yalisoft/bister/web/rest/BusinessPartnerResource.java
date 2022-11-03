@@ -1,6 +1,7 @@
 package com.yalisoft.bister.web.rest;
 
 import com.yalisoft.bister.repository.BusinessPartnerRepository;
+import com.yalisoft.bister.security.AuthoritiesConstants;
 import com.yalisoft.bister.service.BusinessPartnerService;
 import com.yalisoft.bister.service.dto.BusinessPartnerDTO;
 import com.yalisoft.bister.web.rest.errors.BadRequestAlertException;
@@ -23,6 +24,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -63,6 +65,7 @@ public class BusinessPartnerResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/business-partners")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public Mono<ResponseEntity<BusinessPartnerDTO>> createBusinessPartner(@Valid @RequestBody BusinessPartnerDTO businessPartnerDTO)
         throws URISyntaxException {
         log.debug("REST request to save BusinessPartner : {}", businessPartnerDTO);
@@ -94,6 +97,7 @@ public class BusinessPartnerResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/business-partners/{id}")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public Mono<ResponseEntity<BusinessPartnerDTO>> updateBusinessPartner(
         @PathVariable(value = "id", required = false) final Long id,
         @Valid @RequestBody BusinessPartnerDTO businessPartnerDTO
@@ -137,6 +141,7 @@ public class BusinessPartnerResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/business-partners/{id}", consumes = { "application/json", "application/merge-patch+json" })
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public Mono<ResponseEntity<BusinessPartnerDTO>> partialUpdateBusinessPartner(
         @PathVariable(value = "id", required = false) final Long id,
         @NotNull @RequestBody BusinessPartnerDTO businessPartnerDTO
@@ -177,6 +182,7 @@ public class BusinessPartnerResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of businessPartners in body.
      */
     @GetMapping("/business-partners")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public Mono<ResponseEntity<List<BusinessPartnerDTO>>> getAllBusinessPartners(
         @org.springdoc.api.annotations.ParameterObject Pageable pageable,
         ServerHttpRequest request
@@ -218,6 +224,7 @@ public class BusinessPartnerResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/business-partners/{id}")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public Mono<ResponseEntity<Void>> deleteBusinessPartner(@PathVariable Long id) {
         log.debug("REST request to delete BusinessPartner : {}", id);
         return businessPartnerService
@@ -242,6 +249,7 @@ public class BusinessPartnerResource {
      * @return the result of the search.
      */
     @GetMapping("/_search/business-partners")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public Mono<ResponseEntity<Flux<BusinessPartnerDTO>>> searchBusinessPartners(
         @RequestParam String query,
         @org.springdoc.api.annotations.ParameterObject Pageable pageable,

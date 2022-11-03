@@ -3,7 +3,7 @@
     "product": {
       "home": {
         "title": "Products",
-        "refreshListLabel": "Refresh list",
+        "refreshListLabel": "",
         "createLabel": "Create a new Product",
         "createOrEditLabel": "Create or edit a Product",
         "search": "Search for Product",
