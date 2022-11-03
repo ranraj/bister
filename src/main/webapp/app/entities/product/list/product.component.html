@@ -31,6 +31,7 @@
       </button>
 
       <button
+        *jhiHasAnyAuthority="'ROLE_ADMIN'"
         id="jh-create-entity"
         data-cy="entityCreateButton"
         class="btn btn-primary jh-create-entity create-product"
@@ -58,11 +59,14 @@
             <h5 class="mb-1">{{ product.name }}</h5>
           </a>
           <!-- <small *ngIf="product.productCategory">
-           <a [routerLink]="['/product-category', product
+            <a [routerLink]="['/product-category', product
                .productCategory?.id, 'view']">
-             {{ product.productCategory?.id }}
-           </a>
-         </small> -->
+              {{ product.productCategory?.id }}
+            </a>
+          </small> -->
+          <div *ngIf="product.project">
+            <a [routerLink]="['/project', product.project.id, 'view']">{{ product.project.name }}</a>
+          </div>
         </div>
         <small class="mb-1">{{ product.description }}</small>
         <p class="mb-1"><span yaliTranslate="bisterApp.product.salePrice">Sale Price : </span> {{ product.salePrice }}</p>

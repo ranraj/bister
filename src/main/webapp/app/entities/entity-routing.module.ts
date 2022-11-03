@@ -40,6 +40,11 @@ import { RouterModule } from '@angular/router';
         loadChildren: () => import('./project/project.module').then(m => m.ProjectModule),
       },
       {
+        path: '',
+        data: { pageTitle: 'bisterApp.project.home.title' },
+        loadChildren: () => import('./project/project.module').then(m => m.ProjectModule),
+      },
+      {
         path: 'project-activity',
         data: { pageTitle: 'bisterApp.projectActivity.home.title' },
         loadChildren: () => import('./project-activity/project-activity.module').then(m => m.ProjectActivityModule),

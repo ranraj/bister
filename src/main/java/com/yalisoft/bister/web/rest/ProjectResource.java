@@ -1,6 +1,7 @@
 package com.yalisoft.bister.web.rest;
 
 import com.yalisoft.bister.repository.ProjectRepository;
+import com.yalisoft.bister.security.AuthoritiesConstants;
 import com.yalisoft.bister.service.ProjectService;
 import com.yalisoft.bister.service.dto.ProjectDTO;
 import com.yalisoft.bister.web.rest.errors.BadRequestAlertException;
@@ -23,6 +24,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -63,6 +65,7 @@ public class ProjectResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/projects")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public Mono<ResponseEntity<ProjectDTO>> createProject(@Valid @RequestBody ProjectDTO projectDTO) throws URISyntaxException {
         log.debug("REST request to save Project : {}", projectDTO);
         if (projectDTO.getId() != null) {
@@ -93,6 +96,7 @@ public class ProjectResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/projects/{id}")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public Mono<ResponseEntity<ProjectDTO>> updateProject(
         @PathVariable(value = "id", required = false) final Long id,
         @Valid @RequestBody ProjectDTO projectDTO
@@ -136,6 +140,7 @@ public class ProjectResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/projects/{id}", consumes = { "application/json", "application/merge-patch+json" })
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public Mono<ResponseEntity<ProjectDTO>> partialUpdateProject(
         @PathVariable(value = "id", required = false) final Long id,
         @NotNull @RequestBody ProjectDTO projectDTO
@@ -219,6 +224,7 @@ public class ProjectResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/projects/{id}")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public Mono<ResponseEntity<Void>> deleteProject(@PathVariable Long id) {
         log.debug("REST request to delete Project : {}", id);
         return projectService

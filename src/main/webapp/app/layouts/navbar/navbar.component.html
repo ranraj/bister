@@ -43,7 +43,7 @@
             </span>
           </a>
           <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
-            <li>
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
               <a
                 class="dropdown-item"
                 routerLink="business-partner"
@@ -55,7 +55,7 @@
                 <span yaliTranslate="global.menu.entities.businessPartner">Business Partner</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
               <a
                 class="dropdown-item"
                 routerLink="organisation"
@@ -67,7 +67,7 @@
                 <span yaliTranslate="global.menu.entities.organisation">Organisation</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
               <a
                 class="dropdown-item"
                 routerLink="facility"
@@ -79,7 +79,7 @@
                 <span yaliTranslate="global.menu.entities.facility">Facility</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
               <a
                 class="dropdown-item"
                 routerLink="customer"
@@ -91,7 +91,7 @@
                 <span yaliTranslate="global.menu.entities.customer">Customer</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
               <a
                 class="dropdown-item"
                 routerLink="agent"
@@ -103,7 +103,7 @@
                 <span yaliTranslate="global.menu.entities.agent">Agent</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
               <a
                 class="dropdown-item"
                 routerLink="project-type"
@@ -127,7 +127,7 @@
                 <span yaliTranslate="global.menu.entities.project">Project</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
               <a
                 class="dropdown-item"
                 routerLink="project-activity"
@@ -139,7 +139,7 @@
                 <span yaliTranslate="global.menu.entities.projectActivity">Project Activity</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
               <a
                 class="dropdown-item"
                 routerLink="product-activity"
@@ -163,7 +163,7 @@
                 <span yaliTranslate="global.menu.entities.product">Product</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
               <a
                 class="dropdown-item"
                 routerLink="tag"
@@ -175,7 +175,7 @@
                 <span yaliTranslate="global.menu.entities.tag">Tag</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
               <a
                 class="dropdown-item"
                 routerLink="category"
@@ -187,7 +187,7 @@
                 <span yaliTranslate="global.menu.entities.category">Category</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
               <a
                 class="dropdown-item"
                 routerLink="product-attribute"
@@ -199,7 +199,7 @@
                 <span yaliTranslate="global.menu.entities.productAttribute">Product Attribute</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
               <a
                 class="dropdown-item"
                 routerLink="product-attribute-term"
@@ -211,7 +211,7 @@
                 <span yaliTranslate="global.menu.entities.productAttributeTerm">Product Attribute Term</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
               <a
                 class="dropdown-item"
                 routerLink="product-variation-attribute-term"
@@ -247,7 +247,7 @@
                 <span yaliTranslate="global.menu.entities.projectReview">Project Review</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
               <a
                 class="dropdown-item"
                 routerLink="product-variation"
@@ -259,7 +259,7 @@
                 <span yaliTranslate="global.menu.entities.productVariation">Product Variation</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
               <a
                 class="dropdown-item"
                 routerLink="project-specification-group"
@@ -271,7 +271,7 @@
                 <span yaliTranslate="global.menu.entities.projectSpecificationGroup">Project Specification Group</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
               <a
                 class="dropdown-item"
                 routerLink="product-specification-group"
@@ -283,7 +283,7 @@
                 <span yaliTranslate="global.menu.entities.productSpecificationGroup">Product Specification Group</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
               <a
                 class="dropdown-item"
                 routerLink="project-specification"
@@ -295,7 +295,7 @@
                 <span yaliTranslate="global.menu.entities.projectSpecification">Project Specification</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
               <a
                 class="dropdown-item"
                 routerLink="product-specification"
@@ -307,7 +307,7 @@
                 <span yaliTranslate="global.menu.entities.productSpecification">Product Specification</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
               <a
                 class="dropdown-item"
                 routerLink="attachment"
@@ -319,7 +319,7 @@
                 <span yaliTranslate="global.menu.entities.attachment">Attachment</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
               <a
                 class="dropdown-item"
                 routerLink="certification"
@@ -331,7 +331,7 @@
                 <span yaliTranslate="global.menu.entities.certification">Certification</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
               <a
                 class="dropdown-item"
                 routerLink="promotion"
@@ -343,7 +343,7 @@
                 <span yaliTranslate="global.menu.entities.promotion">Promotion</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
               <a
                 class="dropdown-item"
                 routerLink="payment-schedule"
@@ -379,7 +379,7 @@
                 <span yaliTranslate="global.menu.entities.bookingOrder">Booking Order</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
               <a
                 class="dropdown-item"
                 routerLink="address"
@@ -391,7 +391,7 @@
                 <span yaliTranslate="global.menu.entities.address">Address</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
               <a
                 class="dropdown-item"
                 routerLink="phonenumber"
@@ -451,7 +451,7 @@
                 <span yaliTranslate="global.menu.entities.invoice">Invoice</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
               <a
                 class="dropdown-item"
                 routerLink="transaction"
@@ -463,7 +463,7 @@
                 <span yaliTranslate="global.menu.entities.transaction">Transaction</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
               <a
                 class="dropdown-item"
                 routerLink="tax-rate"
@@ -475,7 +475,7 @@
                 <span yaliTranslate="global.menu.entities.taxRate">Tax Rate</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
               <a
                 class="dropdown-item"
                 routerLink="tax-class"
@@ -487,7 +487,7 @@
                 <span yaliTranslate="global.menu.entities.taxClass">Tax Class</span>
               </a>
             </li>
-            <li>
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
               <a
                 class="dropdown-item"
                 routerLink="refund"

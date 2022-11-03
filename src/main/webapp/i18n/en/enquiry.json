@@ -4,7 +4,7 @@
       "home": {
         "title": "Enquiries",
         "refreshListLabel": "Refresh list",
-        "createLabel": "Create a new Enquiry",
+        "createLabel": "Enquiry",
         "createOrEditLabel": "Create or edit a Enquiry",
         "search": "Search for Enquiry",
         "notFound": "No Enquiries found"
