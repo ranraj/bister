@@ -22,7 +22,6 @@ const projectRoute: Routes = [
     resolve: {
       project: ProjectRoutingResolveService,
     },
-    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',

@@ -159,3 +159,7 @@ VALUES(1, '2022-10-21 16:33:00', 'NEW', '4e1c3986-515e-11ed-bdc3-0242ac120002', 
 INSERT INTO bister.yali_user
 (id, login, password_hash, first_name, last_name, email, image_url, activated, lang_key, activation_key, reset_key, created_by, created_date, reset_date, last_modified_by, last_modified_date)
 VALUES(1055, 'kumudha', '$2a$10$GBME0yLY8eh5P8DJcZI29Ok0LHQKiGxA3FtdBHB7GWIsSEpGeeHAq', NULL, NULL, 'kumudha.d@gmail.com', NULL, 1, 'en', 'U5W6d21X4YrWvfpNL2KH', NULL, 'system', '2022-11-02 16:34:03', NULL, 'system', '2022-11-02 16:34:03');
+
+INSERT INTO bister.purchase_order
+(id, placed_date, status, code, delivery_option, user_id, product_variation_id)
+VALUES(2, '2022-11-03 17:19:00', 'NEW', '8696783234323423232332', 'HAND_OVER', 2, 1);
