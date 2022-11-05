@@ -70,6 +70,13 @@
       "ownerSide": false,
       "relationshipName": "invoice",
       "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "customer",
+      "otherEntityRelationshipName": "purchaseOrder",
+      "relationshipName": "customer",
+      "relationshipType": "many-to-one"
     }
   ],
   "service": "serviceClass"

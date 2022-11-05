@@ -11,6 +11,8 @@ import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/user.service';
 import { IProductVariation } from 'app/entities/product-variation/product-variation.model';
 import { ProductVariationService } from 'app/entities/product-variation/service/product-variation.service';
+import { ICustomer } from 'app/entities/customer/customer.model';
+import { CustomerService } from 'app/entities/customer/service/customer.service';
 import { OrderStatus } from 'app/entities/enumerations/order-status.model';
 import { DeliveryOption } from 'app/entities/enumerations/delivery-option.model';
 
@@ -26,6 +28,7 @@ export class PurchaseOrderUpdateComponent implements OnInit {
 
   usersSharedCollection: IUser[] = [];
   productVariationsSharedCollection: IProductVariation[] = [];
+  customersSharedCollection: ICustomer[] = [];
 
   editForm: PurchaseOrderFormGroup = this.purchaseOrderFormService.createPurchaseOrderFormGroup();
 
@@ -34,6 +37,7 @@ export class PurchaseOrderUpdateComponent implements OnInit {
     protected purchaseOrderFormService: PurchaseOrderFormService,
     protected userService: UserService,
     protected productVariationService: ProductVariationService,
+    protected customerService: CustomerService,
     protected activatedRoute: ActivatedRoute
   ) {}
 
@@ -41,6 +45,8 @@ export class PurchaseOrderUpdateComponent implements OnInit {
 
   compareProductVariation = (o1: IProductVariation | null, o2: IProductVariation | null): boolean =>
     this.productVariationService.compareProductVariation(o1, o2);
+
+  compareCustomer = (o1: ICustomer | null, o2: ICustomer | null): boolean => this.customerService.compareCustomer(o1, o2);
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ purchaseOrder }) => {
@@ -95,6 +101,10 @@ export class PurchaseOrderUpdateComponent implements OnInit {
       this.productVariationsSharedCollection,
       purchaseOrder.productVariation
     );
+    this.customersSharedCollection = this.customerService.addCustomerToCollectionIfMissing<ICustomer>(
+      this.customersSharedCollection,
+      purchaseOrder.customer
+    );
   }
 
   protected loadRelationshipsOptions(): void {
@@ -116,5 +126,15 @@ export class PurchaseOrderUpdateComponent implements OnInit {
         )
       )
       .subscribe((productVariations: IProductVariation[]) => (this.productVariationsSharedCollection = productVariations));
+
+    this.customerService
+      .query()
+      .pipe(map((res: HttpResponse<ICustomer[]>) => res.body ?? []))
+      .pipe(
+        map((customers: ICustomer[]) =>
+          this.customerService.addCustomerToCollectionIfMissing<ICustomer>(customers, this.purchaseOrder?.customer)
+        )
+      )
+      .subscribe((customers: ICustomer[]) => (this.customersSharedCollection = customers));
   }
 }

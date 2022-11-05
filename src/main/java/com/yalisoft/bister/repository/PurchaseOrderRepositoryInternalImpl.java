@@ -5,6 +5,7 @@ import static org.springframework.data.relational.core.query.Criteria.where;
 import com.yalisoft.bister.domain.PurchaseOrder;
 import com.yalisoft.bister.domain.enumeration.DeliveryOption;
 import com.yalisoft.bister.domain.enumeration.OrderStatus;
+import com.yalisoft.bister.repository.rowmapper.CustomerRowMapper;
 import com.yalisoft.bister.repository.rowmapper.ProductVariationRowMapper;
 import com.yalisoft.bister.repository.rowmapper.PurchaseOrderRowMapper;
 import com.yalisoft.bister.repository.rowmapper.UserRowMapper;
@@ -50,17 +51,20 @@ class PurchaseOrderRepositoryInternalImpl extends SimpleR2dbcRepository<Purchase
 
     private final UserRowMapper userMapper;
     private final ProductVariationRowMapper productvariationMapper;
+    private final CustomerRowMapper customerMapper;
     private final PurchaseOrderRowMapper purchaseorderMapper;
 
     private static final Table entityTable = Table.aliased("purchase_order", EntityManager.ENTITY_ALIAS);
     private static final Table userTable = Table.aliased("yali_user", "e_user");
     private static final Table productVariationTable = Table.aliased("product_variation", "productVariation");
+    private static final Table customerTable = Table.aliased("customer", "customer");
 
     public PurchaseOrderRepositoryInternalImpl(
         R2dbcEntityTemplate template,
         EntityManager entityManager,
         UserRowMapper userMapper,
         ProductVariationRowMapper productvariationMapper,
+        CustomerRowMapper customerMapper,
         PurchaseOrderRowMapper purchaseorderMapper,
         R2dbcEntityOperations entityOperations,
         R2dbcConverter converter
@@ -75,6 +79,7 @@ class PurchaseOrderRepositoryInternalImpl extends SimpleR2dbcRepository<Purchase
         this.entityManager = entityManager;
         this.userMapper = userMapper;
         this.productvariationMapper = productvariationMapper;
+        this.customerMapper = customerMapper;
         this.purchaseorderMapper = purchaseorderMapper;
     }
 
@@ -87,6 +92,7 @@ class PurchaseOrderRepositoryInternalImpl extends SimpleR2dbcRepository<Purchase
         List<Expression> columns = PurchaseOrderSqlHelper.getColumns(entityTable, EntityManager.ENTITY_ALIAS);
         columns.addAll(UserSqlHelper.getColumns(userTable, "user"));
         columns.addAll(ProductVariationSqlHelper.getColumns(productVariationTable, "productVariation"));
+        columns.addAll(CustomerSqlHelper.getColumns(customerTable, "customer"));
         SelectFromAndJoinCondition selectFrom = Select
             .builder()
             .select(columns)
@@ -96,7 +102,10 @@ class PurchaseOrderRepositoryInternalImpl extends SimpleR2dbcRepository<Purchase
             .equals(Column.create("id", userTable))
             .leftOuterJoin(productVariationTable)
             .on(Column.create("product_variation_id", entityTable))
-            .equals(Column.create("id", productVariationTable));
+            .equals(Column.create("id", productVariationTable))
+            .leftOuterJoin(customerTable)
+            .on(Column.create("customer_id", entityTable))
+            .equals(Column.create("id", customerTable));
         // we do not support Criteria here for now as of https://github.com/jhipster/generator-jhipster/issues/18269
         String select = entityManager.createSelect(selectFrom, PurchaseOrder.class, pageable, whereClause);
         return db.sql(select).map(this::process);
@@ -132,6 +141,7 @@ class PurchaseOrderRepositoryInternalImpl extends SimpleR2dbcRepository<Purchase
         PurchaseOrder entity = purchaseorderMapper.apply(row, "e");
         entity.setUser(userMapper.apply(row, "user"));
         entity.setProductVariation(productvariationMapper.apply(row, "productVariation"));
+        entity.setCustomer(customerMapper.apply(row, "customer"));
         return entity;
     }
 

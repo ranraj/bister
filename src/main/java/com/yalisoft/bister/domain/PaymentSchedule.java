@@ -49,7 +49,10 @@ public class PaymentSchedule implements Serializable {
     private Invoice invoice;
 
     @Transient
-    @JsonIgnoreProperties(value = { "paymentSchedules", "transactions", "user", "productVariation", "invoice" }, allowSetters = true)
+    @JsonIgnoreProperties(
+        value = { "paymentSchedules", "transactions", "user", "productVariation", "invoice", "customer" },
+        allowSetters = true
+    )
     private PurchaseOrder purchaseOrdep;
 
     @Column("invoice_id")

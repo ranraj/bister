@@ -31,6 +31,8 @@ public class PurchaseOrderDTO implements Serializable {
 
     private ProductVariationDTO productVariation;
 
+    private CustomerDTO customer;
+
     public Long getId() {
         return id;
     }
@@ -87,6 +89,14 @@ public class PurchaseOrderDTO implements Serializable {
         this.productVariation = productVariation;
     }
 
+    public CustomerDTO getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(CustomerDTO customer) {
+        this.customer = customer;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -119,6 +129,7 @@ public class PurchaseOrderDTO implements Serializable {
             ", deliveryOption='" + getDeliveryOption() + "'" +
             ", user=" + getUser() +
             ", productVariation=" + getProductVariation() +
+            ", customer=" + getCustomer() +
             "}";
     }
 }

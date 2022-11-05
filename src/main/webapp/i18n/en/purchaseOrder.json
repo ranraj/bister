@@ -27,7 +27,8 @@
       "transaction": "Transaction",
       "user": "User",
       "productVariation": "Product Variation",
-      "invoice": "Invoice"
+      "invoice": "Invoice",
+      "customer": "Customer"
     }
   }
 }

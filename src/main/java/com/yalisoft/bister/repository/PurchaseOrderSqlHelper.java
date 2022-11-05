@@ -18,6 +18,7 @@ public class PurchaseOrderSqlHelper {
 
         columns.add(Column.aliased("user_id", table, columnPrefix + "_user_id"));
         columns.add(Column.aliased("product_variation_id", table, columnPrefix + "_product_variation_id"));
+        columns.add(Column.aliased("customer_id", table, columnPrefix + "_customer_id"));
         return columns;
     }
 }

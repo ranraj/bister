@@ -100,6 +100,12 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
+          <th scope="col" yaliSortBy="customer.name">
+            <div class="d-flex">
+              <span yaliTranslate="bisterApp.purchaseOrder.customer">Customer</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -120,6 +126,11 @@
               <a [routerLink]="['/product-variation', purchaseOrder.productVariation.id, 'view']">{{
                 purchaseOrder.productVariation.name
               }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="purchaseOrder.customer">
+              <a [routerLink]="['/customer', purchaseOrder.customer.id, 'view']">{{ purchaseOrder.customer.name }}</a>
             </div>
           </td>
           <td class="text-end">

@@ -26,6 +26,7 @@ describe('PurchaseOrder Form Service', () => {
             deliveryOption: expect.any(Object),
             user: expect.any(Object),
             productVariation: expect.any(Object),
+            customer: expect.any(Object),
           })
         );
       });
@@ -42,6 +43,7 @@ describe('PurchaseOrder Form Service', () => {
             deliveryOption: expect.any(Object),
             user: expect.any(Object),
             productVariation: expect.any(Object),
+            customer: expect.any(Object),
           })
         );
       });

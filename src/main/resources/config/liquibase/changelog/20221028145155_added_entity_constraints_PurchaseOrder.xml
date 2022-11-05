@@ -19,5 +19,11 @@
                                  constraintName="fk_purchase_order__product_variation_id"
                                  referencedColumnNames="id"
                                  referencedTableName="product_variation"/>
+
+        <addForeignKeyConstraint baseColumnNames="customer_id"
+                                 baseTableName="purchase_order"
+                                 constraintName="fk_purchase_order__customer_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="customer"/>
     </changeSet>
 </databaseChangeLog>

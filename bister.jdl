@@ -521,7 +521,7 @@ relationship OneToMany {
     Project to ProjectActivity{project(name) required}
     Product to ProductActivity{product(name) required} 
     Customer to Enquiry{customer(name)}
-    
+    Customer to PurchaseOrder{customer(name)}
 }
 
 /**

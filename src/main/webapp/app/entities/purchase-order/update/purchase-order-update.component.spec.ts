@@ -14,6 +14,8 @@ import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/user.service';
 import { IProductVariation } from 'app/entities/product-variation/product-variation.model';
 import { ProductVariationService } from 'app/entities/product-variation/service/product-variation.service';
+import { ICustomer } from 'app/entities/customer/customer.model';
+import { CustomerService } from 'app/entities/customer/service/customer.service';
 
 import { PurchaseOrderUpdateComponent } from './purchase-order-update.component';
 
@@ -25,6 +27,7 @@ describe('PurchaseOrder Management Update Component', () => {
   let purchaseOrderService: PurchaseOrderService;
   let userService: UserService;
   let productVariationService: ProductVariationService;
+  let customerService: CustomerService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -49,6 +52,7 @@ describe('PurchaseOrder Management Update Component', () => {
     purchaseOrderService = TestBed.inject(PurchaseOrderService);
     userService = TestBed.inject(UserService);
     productVariationService = TestBed.inject(ProductVariationService);
+    customerService = TestBed.inject(CustomerService);
 
     comp = fixture.componentInstance;
   });
@@ -98,18 +102,43 @@ describe('PurchaseOrder Management Update Component', () => {
       expect(comp.productVariationsSharedCollection).toEqual(expectedCollection);
     });
 
+    it('Should call Customer query and add missing value', () => {
+      const purchaseOrder: IPurchaseOrder = { id: 456 };
+      const customer: ICustomer = { id: 96747 };
+      purchaseOrder.customer = customer;
+
+      const customerCollection: ICustomer[] = [{ id: 60210 }];
+      jest.spyOn(customerService, 'query').mockReturnValue(of(new HttpResponse({ body: customerCollection })));
+      const additionalCustomers = [customer];
+      const expectedCollection: ICustomer[] = [...additionalCustomers, ...customerCollection];
+      jest.spyOn(customerService, 'addCustomerToCollectionIfMissing').mockReturnValue(expectedCollection);
+
+      activatedRoute.data = of({ purchaseOrder });
+      comp.ngOnInit();
+
+      expect(customerService.query).toHaveBeenCalled();
+      expect(customerService.addCustomerToCollectionIfMissing).toHaveBeenCalledWith(
+        customerCollection,
+        ...additionalCustomers.map(expect.objectContaining)
+      );
+      expect(comp.customersSharedCollection).toEqual(expectedCollection);
+    });
+
     it('Should update editForm', () => {
       const purchaseOrder: IPurchaseOrder = { id: 456 };
       const user: IUser = { id: 90200 };
       purchaseOrder.user = user;
       const productVariation: IProductVariation = { id: 2814 };
       purchaseOrder.productVariation = productVariation;
+      const customer: ICustomer = { id: 76407 };
+      purchaseOrder.customer = customer;
 
       activatedRoute.data = of({ purchaseOrder });
       comp.ngOnInit();
 
       expect(comp.usersSharedCollection).toContain(user);
       expect(comp.productVariationsSharedCollection).toContain(productVariation);
+      expect(comp.customersSharedCollection).toContain(customer);
       expect(comp.purchaseOrder).toEqual(purchaseOrder);
     });
   });
@@ -200,6 +229,16 @@ describe('PurchaseOrder Management Update Component', () => {
         jest.spyOn(productVariationService, 'compareProductVariation');
         comp.compareProductVariation(entity, entity2);
         expect(productVariationService.compareProductVariation).toHaveBeenCalledWith(entity, entity2);
+      });
+    });
+
+    describe('compareCustomer', () => {
+      it('Should forward to customerService', () => {
+        const entity = { id: 123 };
+        const entity2 = { id: 456 };
+        jest.spyOn(customerService, 'compareCustomer');
+        comp.compareCustomer(entity, entity2);
+        expect(customerService.compareCustomer).toHaveBeenCalledWith(entity, entity2);
       });
     });
   });

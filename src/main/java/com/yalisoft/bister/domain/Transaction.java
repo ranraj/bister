@@ -38,7 +38,10 @@ public class Transaction implements Serializable {
     private TransactionStatus status;
 
     @Transient
-    @JsonIgnoreProperties(value = { "paymentSchedules", "transactions", "user", "productVariation", "invoice" }, allowSetters = true)
+    @JsonIgnoreProperties(
+        value = { "paymentSchedules", "transactions", "user", "productVariation", "invoice", "customer" },
+        allowSetters = true
+    )
     private PurchaseOrder purchaseOrder;
 
     @Column("purchase_order_id")

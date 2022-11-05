@@ -37,6 +37,7 @@ type PurchaseOrderFormGroupContent = {
   deliveryOption: FormControl<PurchaseOrderFormRawValue['deliveryOption']>;
   user: FormControl<PurchaseOrderFormRawValue['user']>;
   productVariation: FormControl<PurchaseOrderFormRawValue['productVariation']>;
+  customer: FormControl<PurchaseOrderFormRawValue['customer']>;
 };
 
 export type PurchaseOrderFormGroup = FormGroup<PurchaseOrderFormGroupContent>;
@@ -74,6 +75,7 @@ export class PurchaseOrderFormService {
       productVariation: new FormControl(purchaseOrderRawValue.productVariation, {
         validators: [Validators.required],
       }),
+      customer: new FormControl(purchaseOrderRawValue.customer),
     });
   }
 

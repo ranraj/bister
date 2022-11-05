@@ -104,7 +104,7 @@ public class Enquiry implements Serializable {
     private Product product;
 
     @Transient
-    @JsonIgnoreProperties(value = { "user", "address", "enquiries" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "user", "address", "enquiries", "purchaseOrders" }, allowSetters = true)
     private Customer customer;
 
     @Column("agent_id")

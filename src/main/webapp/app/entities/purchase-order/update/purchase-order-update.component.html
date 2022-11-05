@@ -166,6 +166,21 @@
             This field is required.
           </small>
         </div>
+
+        <div class="row mb-3">
+          <label class="form-label" yaliTranslate="bisterApp.purchaseOrder.customer" for="field_customer">Customer</label>
+          <select
+            class="form-control"
+            id="field_customer"
+            data-cy="customer"
+            name="customer"
+            formControlName="customer"
+            [compareWith]="compareCustomer"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="customerOption" *ngFor="let customerOption of customersSharedCollection">{{ customerOption.name }}</option>
+          </select>
+        </div>
       </div>
 
       <div>

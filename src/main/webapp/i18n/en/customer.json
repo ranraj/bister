@@ -24,7 +24,8 @@
       "avatarUrl": "Avatar Url",
       "user": "User",
       "address": "Address",
-      "enquiry": "Enquiry"
+      "enquiry": "Enquiry",
+      "purchaseOrder": "Purchase Order"
     }
   }
 }

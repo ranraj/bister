@@ -89,6 +89,11 @@ describe('PurchaseOrder e2e test', () => {
       body: [],
     });
 
+    cy.intercept('GET', '/api/customers', {
+      statusCode: 200,
+      body: [],
+    });
+
   });
    */
 

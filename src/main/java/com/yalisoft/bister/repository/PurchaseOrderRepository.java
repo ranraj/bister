@@ -41,6 +41,12 @@ public interface PurchaseOrderRepository extends ReactiveCrudRepository<Purchase
     @Query("SELECT * FROM purchase_order entity WHERE entity.id not in (select invoice_id from invoice)")
     Flux<PurchaseOrder> findAllWhereInvoiceIsNull();
 
+    @Query("SELECT * FROM purchase_order entity WHERE entity.customer_id = :id")
+    Flux<PurchaseOrder> findByCustomer(Long id);
+
+    @Query("SELECT * FROM purchase_order entity WHERE entity.customer_id IS NULL")
+    Flux<PurchaseOrder> findAllWhereCustomerIsNull();
+
     @Override
     <S extends PurchaseOrder> Mono<S> save(S entity);
 

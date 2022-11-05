@@ -42,6 +42,12 @@
             }}</a>
           </div>
         </dd>
+        <dt><span yaliTranslate="bisterApp.purchaseOrder.customer">Customer</span></dt>
+        <dd>
+          <div *ngIf="purchaseOrder.customer">
+            <a [routerLink]="['/customer', purchaseOrder.customer.id, 'view']">{{ purchaseOrder.customer.name }}</a>
+          </div>
+        </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

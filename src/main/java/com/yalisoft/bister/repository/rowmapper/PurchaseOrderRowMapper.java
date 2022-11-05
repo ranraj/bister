@@ -34,6 +34,7 @@ public class PurchaseOrderRowMapper implements BiFunction<Row, String, PurchaseO
         entity.setDeliveryOption(converter.fromRow(row, prefix + "_delivery_option", DeliveryOption.class));
         entity.setUserId(converter.fromRow(row, prefix + "_user_id", Long.class));
         entity.setProductVariationId(converter.fromRow(row, prefix + "_product_variation_id", Long.class));
+        entity.setCustomerId(converter.fromRow(row, prefix + "_customer_id", Long.class));
         return entity;
     }
 }

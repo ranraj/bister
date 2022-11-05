@@ -47,6 +47,13 @@ public class Customer implements Serializable {
     @JsonIgnoreProperties(value = { "attachments", "enquiryResponses", "agent", "project", "product", "customer" }, allowSetters = true)
     private Set<Enquiry> enquiries = new HashSet<>();
 
+    @Transient
+    @JsonIgnoreProperties(
+        value = { "paymentSchedules", "transactions", "user", "productVariation", "invoice", "customer" },
+        allowSetters = true
+    )
+    private Set<PurchaseOrder> purchaseOrders = new HashSet<>();
+
     @Column("user_id")
     private Long userId;
 
@@ -163,6 +170,37 @@ public class Customer implements Serializable {
     public Customer removeEnquiry(Enquiry enquiry) {
         this.enquiries.remove(enquiry);
         enquiry.setCustomer(null);
+        return this;
+    }
+
+    public Set<PurchaseOrder> getPurchaseOrders() {
+        return this.purchaseOrders;
+    }
+
+    public void setPurchaseOrders(Set<PurchaseOrder> purchaseOrders) {
+        if (this.purchaseOrders != null) {
+            this.purchaseOrders.forEach(i -> i.setCustomer(null));
+        }
+        if (purchaseOrders != null) {
+            purchaseOrders.forEach(i -> i.setCustomer(this));
+        }
+        this.purchaseOrders = purchaseOrders;
+    }
+
+    public Customer purchaseOrders(Set<PurchaseOrder> purchaseOrders) {
+        this.setPurchaseOrders(purchaseOrders);
+        return this;
+    }
+
+    public Customer addPurchaseOrder(PurchaseOrder purchaseOrder) {
+        this.purchaseOrders.add(purchaseOrder);
+        purchaseOrder.setCustomer(this);
+        return this;
+    }
+
+    public Customer removePurchaseOrder(PurchaseOrder purchaseOrder) {
+        this.purchaseOrders.remove(purchaseOrder);
+        purchaseOrder.setCustomer(null);
         return this;
     }
 

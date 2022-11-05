@@ -51,6 +51,12 @@
       "otherEntityRelationshipName": "customer",
       "relationshipName": "enquiry",
       "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "purchaseOrder",
+      "otherEntityRelationshipName": "customer",
+      "relationshipName": "purchaseOrder",
+      "relationshipType": "one-to-many"
     }
   ],
   "service": "serviceClass"
