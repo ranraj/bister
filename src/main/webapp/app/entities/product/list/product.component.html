@@ -63,9 +63,11 @@
             <a [routerLink]="['/project', product.project.id, 'view']">{{ product.project.name }}</a>
           </div>
 
-          <a [routerLink]="['/product-category', product.productCategory?.id, 'view']">
+          <!-- <a [routerLink]="['/product-category', product
+               .productCategory?.id, 'view']">
             {{ product.productCategory?.id }}
           </a>
+           -->
         </div>
         <small class="mb-1">{{ product.description }}</small>
         <p class="mb-1"><span yaliTranslate="bisterApp.product.salePrice">Sale Price : </span> {{ product.salePrice }}</p>

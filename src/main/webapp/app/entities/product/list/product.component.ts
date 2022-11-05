@@ -103,14 +103,16 @@ export class ProductComponent implements OnInit {
 
   protected fillComponentAttributeFromRoute(params: ParamMap, data: Data): void {
     const page = params.get(PAGE_HEADER);
-    this.page = +(page ?? 1);
-    const sort = (params.get(SORT) ?? data[DEFAULT_SORT_DATA]).split(',');
-    this.predicate = sort[0];
-    this.ascending = sort[1] === ASC;
-    if (params.has('search') && params.get('search') !== '') {
-      this.currentSearch = params.get('search') as string;
-      if (ProductComponent.NOT_SORTABLE_FIELDS_AFTER_SEARCH.includes(this.predicate)) {
-        this.predicate = '';
+    if (page != null) {
+      this.page = +(page ?? 1);
+      const sort = (params.get(SORT) ?? data[DEFAULT_SORT_DATA]).split(',');
+      this.predicate = sort[0];
+      this.ascending = sort[1] === ASC;
+      if (params.has('search') && params.get('search') !== '') {
+        this.currentSearch = params.get('search') as string;
+        if (ProductComponent.NOT_SORTABLE_FIELDS_AFTER_SEARCH.includes(this.predicate)) {
+          this.predicate = '';
+        }
       }
     }
   }

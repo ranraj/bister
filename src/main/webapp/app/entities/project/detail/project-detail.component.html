@@ -9,7 +9,7 @@
 
       <yali-alert></yali-alert>
 
-      <dl class="row-md jh-entity-details">
+      <dl class="row-md jh-entity-details" *yaliHasAnyAuthority="'ROLE_ADMIN'">
         <dt><span yaliTranslate="global.field.id">ID</span></dt>
         <dd>
           <span>{{ project.id }}</span>
@@ -82,6 +82,46 @@
           </span>
         </dd>
       </dl>
+
+      <div id="project-details" class="mt-0">
+        <div class="row">
+          <!-- <div class="col-2 col-xs-12 justify-content-center">
+            <img src="../content/images/pexels-photo-439391.jpeg" style="max-height: 150px" alt="product image" />
+          </div> -->
+          <div class="col col-xs-12">
+            <div class="d-flex w-100 justify-content-between">
+              <a [routerLink]="['/project', project.id, 'view']">
+                <h5 class="mb-1">{{ project.name }}</h5>
+              </a>
+              <div class="row row-cols-sm-auto align-items-center">
+                <small *ngIf="project.projectType">
+                  <a [routerLink]="['/project-type', project.projectType.id, 'view']">{{ project.projectType.name }}</a>
+                </small>
+                <button
+                  id="jh-create-entity"
+                  data-cy="entityCreateButton"
+                  class="btn btn-primary jh-create-entity create-enquiry"
+                  [routerLink]="['/enquiry/new']"
+                >
+                  <fa-icon icon="plus"></fa-icon>
+                  <span class="hidden-sm-down" yaliTranslate="bisterApp.enquiry.home.createLabel"> Create a new Enquiry </span>
+                </button>
+              </div>
+            </div>
+
+            <small class="mb-1">{{ project.description }}</small>
+            <p class="mb-1">
+              <span yaliTranslate="bisterApp.project.estimatedBudget">Estimated Budget : </span> {{ project.estimatedBudget }}
+            </p>
+            <small>
+              <p>
+                <span yaliTranslate="bisterApp.project.sharableHash">Sharable Hash :</span>
+                {{ project.sharableHash }}
+              </p>
+            </small>
+          </div>
+        </div>
+      </div>
       <yali-product></yali-product>
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span yaliTranslate="entity.action.back">Back</span>

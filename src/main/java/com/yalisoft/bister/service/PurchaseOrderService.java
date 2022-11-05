@@ -108,6 +108,7 @@ public class PurchaseOrderService {
     @Transactional(readOnly = true)
     public Flux<PurchaseOrderDTO> findAll(Pageable pageable) {
         log.debug("Request to get all PurchaseOrders");
+
         return SecurityUtils
             .hasCurrentUserThisAuthority(AuthoritiesConstants.ADMIN)
             .flatMapMany(isAdmin -> {
@@ -117,7 +118,6 @@ public class PurchaseOrderService {
                     return SecurityUtils
                         .getCurrentUserLogin()
                         .flatMapMany(name -> {
-                            System.out.println("$$$$$$$" + name);
                             return purchaseOrderRepository.findAllByCustomerUserLogin(name, pageable).map(purchaseOrderMapper::toDto);
                         });
                 }
