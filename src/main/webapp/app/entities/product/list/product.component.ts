@@ -80,9 +80,6 @@ export class ProductComponent implements OnInit {
       next: (res: EntityArrayResponseType) => {
         this.onResponseSuccess(res);
       },
-      error: (res: Response) => {
-        console.log('$$$', res);
-      },
     });
   }
 

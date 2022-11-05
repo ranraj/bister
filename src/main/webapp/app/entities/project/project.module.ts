@@ -5,10 +5,9 @@ import { ProjectDetailComponent } from './detail/project-detail.component';
 import { ProjectUpdateComponent } from './update/project-update.component';
 import { ProjectDeleteDialogComponent } from './delete/project-delete-dialog.component';
 import { ProjectRoutingModule } from './route/project-routing.module';
-import { ProductComponent } from '../product/list/product.component';
 
 @NgModule({
   imports: [SharedModule, ProjectRoutingModule],
-  declarations: [ProjectComponent, ProjectDetailComponent, ProjectUpdateComponent, ProjectDeleteDialogComponent, ProductComponent],
+  declarations: [ProjectComponent, ProjectDetailComponent, ProjectUpdateComponent, ProjectDeleteDialogComponent],
 })
 export class ProjectModule {}

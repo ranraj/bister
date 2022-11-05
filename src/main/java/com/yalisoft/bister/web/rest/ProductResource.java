@@ -1,7 +1,6 @@
 package com.yalisoft.bister.web.rest;
 
 import com.yalisoft.bister.repository.ProductRepository;
-import com.yalisoft.bister.security.AuthoritiesConstants;
 import com.yalisoft.bister.service.ProductService;
 import com.yalisoft.bister.service.dto.ProductDTO;
 import com.yalisoft.bister.web.rest.errors.BadRequestAlertException;
@@ -24,7 +23,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.reactive.ServerHttpRequest;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -65,7 +63,6 @@ public class ProductResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/products")
-    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public Mono<ResponseEntity<ProductDTO>> createProduct(@Valid @RequestBody ProductDTO productDTO) throws URISyntaxException {
         log.debug("REST request to save Product : {}", productDTO);
         if (productDTO.getId() != null) {
@@ -96,7 +93,6 @@ public class ProductResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/products/{id}")
-    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public Mono<ResponseEntity<ProductDTO>> updateProduct(
         @PathVariable(value = "id", required = false) final Long id,
         @Valid @RequestBody ProductDTO productDTO
@@ -140,7 +136,6 @@ public class ProductResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/products/{id}", consumes = { "application/json", "application/merge-patch+json" })
-    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public Mono<ResponseEntity<ProductDTO>> partialUpdateProduct(
         @PathVariable(value = "id", required = false) final Long id,
         @NotNull @RequestBody ProductDTO productDTO
@@ -224,7 +219,6 @@ public class ProductResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/products/{id}")
-    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public Mono<ResponseEntity<Void>> deleteProduct(@PathVariable Long id) {
         log.debug("REST request to delete Product : {}", id);
         return productService

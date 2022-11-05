@@ -1,7 +1,6 @@
 package com.yalisoft.bister.web.rest;
 
 import com.yalisoft.bister.repository.FacilityRepository;
-import com.yalisoft.bister.security.AuthoritiesConstants;
 import com.yalisoft.bister.service.FacilityService;
 import com.yalisoft.bister.service.dto.FacilityDTO;
 import com.yalisoft.bister.web.rest.errors.BadRequestAlertException;
@@ -24,7 +23,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.reactive.ServerHttpRequest;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -65,7 +63,6 @@ public class FacilityResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/facilities")
-    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public Mono<ResponseEntity<FacilityDTO>> createFacility(@Valid @RequestBody FacilityDTO facilityDTO) throws URISyntaxException {
         log.debug("REST request to save Facility : {}", facilityDTO);
         if (facilityDTO.getId() != null) {
@@ -96,7 +93,6 @@ public class FacilityResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/facilities/{id}")
-    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public Mono<ResponseEntity<FacilityDTO>> updateFacility(
         @PathVariable(value = "id", required = false) final Long id,
         @Valid @RequestBody FacilityDTO facilityDTO
@@ -140,7 +136,6 @@ public class FacilityResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/facilities/{id}", consumes = { "application/json", "application/merge-patch+json" })
-    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public Mono<ResponseEntity<FacilityDTO>> partialUpdateFacility(
         @PathVariable(value = "id", required = false) final Long id,
         @NotNull @RequestBody FacilityDTO facilityDTO
@@ -182,7 +177,6 @@ public class FacilityResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of facilities in body.
      */
     @GetMapping("/facilities")
-    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public Mono<ResponseEntity<List<FacilityDTO>>> getAllFacilities(
         @org.springdoc.api.annotations.ParameterObject Pageable pageable,
         ServerHttpRequest request,
@@ -225,7 +219,6 @@ public class FacilityResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/facilities/{id}")
-    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public Mono<ResponseEntity<Void>> deleteFacility(@PathVariable Long id) {
         log.debug("REST request to delete Facility : {}", id);
         return facilityService

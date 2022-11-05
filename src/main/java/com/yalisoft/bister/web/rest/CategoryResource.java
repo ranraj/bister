@@ -1,7 +1,6 @@
 package com.yalisoft.bister.web.rest;
 
 import com.yalisoft.bister.repository.CategoryRepository;
-import com.yalisoft.bister.security.AuthoritiesConstants;
 import com.yalisoft.bister.service.CategoryService;
 import com.yalisoft.bister.service.dto.CategoryDTO;
 import com.yalisoft.bister.web.rest.errors.BadRequestAlertException;
@@ -24,7 +23,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.reactive.ServerHttpRequest;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -65,7 +63,6 @@ public class CategoryResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/categories")
-    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public Mono<ResponseEntity<CategoryDTO>> createCategory(@Valid @RequestBody CategoryDTO categoryDTO) throws URISyntaxException {
         log.debug("REST request to save Category : {}", categoryDTO);
         if (categoryDTO.getId() != null) {
@@ -96,7 +93,6 @@ public class CategoryResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/categories/{id}")
-    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public Mono<ResponseEntity<CategoryDTO>> updateCategory(
         @PathVariable(value = "id", required = false) final Long id,
         @Valid @RequestBody CategoryDTO categoryDTO
@@ -140,7 +136,6 @@ public class CategoryResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/categories/{id}", consumes = { "application/json", "application/merge-patch+json" })
-    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public Mono<ResponseEntity<CategoryDTO>> partialUpdateCategory(
         @PathVariable(value = "id", required = false) final Long id,
         @NotNull @RequestBody CategoryDTO categoryDTO
@@ -222,7 +217,6 @@ public class CategoryResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/categories/{id}")
-    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public Mono<ResponseEntity<Void>> deleteCategory(@PathVariable Long id) {
         log.debug("REST request to delete Category : {}", id);
         return categoryService

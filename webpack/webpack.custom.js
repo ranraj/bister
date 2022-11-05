@@ -31,7 +31,7 @@ module.exports = async (config, options, targetOptions) => {
       }),
       new WebpackNotifierPlugin({
         title: 'Bister',
-        contentImage: path.join(__dirname, 'bister-logo.jpg'),
+        contentImage: path.join(__dirname, 'logo-jhipster.png'),
       })
     );
   }

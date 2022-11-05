@@ -3,7 +3,7 @@
     "project": {
       "home": {
         "title": "Projects",
-        "refreshListLabel": "",
+        "refreshListLabel": "Refresh list",
         "createLabel": "Create a new Project",
         "createOrEditLabel": "Create or edit a Project",
         "search": "Search for Project",

@@ -15,6 +15,7 @@ const categoryRoute: Routes = [
     data: {
       defaultSort: 'id,' + ASC,
     },
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
@@ -22,6 +23,7 @@ const categoryRoute: Routes = [
     resolve: {
       category: CategoryRoutingResolveService,
     },
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',

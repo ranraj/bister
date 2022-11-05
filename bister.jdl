@@ -15,7 +15,7 @@ application {
     messageBroker kafka
     searchEngine elasticsearch
     reactive true    
-    cacheProvider redis   
+    cacheProvider memcached   
   }
   entities *
 }

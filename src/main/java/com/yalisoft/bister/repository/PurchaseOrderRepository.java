@@ -52,9 +52,6 @@ public interface PurchaseOrderRepository extends ReactiveCrudRepository<Purchase
 
     @Override
     Mono<Void> deleteById(Long id);
-
-    @Query("SELECT * FROM purchase_order entity JOIN yali_user user WHERE user.login = :name and entity.user_id = user.id")
-    Flux<PurchaseOrder> findAllByCustomerUserLogin(String name, Pageable pageable);
 }
 
 interface PurchaseOrderRepositoryInternal {
