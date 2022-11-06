@@ -17,12 +17,17 @@ import { ICustomer } from 'app/entities/customer/customer.model';
 import { CustomerService } from 'app/entities/customer/service/customer.service';
 import { EnquiryType } from 'app/entities/enumerations/enquiry-type.model';
 import { EnquiryResolutionStatus } from 'app/entities/enumerations/enquiry-resolution-status.model';
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/auth/account.model';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'yali-enquiry-update',
   templateUrl: './enquiry-update.component.html',
 })
 export class EnquiryUpdateComponent implements OnInit {
+  account: Account | null = null;
   isSaving = false;
   enquiry: IEnquiry | null = null;
   enquiryTypeValues = Object.keys(EnquiryType);
@@ -34,6 +39,7 @@ export class EnquiryUpdateComponent implements OnInit {
   customersSharedCollection: ICustomer[] = [];
 
   editForm: EnquiryFormGroup = this.enquiryFormService.createEnquiryFormGroup();
+  private readonly destroy$ = new Subject<void>();
 
   constructor(
     protected enquiryService: EnquiryService,
@@ -42,7 +48,8 @@ export class EnquiryUpdateComponent implements OnInit {
     protected projectService: ProjectService,
     protected productService: ProductService,
     protected customerService: CustomerService,
-    protected activatedRoute: ActivatedRoute
+    protected activatedRoute: ActivatedRoute,
+    private accountService: AccountService
   ) {}
 
   compareAgent = (o1: IAgent | null, o2: IAgent | null): boolean => this.agentService.compareAgent(o1, o2);
@@ -60,7 +67,15 @@ export class EnquiryUpdateComponent implements OnInit {
         this.updateForm(enquiry);
       }
 
-      this.loadRelationshipsOptions();
+      this.accountService
+        .getAuthenticationState()
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(account => {
+          this.account = account;
+          if (account != null) {
+            this.loadRelationshipsOptions();
+          }
+        });
     });
   }
 

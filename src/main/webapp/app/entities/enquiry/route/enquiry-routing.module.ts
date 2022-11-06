@@ -31,7 +31,6 @@ const enquiryRoute: Routes = [
     resolve: {
       enquiry: EnquiryRoutingResolveService,
     },
-    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
