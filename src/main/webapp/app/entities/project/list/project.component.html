@@ -25,6 +25,41 @@
     </form>
 
     <div class="d-flex justify-content-end">
+      <div class="me-2 d-flex justify-content-end align-items-center">
+        <div
+          class="btn-group"
+          role="group"
+          yaliSort
+          [(predicate)]="predicate"
+          [(ascending)]="ascending"
+          (sortChange)="navigateToWithComponentValues()"
+        >
+          <button type="button" class="btn btn-light" jhiSortBy="name">
+            <span class="d-flex">
+              <span yaliTranslate="bisterApp.project.name">Name</span>&nbsp;
+              <fa-icon [icon]="'sort'"></fa-icon>
+            </span>
+          </button>
+          <button type="button" class="btn btn-light" yaliSortBy="estimatedBudget">
+            <span class="d-flex">
+              <span yaliTranslate="bisterApp.project.estimatedBudget">Budget</span>&nbsp;
+              <fa-icon [icon]="'sort'"></fa-icon>
+            </span>
+          </button>
+          <button type="button" class="btn btn-light" yaliSortBy="dateModified">
+            <span class="d-flex">
+              <span yaliTranslate="bisterApp.project.dateModified">Date</span>&nbsp;
+              <fa-icon [icon]="'sort'"></fa-icon>
+            </span>
+          </button>
+          <button type="button" class="btn btn-light" yaliSortBy="projectStatus">
+            <span class="d-flex">
+              <span yaliTranslate="bisterApp.project.projectStatus">Project Status</span>&nbsp;
+              <fa-icon [icon]="'sort'"></fa-icon>
+            </span>
+          </button>
+        </div>
+      </div>
       <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span yaliTranslate="bisterApp.project.home.refreshListLabel">Refresh list</span>
@@ -85,8 +120,14 @@
             </p>
             <small>
               <p>
-                <span yaliTranslate="bisterApp.project.sharableHash">Sharable Hash :</span>
-                {{ project.sharableHash }}
+                <span yaliTranslate="bisterApp.project.projectStatus">Status</span>
+                {{ project.projectStatus }}
+              </p>
+            </small>
+            <small>
+              <p>
+                <span yaliTranslate="bisterApp.project.dateModified">Date modified</span>
+                {{ project.dateModified }}
               </p>
             </small>
           </div>
