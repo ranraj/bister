@@ -277,3 +277,33 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 [openapi-generator]: https://openapi-generator.tech
 [swagger-editor]: https://editor.swagger.io
 [doing api-first development]: https://www.jhipster.tech/documentation-archive/v7.9.3/doing-api-first-development/
+
+Build Image
+
+```
+./gradlew -Pprod bootJar jibDockerBuild
+```
+
+Run docker image
+
+```
+docker-compose -f src/main/docker/app.yml up
+```
+
+Dependency
+
+```
+docker-compose -f src/main/docker/app-local.yml up
+```
+
+Boot backend
+
+```
+ ./gradlew bootRun
+```
+
+Live reload backend
+
+```
+ ./gradlew compileJava
+```

@@ -5,5 +5,5 @@
   ${AnsiColor.BRIGHT_BLUE}   ██╔═╝ ${AnsiColor.RED} ██╔═══██║ ██║          ██║       ╚═══██╗ ██║   ██║  ██╔═══╝       ██║   
   ${AnsiColor.BRIGHT_BLUE}   ██║   ${AnsiColor.RED} ██║   ██║ ████████╗ ████████╗   ██████╔╝  ██████╔╝  ██║           ██║   
 
-${AnsiColor.BRIGHT_BLUE}:: JHipster 🤓  :: Running Spring Boot ${spring-boot.version} ::
-:: https://www.jhipster.tech ::${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_BLUE}:: Yali 🤓  :: Running Spring Boot ${spring-boot.version} ::
+:: https://www.yalisoft.io ::${AnsiColor.DEFAULT}

@@ -163,3 +163,7 @@ VALUES(1055, 'kumudha', '$2a$10$GBME0yLY8eh5P8DJcZI29Ok0LHQKiGxA3FtdBHB7GWIsSEpG
 INSERT INTO bister.purchase_order
 (id, placed_date, status, code, delivery_option, user_id, product_variation_id)
 VALUES(2, '2022-11-03 17:19:00', 'NEW', '8696783234323423232332', 'HAND_OVER', 2, 1);
+
+INSERT INTO bister.project
+(id, name, slug, description, short_description, regular_price, sale_price, published, date_created, date_modified, project_status, sharable_hash, estimated_budget, address_id, project_type_id)
+VALUES(2, 'Olympia Oliver', 'Olympia Oliver', 'Olympia Oliver Port club', 'Olympia Oliver Port club', 20000000.00, 20000000.00, 0, '2022-11-06 11:08:00', '2022-11-01', 'COMPLETED', NULL, 200000000.00, 2, 1);
