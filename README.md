@@ -284,6 +284,12 @@ Build Image
 ./gradlew -Pprod bootJar jibDockerBuild
 ```
 
+Push Image
+
+```
+./gradlew -Pprod bootJar jib -Djib.to.image=ranjithrajd/bister
+```
+
 Run docker image
 
 ```
