@@ -32,6 +32,7 @@ export class EnquiryUpdateComponent implements OnInit {
   enquiry: IEnquiry | null = null;
   enquiryTypeValues = Object.keys(EnquiryType);
   enquiryResolutionStatusValues = Object.keys(EnquiryResolutionStatus);
+  selectedValue = 'CONSULTATION';
 
   agentsSharedCollection: IAgent[] = [];
   projectsSharedCollection: IProject[] = [];

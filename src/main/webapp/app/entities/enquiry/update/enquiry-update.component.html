@@ -119,8 +119,14 @@
 
         <div class="row mb-3">
           <label class="form-label" yaliTranslate="bisterApp.enquiry.enquiryType" for="field_enquiryType">Enquiry Type</label>
-          <select class="form-control" name="enquiryType" formControlName="enquiryType" id="field_enquiryType" data-cy="enquiryType">
-            <option [ngValue]="null">{{ 'bisterApp.EnquiryType.null' | translate }}</option>
+          <select
+            [(ngModel)]="selectedValue"
+            class="form-control"
+            name="enquiryType"
+            formControlName="enquiryType"
+            id="field_enquiryType"
+            data-cy="enquiryType"
+          >
             <option *ngFor="let enquiryType of enquiryTypeValues" [value]="enquiryType">
               {{ 'bisterApp.EnquiryType.' + enquiryType | translate }}
             </option>
