@@ -1,5 +1,5 @@
 import { IAgent } from 'app/entities/agent/agent.model';
-import { IEnquiry } from 'app/entities/enquiry/enquiry.model';
+import { IEnquiry } from 'app/enquiry/enquiry.model';
 import { EnquiryResponseType } from 'app/entities/enumerations/enquiry-response-type.model';
 
 export interface IEnquiryResponse {

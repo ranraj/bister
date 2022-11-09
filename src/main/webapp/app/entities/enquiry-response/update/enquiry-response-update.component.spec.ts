@@ -11,8 +11,8 @@ import { EnquiryResponseService } from '../service/enquiry-response.service';
 import { IEnquiryResponse } from '../enquiry-response.model';
 import { IAgent } from 'app/entities/agent/agent.model';
 import { AgentService } from 'app/entities/agent/service/agent.service';
-import { IEnquiry } from 'app/entities/enquiry/enquiry.model';
-import { EnquiryService } from 'app/entities/enquiry/service/enquiry.service';
+import { IEnquiry } from 'app/enquiry/enquiry.model';
+import { EnquiryService } from 'app/enquiry/service/enquiry.service';
 
 import { EnquiryResponseUpdateComponent } from './enquiry-response-update.component';
 

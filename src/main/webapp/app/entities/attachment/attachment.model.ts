@@ -1,6 +1,6 @@
 import { IProduct } from 'app/entities/product/product.model';
 import { IProject } from 'app/entities/project/project.model';
-import { IEnquiry } from 'app/entities/enquiry/enquiry.model';
+import { IEnquiry } from 'app/enquiry/enquiry.model';
 import { ICertification } from 'app/entities/certification/certification.model';
 import { IProductSpecification } from 'app/entities/product-specification/product-specification.model';
 import { IProjectSpecification } from 'app/entities/project-specification/project-specification.model';

@@ -28,7 +28,7 @@
           </a>
         </li>
         <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-          <a class="nav-link" routerLink="/enquiry/new" (click)="collapseNavbar()">
+          <a class="nav-link" (click)="openVerticallyCentered(content)">
             <span>
               <fa-icon icon="question"></fa-icon>
               <span yaliTranslate="global.menu.entities.enquiry">Enquiry </span>
@@ -662,3 +662,16 @@
     </div>
   </div>
 </nav>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" yaliTranslate="bisterApp.enquiry.home.createOrEditLabel">Enquiry</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <yali-enquiry-guest-update></yali-enquiry-guest-update>
+  </div>
+  <!-- <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div> -->
+</ng-template>

@@ -172,7 +172,7 @@ import { RouterModule } from '@angular/router';
       {
         path: 'enquiry',
         data: { pageTitle: 'bisterApp.enquiry.home.title' },
-        loadChildren: () => import('./enquiry/enquiry.module').then(m => m.EnquiryModule),
+        loadChildren: () => import('../enquiry/enquiry.module').then(m => m.EnquiryModule),
       },
       {
         path: 'enquiry-response',
